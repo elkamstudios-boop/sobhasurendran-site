@@ -1,0 +1,70 @@
+/* ============================================================
+   COLORS — "Civic Indigo"
+   Deep indigo reads as authority + calm trust; a warm gold accent
+   adds energy and celebration without tipping into saffron/orange.
+   (Direction #1 from the ELKAM Studios color review.)
+   ============================================================ */
+:root {
+  /* ---- Brand core ---- */
+  --c-indigo:        #2D2467; /* hero, nav, headings, result-bar name fill */
+  --c-violet:        #4B3F8F; /* secondary indigo, gradients, hovers */
+  --c-gold:          #E8B84B; /* primary accent, CTA, achievement highlights */
+  --c-cream:         #F7F4EE; /* warm page / section background */
+  --c-ink:           #1A1530; /* near-black indigo, deepest text + bars */
+
+  /* ---- Indigo ramp (derived, harmonious) ---- */
+  --c-indigo-900:    #1A1530;
+  --c-indigo-800:    #241C52;
+  --c-indigo-700:    #2D2467;
+  --c-indigo-600:    #4B3F8F;
+  --c-indigo-400:    #7C72B4;
+  --c-indigo-200:    #C9C3E2;
+  --c-indigo-100:    #E3E0F0;
+  --c-indigo-050:    #EFEDF7;
+
+  /* ---- Gold ramp ---- */
+  --c-gold-600:      #C9962E;
+  --c-gold-500:      #E8B84B;
+  --c-gold-300:      #F2D488;
+  --c-gold-100:      #FAEFCF;
+
+  /* ---- Neutrals ---- */
+  --c-white:         #FFFFFF;
+  --c-charcoal:      #2E2C38; /* result-bar year/votes cells */
+  --c-slate:         #3A3744; /* body copy */
+  --c-grey:          #6B6878; /* muted copy, captions */
+  --c-line:          #E4E1DA; /* hairline dividers on cream */
+
+  /* ---- Functional ---- */
+  --c-positive:      #2F8F4E; /* "increase in votes" triangle */
+
+  /* ============================================================
+     SEMANTIC ALIASES
+     ============================================================ */
+  --surface-page:    var(--c-white);
+  --surface-alt:     var(--c-cream);
+  --surface-tint:    var(--c-indigo-050);
+  --surface-hero:    var(--c-indigo-700);
+  --surface-ink:     var(--c-ink);
+  --surface-card:    var(--c-white);
+
+  --text-strong:     var(--c-ink);
+  --text-heading:    var(--c-indigo-700);
+  --text-body:       var(--c-slate);
+  --text-muted:      var(--c-grey);
+  --text-on-dark:    var(--c-white);
+  --text-on-dark-dim:rgba(255,255,255,0.72);
+
+  --accent:          var(--c-gold-500);
+  --accent-strong:   var(--c-gold-600);
+  --on-accent:       var(--c-ink);
+
+  --border-hairline: var(--c-line);
+  --border-strong:   var(--c-indigo-700);
+
+  /* result / election bar roles */
+  --bar-meta:        var(--c-charcoal); /* year + votes cells */
+  --bar-name:        var(--c-indigo-700); /* candidate (was orange) */
+  --bar-name-rival:  var(--c-grey);     /* opponent fill */
+  --bar-text:        var(--c-white);
+}

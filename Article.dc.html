@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="ext-resource-dependency" content="images/g_meeting.png" data-resource-id="g_meeting" />
+<meta name="ext-resource-dependency" content="images/g_meet.png" data-resource-id="g_meet" />
+<meta name="ext-resource-dependency" content="images/g_rally.png" data-resource-id="g_rally" />
+<meta name="ext-resource-dependency" content="images/community.png" data-resource-id="community" />
+<meta name="ext-resource-dependency" content="images/g_conf.png" data-resource-id="g_conf" />
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/colors.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/typography.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/effects.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/styles.css">
+<script src="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/_ds_bundle.js"></script>
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Mulish',system-ui,sans-serif;background:#F7F4EE;color:#3A3744;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.6}
+  ::selection{background:#2D2467;color:#fff}
+  a{color:#2D2467;text-decoration:none}
+  a:hover{color:#4B3F8F}
+  .art-body p{font-family:'Mulish',sans-serif;font-size:18px;line-height:1.75;color:#3A3744;margin:0 0 22px}
+  .art-body h3{font-family:'Montserrat',sans-serif;font-weight:800;font-size:22px;color:#2D2467;margin:38px 0 14px;letter-spacing:-.01em}
+  @media (max-width:980px){
+    .art-grid{grid-template-columns:1fr !important}
+    .art-rail{position:static !important}
+    .a-nav-links{display:none !important}
+  }
+</style>
+</helmet>
+
+<template id="__bundler_thumbnail" data-bg-color="#2D2467">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#F7F4EE"/>
+    <rect x="180" y="150" width="500" height="44" rx="8" fill="#2D2467"/>
+    <rect x="180" y="230" width="840" height="20" rx="5" fill="#C9BFB0"/>
+    <rect x="180" y="270" width="800" height="20" rx="5" fill="#C9BFB0"/>
+    <rect x="180" y="340" width="620" height="220" rx="14" fill="#241C52"/>
+    <rect x="850" y="340" width="170" height="220" rx="12" fill="#E8B84B"/>
+  </svg>
+</template>
+
+<div style="min-height:100vh">
+  <!-- Header -->
+  <header style="background:#fff;border-bottom:1px solid #E4E1DA;position:sticky;top:0;z-index:40">
+    <div style="max-width:1180px;margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px">
+      <a href="Sobha Surendran.dc.html" style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:17px;letter-spacing:.5px;color:#2D2467">SOBHA SURENDRAN</a>
+      <nav class="a-nav-links" style="display:flex;align-items:center;gap:6px">
+        <a href="News.dc.html" style="font-family:'Mulish',sans-serif;font-size:14px;font-weight:700;color:#fff;background:#2D2467;padding:8px 17px;border-radius:999px">Newsroom</a>
+        <a href="Sobha Surendran.dc.html#gallery" style="font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px">Gallery</a>
+      </nav>
+      <a href="News.dc.html" style="display:inline-flex;align-items:center;gap:8px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2D2467" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>All coverage</a>
+    </div>
+  </header>
+
+  <div class="art-grid" style="max-width:1180px;margin:0 auto;padding:40px 28px 72px;display:grid;grid-template-columns:1fr 320px;gap:48px;align-items:start">
+    <!-- Article -->
+    <article>
+      <a href="News.dc.html" style="font-family:'Mulish',sans-serif;font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#C9962E">{{ category }}</a>
+      <h1 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(30px,4vw,46px);line-height:1.08;letter-spacing:-.02em;color:#2D2467;margin:12px 0 18px">{{ title }}</h1>
+      <p style="font-family:'Mulish',sans-serif;font-size:20px;line-height:1.55;color:#5A5766;margin:0 0 22px">{{ standfirst }}</p>
+
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:16px 0;border-top:1px solid #E4E1DA;border-bottom:1px solid #E4E1DA;margin-bottom:8px">
+        <span style="display:inline-flex;align-items:center;gap:8px;font-family:'Mulish',sans-serif;font-size:13px;font-weight:700;color:#2D2467">
+          <span style="width:30px;height:30px;border-radius:50%;background:#2D2467;color:#E8B84B;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:900;font-size:13px">AI</span>
+          Newsroom desk
+        </span>
+        <span style="font-family:'Mulish',sans-serif;font-size:13px;color:#9a97a6">Compiled from {{ sourceCount }} reports · {{ published }}</span>
+        <span style="display:inline-flex;align-items:center;gap:7px;background:#E9F5EC;color:#227544;font-family:'Mulish',sans-serif;font-weight:700;font-size:12px;padding:5px 12px;border-radius:999px;margin-left:auto">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2F8F4E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          Multi-source verified
+        </span>
+      </div>
+
+      <div style="position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 20px 48px rgba(26,21,48,.16);margin:22px 0 12px">
+        <div style="position:absolute;inset:0;background-image:{{ heroBg }};background-size:cover;background-position:24% 40%"></div>
+      </div>
+      <div style="font-family:'Mulish',sans-serif;font-size:13px;color:#9a97a6;margin-bottom:30px">Party leaders at the Thrissur state committee meeting. Photo pooled from wire coverage.</div>
+
+      <div class="art-body">
+        <p><strong>THRISSUR —</strong> Sobha Surendran formally assumed charge as the BJP’s Kerala General Secretary, a move party functionaries described as central to the organisation’s preparations for the 2026 assembly elections. The decision was confirmed at the state committee meeting and reported across state and national outlets within hours.</p>
+        <p>Her elevation follows years of organisational work, most visibly the expansion of the Mahila Morcha into every one of Kerala’s 140 assembly constituencies — a build-out several reports singled out as unusually complete for the state unit.</p>
+        <h3>What the coverage agrees on</h3>
+        <p>Across the seven reports compiled for this story, the core facts are consistent: the appointment was made in Thrissur, it is tied explicitly to the 2026 campaign, and it hands her a leading role in candidate coordination and booth-level strategy.</p>
+        <p>Outlets differ mainly in emphasis. Regional dailies foreground her grassroots record and the women-wing rollout; national wires frame the appointment within the party’s wider southern strategy and its search for a durable foothold in Kerala.</p>
+        <h3>Why it matters</h3>
+        <p>Analysts quoted in the coverage read the appointment as recognition of sustained ground organising rather than a purely symbolic promotion. The vote-share gains recorded in constituencies such as Alappuzha are cited as evidence that the state unit’s methodical, constituency-by-constituency approach is beginning to register at the ballot box.</p>
+        <p>The months ahead — candidate selection, alliance arithmetic, and the welfare agenda she has championed — will test how far that organisational base can be converted into electoral results.</p>
+      </div>
+
+      <!-- Source cluster -->
+      <div style="margin-top:36px;background:#fff;border:1px solid #E4E1DA;border-radius:18px;overflow:hidden">
+        <div style="padding:20px 24px;background:#2D2467;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:16px;background-image:repeating-linear-gradient(118deg,rgba(232,184,75,.06) 0,rgba(232,184,75,.06) 1px,transparent 1px,transparent 20px)">
+          <div>
+            <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:16px;letter-spacing:.02em">This story, across {{ sourceCount }} outlets</div>
+            <div style="font-family:'Mulish',sans-serif;font-size:13px;color:rgba(255,255,255,.7);margin-top:4px">One event, de-duplicated from every report the crawler found.</div>
+          </div>
+          <span style="font-family:'Mulish',sans-serif;font-size:12px;font-weight:700;color:#1A1530;background:#E8B84B;padding:6px 13px;border-radius:999px;white-space:nowrap">Cluster · {{ published }}</span>
+        </div>
+        <div>
+          <sc-for list="{{ sources }}" as="src" hint-placeholder-count="7">
+            <div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:16px 24px;border-bottom:1px solid #EFEBE2">
+              <div>
+                <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+                  <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;color:#2D2467">{{ src.name }}</span>
+                  <sc-if value="{{ src.original }}" hint-placeholder-val="{{ false }}"><span style="font-family:'Mulish',sans-serif;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#227544;background:#E9F5EC;padding:3px 8px;border-radius:4px">First to report</span></sc-if>
+                </div>
+                <div style="font-family:'Mulish',sans-serif;font-size:13px;color:#6B6878;margin-top:4px">{{ src.headline }}</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:16px">
+                <div style="text-align:right">
+                  <div style="font-family:'Mulish',sans-serif;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#9a97a6">Credibility</div>
+                  <div style="display:flex;align-items:center;gap:7px;margin-top:4px">
+                    <div style="width:64px;height:6px;border-radius:999px;background:#EFEBE2;overflow:hidden"><div style="width:{{ src.cred }};height:100%;background:#2F8F4E"></div></div>
+                    <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;color:#227544">{{ src.credNum }}</span>
+                  </div>
+                </div>
+                <a href="#" style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;color:#4B3F8F;white-space:nowrap">Read →</a>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </article>
+
+    <!-- Rail -->
+    <aside class="art-rail" style="position:sticky;top:96px;display:flex;flex-direction:column;gap:22px">
+      <div style="background:#fff;border:1px solid #E4E1DA;border-radius:16px;padding:22px">
+        <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#2D2467;margin-bottom:16px">Story signals</div>
+        <sc-for list="{{ signals }}" as="sig" hint-placeholder-count="3">
+          <div style="margin-bottom:18px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+              <span style="font-family:'Mulish',sans-serif;font-size:13px;font-weight:700;color:#3A3744">{{ sig.label }}</span>
+              <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:#2D2467">{{ sig.num }}</span>
+            </div>
+            <div style="width:100%;height:7px;border-radius:999px;background:#EFEBE2;overflow:hidden"><div style="width:{{ sig.pct }};height:100%;background:{{ sig.color }}"></div></div>
+          </div>
+        </sc-for>
+        <div style="font-family:'Mulish',sans-serif;font-size:12px;line-height:1.5;color:#9a97a6;margin-top:6px">Computed by the ingestion pipeline at publish time.</div>
+      </div>
+
+      <div style="background:#fff;border:1px solid #E4E1DA;border-radius:16px;padding:22px">
+        <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#2D2467;margin-bottom:16px">Related coverage</div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
+            <a href="Article.dc.html" style="display:flex;gap:12px;align-items:flex-start">
+              <div style="width:64px;height:52px;border-radius:8px;flex:none;background-image:{{ r.bg }};background-size:cover;background-position:{{ r.pos }}"></div>
+              <div>
+                <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:13.5px;line-height:1.3;color:#2D2467">{{ r.title }}</div>
+                <div style="font-family:'Mulish',sans-serif;font-size:11.5px;color:#9a97a6;margin-top:4px">{{ r.sourceLabel }}</div>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer style="background:#14102A;color:#fff;padding:40px 28px">
+    <div style="max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+      <span style="font-family:'Mulish',sans-serif;font-size:13px;color:rgba(255,255,255,.5)">© 2026 Sobha Surendran · Newsroom</span>
+      <span style="font-family:'Mulish',sans-serif;font-size:13px;color:rgba(255,255,255,.5)">This is an AI-compiled summary; full reports remain with the linked publishers.</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180,&quot;height&quot;:1400}}">
+class Component extends DCLogic {
+  R(path) {
+    const id = path.replace('images/', '').replace('.png', '');
+    return (typeof window !== 'undefined' && window.__resources && window.__resources[id]) || path;
+  }
+
+  renderVals() {
+    const sources = [
+      { name: 'The Hindu', headline: 'Surendran named BJP Kerala general secretary', cred: '96%', credNum: '9.6', original: true },
+      { name: 'Manorama Online', headline: 'തൃശൂരിൽ സംസ്ഥാന കമ്മിറ്റി യോഗം; പുതിയ ചുമതല', cred: '93%', credNum: '9.3', original: false },
+      { name: 'Mathrubhumi', headline: 'Organisational reshuffle ahead of 2026 polls', cred: '92%', credNum: '9.2', original: false },
+      { name: 'ANI', headline: 'BJP announces new Kerala office-bearers', cred: '90%', credNum: '9.0', original: false },
+      { name: 'The New Indian Express', headline: 'A grassroots record rewarded with a central role', cred: '89%', credNum: '8.9', original: false },
+      { name: 'Times of India', headline: 'BJP sharpens Kerala focus with new GS', cred: '88%', credNum: '8.8', original: false },
+      { name: 'Deccan Herald', headline: 'Southern strategy: BJP’s Kerala appointment', cred: '86%', credNum: '8.6', original: false },
+    ];
+    const related = [
+      { title: 'Mahila Morcha units now active across all 140 constituencies', bg: 'url("' + this.R('images/g_meet.png') + '")', pos: '38% 40%', sourceLabel: '5 sources · 5h ago' },
+      { title: 'Alappuzha vote share climbs 11 points', bg: 'url("' + this.R('images/g_rally.png') + '")', pos: '36% 24%', sourceLabel: '4 sources · 8h ago' },
+      { title: 'Women-led welfare roadmap ahead of 2026 budget', bg: 'url("' + this.R('images/community.png') + '")', pos: '40% 34%', sourceLabel: '3 sources · 1d ago' },
+    ];
+    return {
+      category: 'Appointment',
+      title: 'Sobha Surendran takes charge as BJP Kerala General Secretary',
+      standfirst: 'Confirmed at the Thrissur state committee meeting, the appointment places her at the centre of the party’s 2026 organisational push.',
+      published: 'Jul 7, 2026',
+      sourceCount: sources.length,
+      heroBg: 'url("' + this.R('images/g_meeting.png') + '")',
+      sources,
+      related,
+      signals: [
+        { label: 'Relevance', num: '9.8', pct: '98%', color: '#2D2467' },
+        { label: 'Source credibility', num: '9.1', pct: '91%', color: '#2F8F4E' },
+        { label: 'Content quality', num: '8.7', pct: '87%', color: '#E8B84B' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

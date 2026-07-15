@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="ext-resource-dependency" content="images/g_rally.png" data-resource-id="g_rally" />
+<meta name="ext-resource-dependency" content="images/community.png" data-resource-id="community" />
+<meta name="ext-resource-dependency" content="images/g_meeting.png" data-resource-id="g_meeting" />
+<meta name="ext-resource-dependency" content="images/g_office.png" data-resource-id="g_office" />
+<meta name="ext-resource-dependency" content="images/g_meet.png" data-resource-id="g_meet" />
+<meta name="ext-resource-dependency" content="images/g_felicitation.png" data-resource-id="g_felicitation" />
+<meta name="ext-resource-dependency" content="images/g_conf.png" data-resource-id="g_conf" />
+<meta name="ext-resource-dependency" content="images/portrait.png" data-resource-id="portrait" />
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/colors.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/typography.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/effects.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/styles.css">
+<script src="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/_ds_bundle.js"></script>
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Mulish',system-ui,sans-serif;background:#F7F4EE;color:#3A3744;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.55}
+  ::selection{background:#2D2467;color:#fff}
+  a{color:#2D2467;text-decoration:none}
+  a:hover{color:#4B3F8F}
+  @keyframes pulseDot{0%{transform:scale(1);opacity:1}70%{transform:scale(2.6);opacity:0}100%{opacity:0}}
+  @media (max-width:1024px){
+    .n-grid{grid-template-columns:1fr !important}
+    .n-rail{position:static !important;width:auto !important}
+  }
+  @media (max-width:880px){
+    .n-nav-links{display:none !important}
+    .n-lead{grid-template-columns:1fr !important}
+    .n-lead-img{min-height:240px !important}
+    .n-cards{grid-template-columns:1fr !important}
+  }
+  /* Safety net for translated content — same rationale as the main page: a
+     long Malayalam compound word has no natural break point at spaces, and
+     Google's Website Translator sets its own inline styles directly on the
+     <font> wrapper it injects around translated text, which otherwise wins
+     over anything merely inherited from an ancestor. */
+  h1,h2,h3,h4,p,span,div,a{overflow-wrap:break-word !important;word-break:keep-all !important}
+  font{word-break:inherit !important;overflow-wrap:inherit !important}
+  /* Suppress Google's own translate widget chrome — driven from our own
+     styled banner instead. */
+  .goog-te-banner-frame.skiptranslate{display:none !important}
+  body{top:0px !important}
+  .goog-te-gadget{display:none !important}
+  .goog-text-highlight{background:none !important;box-shadow:none !important}
+</style>
+</helmet>
+
+<template id="__bundler_thumbnail" data-bg-color="#2D2467">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#2D2467"/>
+    <rect x="150" y="180" width="620" height="60" rx="8" fill="#E8B84B"/>
+    <rect x="150" y="270" width="900" height="26" rx="6" fill="#4B3F8F"/>
+    <rect x="150" y="320" width="820" height="26" rx="6" fill="#4B3F8F"/>
+    <rect x="150" y="420" width="380" height="200" rx="14" fill="#241C52"/>
+    <rect x="560" y="420" width="490" height="26" rx="6" fill="#4B3F8F"/>
+    <rect x="560" y="470" width="430" height="26" rx="6" fill="#4B3F8F"/>
+  </svg>
+</template>
+
+<div id="google_translate_element" style="display:none"></div>
+
+<sc-if value="{{ showTranslateBanner }}" hint-placeholder-val="{{ true }}">
+  <div class="notranslate" style="position:fixed;top:0;left:0;right:0;z-index:300;background:#2D2467;color:#fff;padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;box-shadow:0 6px 20px rgba(0,0,0,.25);font-family:'Mulish',sans-serif;font-size:13.5px;background-image:repeating-linear-gradient(118deg,rgba(232,184,75,.05) 0,rgba(232,184,75,.05) 1px,transparent 1px,transparent 22px)">
+    <span style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;text-align:center">
+      <svg style="flex:none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8B84B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+      <span><strong style="color:#F2D488">ഈ വെബ്സൈറ്റ് മലയാളത്തിൽ വായിക്കണോ?</strong>&nbsp; Would you like to read this site in Malayalam?</span>
+    </span>
+    <span style="display:flex;align-items:center;gap:10px;flex:none">
+      <button type="button" onClick="{{ onTranslate }}" style="cursor:pointer;border:none;background:#E8B84B;color:#1A1530;font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;padding:9px 20px;border-radius:999px;white-space:nowrap">Translate to Malayalam</button>
+      <button type="button" onClick="{{ onDismissTranslateBanner }}" aria-label="Dismiss" style="cursor:pointer;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none">✕</button>
+    </span>
+  </div>
+</sc-if>
+
+<div style="min-height:100vh;display:flex;flex-direction:column">
+  <!-- ===== Header ===== -->
+  <header style="background:#fff;border-bottom:1px solid #E4E1DA;position:sticky;top:0;z-index:40">
+    <div style="max-width:1280px;margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px">
+      <a href="Sobha Surendran.dc.html" class="notranslate" style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:17px;letter-spacing:.5px;color:#2D2467;white-space:nowrap">SOBHA SURENDRAN</a>
+      <nav class="n-nav-links" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;row-gap:8px">
+        <a href="Sobha Surendran.dc.html#story" style="font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">About</a>
+        <a href="Sobha Surendran.dc.html#journey" style="font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">Journey</a>
+        <a href="Sobha Surendran.dc.html#initiative" style="font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">Initiatives</a>
+        <a href="News.dc.html" style="font-family:'Mulish',sans-serif;font-size:14px;font-weight:700;color:#fff;background:#2D2467;padding:8px 17px;border:1px solid #2D2467;border-radius:999px;white-space:nowrap">Newsroom</a>
+        <a href="Sobha Surendran.dc.html#gallery" style="font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">Gallery</a>
+      </nav>
+      <div style="position:relative">
+        <button type="button" onClick="{{ onToggleNavSocial }}" style="cursor:pointer;border:none;background:#F7F4EE;border-radius:999px;padding:5px 6px 5px 22px;display:flex;align-items:center;gap:14px;white-space:nowrap">
+          <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467">Connect</span>
+          <span style="width:34px;height:34px;border-radius:50%;background:#2D2467;display:flex;align-items:center;justify-content:center;transition:transform .25s ease;transform:{{ navChevron }}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E8B84B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+          </span>
+        </button>
+        <sc-if value="{{ navSocialOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:calc(100% + 12px);right:0;z-index:90;width:min(256px,calc(100vw - 32px));background:#fff;border:1px solid #E4E1DA;border-radius:16px;box-shadow:0 24px 60px rgba(26,21,48,.28);padding:8px">
+            <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#9a97a6;padding:8px 12px 8px">Follow Sobha Surendran</div>
+            <a href="https://www.instagram.com/sobhasurendranofficial/" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none" style-hover="background:#F7F4EE">
+              <span style="flex:none;width:34px;height:34px;border-radius:9px;background:#F0ECFB;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D2467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="#2D2467" stroke="none"></circle></svg></span>
+              <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467">Instagram</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9BFB0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto"><path d="M7 17L17 7M17 7H9M17 7v8"></path></svg>
+            </a>
+            <a href="https://www.facebook.com/SobhaSurendranOfficia" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none" style-hover="background:#F7F4EE">
+              <span style="flex:none;width:34px;height:34px;border-radius:9px;background:#F0ECFB;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="#2D2467"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"></path></svg></span>
+              <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467">Facebook</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9BFB0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto"><path d="M7 17L17 7M17 7H9M17 7v8"></path></svg>
+            </a>
+            <a href="https://x.com/SobhaBJP?lang=en" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none" style-hover="background:#F7F4EE">
+              <span style="flex:none;width:34px;height:34px;border-radius:9px;background:#F0ECFB;display:flex;align-items:center;justify-content:center"><svg width="15" height="15" viewBox="0 0 24 24" fill="#2D2467"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></span>
+              <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467">X (Twitter)</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9BFB0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto"><path d="M7 17L17 7M17 7H9M17 7v8"></path></svg>
+            </a>
+            <a href="https://www.youtube.com/@SobhaBJP" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none" style-hover="background:#F7F4EE">
+              <span style="flex:none;width:34px;height:34px;border-radius:9px;background:#F0ECFB;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="#2D2467"><path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2C0 8.07 0 12 0 12s0 3.93.5 5.8a3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.8zM9.55 15.57V8.43L15.82 12z"></path></svg></span>
+              <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467">YouTube</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9BFB0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto"><path d="M7 17L17 7M17 7H9M17 7v8"></path></svg>
+            </a>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Masthead ===== -->
+  <div style="background:#2D2467;color:#fff;background-image:repeating-linear-gradient(118deg,rgba(232,184,75,.05) 0,rgba(232,184,75,.05) 1px,transparent 1px,transparent 22px)">
+    <div style="max-width:1280px;margin:0 auto;padding:40px 28px 34px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+        <div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#F2D488;margin-bottom:12px">The Newsroom</div>
+          <h1 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(34px,4.4vw,52px);line-height:1.15;letter-spacing:-.02em;margin:0;color:#fff">Coverage, gathered and clustered.</h1>
+          <p style="font-family:'Mulish',sans-serif;font-size:16px;line-height:1.6;color:rgba(255,255,255,.72);max-width:520px;margin:16px 0 0">Real Facebook posts, plus news articles mentioning her name — pulled in automatically and refreshed on a schedule.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:14px">
+          <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:8px 16px">
+            <span style="position:relative;display:inline-flex;width:9px;height:9px"><span style="position:absolute;inset:0;border-radius:50%;background:#2F8F4E;animation:pulseDot 2.4s ease-out infinite"></span><span style="position:relative;width:9px;height:9px;border-radius:50%;background:#2F8F4E"></span></span>
+            <span style="font-family:'Mulish',sans-serif;font-size:13px;font-weight:700;color:#fff">Auto-updated hourly</span>
+            <span style="font-family:'Mulish',sans-serif;font-size:13px;color:rgba(255,255,255,.6)">· refreshed {{ refreshedAgo }}</span>
+          </div>
+          <div style="display:flex;gap:26px">
+            <div style="text-align:right">
+              <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:26px;color:#E8B84B;line-height:1">{{ statStories }}</div>
+              <div style="font-family:'Mulish',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6)">Stories</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:26px;color:#E8B84B;line-height:1">{{ statSources }}</div>
+              <div style="font-family:'Mulish',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6)">Sources</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:26px;color:#E8B84B;line-height:1">{{ statToday }}</div>
+              <div style="font-family:'Mulish',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6)">New today</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search -->
+      <div style="margin-top:30px;display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:6px 6px 6px 18px;max-width:720px;box-shadow:0 18px 40px rgba(26,21,48,.28)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B6878" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input value="{{ query }}" onInput="{{ onQuery }}" placeholder="Search coverage — try &quot;Mahila Morcha&quot; or &quot;Palakkad&quot;" style="flex:1;border:none;outline:none;font-family:'Mulish',sans-serif;font-size:15px;color:#1A1530;background:transparent;padding:10px 0" />
+        <button type="button" style="background:#2D2467;color:#fff;border:none;font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;padding:12px 22px;border-radius:10px;cursor:pointer">Search</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Category rail ===== -->
+  <div style="background:#fff;border-bottom:1px solid #E4E1DA;position:sticky;top:65px;z-index:30">
+    <div style="max-width:1280px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;gap:10px;overflow-x:auto">
+      <sc-for list="{{ categories }}" as="c" hint-placeholder-count="5">
+        <button type="button" onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}<span style="{{ c.countStyle }}">{{ c.count }}</span></button>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- ===== Body ===== -->
+  <div class="n-grid" style="flex:1;max-width:1280px;margin:0 auto;width:100%;padding:32px 28px 64px;display:grid;grid-template-columns:1fr 340px;gap:40px">
+    <!-- Main column -->
+    <div>
+      <sc-if value="{{ loading }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:60px 20px;text-align:center;background:#fff;border:1px dashed #D8D3C8;border-radius:16px">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:18px;color:#2D2467;margin-bottom:8px">Loading the latest coverage…</div>
+          <p style="font-family:'Mulish',sans-serif;font-size:14px;color:#6B6878;margin:0">Pulling in real posts and news articles — this only takes a moment.</p>
+        </div>
+      </sc-if>
+
+      <!-- Lead story -->
+      <sc-if value="{{ hasLead }}" hint-placeholder-val="{{ true }}">
+        <a href="{{ lead.url }}" target="_blank" rel="noopener noreferrer" class="n-lead" style="display:grid;grid-template-columns:1.15fr .85fr;gap:0;background:#fff;border:1px solid #E4E1DA;border-radius:18px;overflow:hidden;box-shadow:0 18px 44px rgba(26,21,48,.1);margin-bottom:34px">
+          <div style="padding:34px 34px 30px;display:flex;flex-direction:column;justify-content:center">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+              <span style="background:#E8B84B;color:#1A1530;font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border-radius:4px">Latest</span>
+              <span style="font-family:'Mulish',sans-serif;font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#C9962E">{{ lead.category }}</span>
+            </div>
+            <h2 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(22px,2.6vw,32px);line-height:1.24;letter-spacing:-.01em;margin:0;color:#2D2467;overflow-wrap:break-word">{{ lead.title }}</h2>
+            <p style="font-family:'Mulish',sans-serif;font-size:16px;line-height:1.6;color:#5A5766;margin:16px 0 0">{{ lead.summary }}</p>
+            <div style="display:flex;align-items:center;gap:12px;margin-top:22px;flex-wrap:wrap">
+              <span style="display:inline-flex;align-items:center;gap:7px;background:#F7F4EE;border-radius:999px;padding:6px 14px;font-family:'Mulish',sans-serif;font-size:13px;font-weight:700;color:#2D2467">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2F8F4E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                {{ lead.sourceLabel }}
+              </span>
+              <span style="font-family:'Mulish',sans-serif;font-size:13px;color:#9a97a6">{{ lead.ago }}</span>
+            </div>
+          </div>
+          <div class="n-lead-img" style="position:relative;min-height:340px">
+            <div style="position:absolute;inset:0;background-image:{{ lead.bg }};background-size:cover;background-position:{{ lead.pos }}"></div>
+            <div style="position:absolute;inset:0;background:linear-gradient(300deg,transparent 40%,rgba(45,36,103,.28))"></div>
+          </div>
+        </a>
+      </sc-if>
+
+      <!-- Story list -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin:0 0 18px">
+        <h3 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:#2D2467;margin:0">{{ listHeading }}</h3>
+        <span style="font-family:'Mulish',sans-serif;font-size:13px;color:#9a97a6">{{ resultCount }}</span>
+      </div>
+
+      <sc-if value="{{ hasResults }}" hint-placeholder-val="{{ true }}">
+        <div class="n-cards" style="display:flex;flex-direction:column;gap:0">
+          <sc-for list="{{ stories }}" as="s" hint-placeholder-count="6">
+            <a href="{{ s.url }}" target="_blank" rel="noopener noreferrer" style="display:grid;grid-template-columns:180px 1fr;gap:22px;padding:24px 0;border-bottom:1px solid #E4E1DA;align-items:start">
+              <div style="position:relative;aspect-ratio:4/3;border-radius:12px;overflow:hidden;box-shadow:0 10px 24px rgba(26,21,48,.12)">
+                <div style="position:absolute;inset:0;background-image:{{ s.bg }};background-size:cover;background-position:{{ s.pos }}"></div>
+              </div>
+              <div>
+                <div style="display:flex;align-items:center;gap:9px;margin-bottom:8px">
+                  <span style="font-family:'Mulish',sans-serif;font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#C9962E">{{ s.category }}</span>
+                  <span style="width:3px;height:3px;border-radius:50%;background:#C9BFB0"></span>
+                  <span style="font-family:'Mulish',sans-serif;font-size:12px;color:#9a97a6">{{ s.ago }}</span>
+                </div>
+                <h4 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:19px;line-height:1.32;margin:0;color:#2D2467;overflow-wrap:break-word">{{ s.title }}</h4>
+                <p style="font-family:'Mulish',sans-serif;font-size:14.5px;line-height:1.55;color:#5A5766;margin:8px 0 0">{{ s.summary }}</p>
+                <div style="display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap">
+                  <span style="display:inline-flex;align-items:center;gap:6px;font-family:'Mulish',sans-serif;font-size:13px;font-weight:700;color:#2D2467">{{ s.sourceLabel }}</span>
+                </div>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:60px 20px;text-align:center;background:#fff;border:1px dashed #D8D3C8;border-radius:16px">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:18px;color:#2D2467;margin-bottom:8px">No coverage matches "{{ query }}"</div>
+          <p style="font-family:'Mulish',sans-serif;font-size:14px;color:#6B6878;margin:0">Try a broader term, or clear the filter to see all stories.</p>
+        </div>
+      </sc-if>
+    </div>
+
+    <!-- Rail -->
+    <aside class="n-rail" style="position:sticky;top:130px;align-self:start;display:flex;flex-direction:column;gap:22px">
+      <div style="background:#fff;border:1px solid #E4E1DA;border-radius:16px;padding:22px">
+        <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#2D2467;margin-bottom:16px">Recent highlights</div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <sc-for list="{{ trending }}" as="t" hint-placeholder-count="4">
+            <a href="{{ t.url }}" target="_blank" rel="noopener noreferrer" style="display:flex;gap:14px;align-items:flex-start">
+              <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:22px;color:#E8B84B;line-height:1;flex:none;width:24px">{{ t.rank }}</span>
+              <div>
+                <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14.5px;line-height:1.3;color:#2D2467;overflow-wrap:break-word">{{ t.title }}</div>
+                <div style="font-family:'Mulish',sans-serif;font-size:12px;color:#9a97a6;margin-top:5px">{{ t.sourceLabel }} · {{ t.ago }}</div>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="background:#1A1530;border-radius:16px;padding:24px;color:#fff;background-image:repeating-linear-gradient(118deg,rgba(232,184,75,.06) 0,rgba(232,184,75,.06) 1px,transparent 1px,transparent 20px)">
+        <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#E8B84B;margin-bottom:14px">How this feed works</div>
+        <ol style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:12px">
+          <li style="font-family:'Mulish',sans-serif;font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.82)">Real Facebook posts, pulled directly from the connected Page.</li>
+          <li style="font-family:'Mulish',sans-serif;font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.82)">News articles mentioning her name, discovered automatically and refreshed hourly.</li>
+          <li style="font-family:'Mulish',sans-serif;font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.82)">Everything is sorted newest-first across every connected source.</li>
+        </ol>
+        <a href="Newsroom Admin.dc.html" style="display:inline-flex;align-items:center;gap:8px;margin-top:18px;color:#E8B84B;font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px">View the pipeline <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E8B84B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+
+      <div style="background:#fff;border:1px solid #E4E1DA;border-radius:16px;padding:22px">
+        <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#2D2467;margin-bottom:14px">Sources in this feed</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <sc-for list="{{ sourceChips }}" as="src" hint-placeholder-count="8">
+            <span style="font-family:'Mulish',sans-serif;font-size:12.5px;font-weight:600;color:#5A5766;background:#F7F4EE;border:1px solid #E4E1DA;border-radius:999px;padding:5px 12px">{{ src }}</span>
+          </sc-for>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer style="background:#14102A;color:#fff;padding:40px 28px">
+    <div style="max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+      <span style="font-family:'Mulish',sans-serif;font-size:13px;color:rgba(255,255,255,.5)">© 2026 Sobha Surendran · Newsroom auto-updates hourly</span>
+      <span style="font-family:'Mulish',sans-serif;font-size:13px;color:rgba(255,255,255,.5)">Coverage aggregated for reference; rights remain with original publishers.</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:1400}}">
+// Thumbnail Fetch API (design_handoff_thumbnail_api/server.js) — serves the
+// unified newsroom feed. Change this if the API is deployed somewhere other
+// than a local dev server.
+const THUMB_API_BASE = 'http://localhost:8787';
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { cat: 'All', query: '', socialMenu: null, newsroomItems: [], newsroomLoading: true, newsroomUpdatedAt: null, showTranslateBanner: true };
+  }
+
+  componentDidMount() {
+    this._socialAway = () => { if (this.state.socialMenu) this.setState({ socialMenu: null }); };
+    window.addEventListener('click', this._socialAway);
+    this._loadNewsroom();
+    this._loadGoogleTranslate();
+  }
+
+  componentWillUnmount() {
+    if (this._socialAway) window.removeEventListener('click', this._socialAway);
+  }
+
+  R(path) {
+    const id = path.replace('images/', '').replace('.png', '');
+    return (typeof window !== 'undefined' && window.__resources && window.__resources[id]) || path;
+  }
+
+  async _loadNewsroom() {
+    try {
+      const res = await fetch(THUMB_API_BASE + '/api/newsroom');
+      if (res.ok) {
+        const data = await res.json();
+        this.setState({ newsroomItems: data.items || [], newsroomUpdatedAt: data.updated_at || null, newsroomLoading: false });
+      } else {
+        this.setState({ newsroomLoading: false });
+      }
+    } catch (e) {
+      this.setState({ newsroomLoading: false });
+    }
+  }
+
+  _loadGoogleTranslate() {
+    if (typeof document === 'undefined' || document.getElementById('google-translate-script')) return;
+    window.googleTranslateElementInit = () => {
+      new window.google.translate.TranslateElement(
+        { pageLanguage: 'en', includedLanguages: 'ml', autoDisplay: false },
+        'google_translate_element'
+      );
+    };
+    const script = document.createElement('script');
+    script.id = 'google-translate-script';
+    script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    document.body.appendChild(script);
+  }
+
+  _translateToMalayalam() {
+    const tryOnce = (attempt) => {
+      const combo = document.querySelector('.goog-te-combo');
+      if (combo) {
+        combo.value = 'ml';
+        combo.dispatchEvent(new Event('change'));
+        this.setState({ showTranslateBanner: false });
+      } else if (attempt < 20) {
+        setTimeout(() => tryOnce(attempt + 1), 300);
+      }
+    };
+    tryOnce(0);
+  }
+
+  cats() { return ['All', 'News', 'Facebook']; }
+
+  platformLabel(p) {
+    return { news: 'News', instagram: 'Instagram', facebook: 'Facebook', x: 'X (Twitter)' }[p] || p || 'News';
+  }
+
+  _fmtAgo(iso) {
+    if (!iso) return '';
+    const then = new Date(iso).getTime();
+    if (isNaN(then)) return '';
+    const diffMs = Date.now() - then;
+    const mins = Math.floor(diffMs / 60000);
+    if (mins < 1) return 'just now';
+    if (mins < 60) return mins + 'm ago';
+    const hrs = Math.floor(mins / 60);
+    if (hrs < 24) return hrs + 'h ago';
+    return Math.floor(hrs / 24) + 'd ago';
+  }
+
+  filtered() {
+    const q = this.state.query.trim().toLowerCase();
+    return this.state.newsroomItems.filter((s) => {
+      const label = this.platformLabel(s.platform);
+      const catOk = this.state.cat === 'All' || this.state.cat === label || (this.state.cat === 'X' && s.platform === 'x');
+      const qOk = !q || ((s.title || '') + ' ' + (s.summary || '') + ' ' + (s.source || '')).toLowerCase().includes(q);
+      return catOk && qOk;
+    });
+  }
+
+  renderVals() {
+    const all = this.state.newsroomItems;
+    const list = this.filtered();
+    const navSocialOpen = this.state.socialMenu === 'nav';
+    const filtering = this.state.cat !== 'All' || this.state.query.trim() !== '';
+    const lead = (!filtering && list.length) ? list[0] : null;
+    const rest = lead ? list.filter((s) => s !== lead) : list;
+
+    const catStyleBase = 'font-family:Montserrat,sans-serif;font-weight:700;font-size:13.5px;padding:9px 16px;border-radius:999px;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:7px;border:1px solid';
+    const cats = this.cats().map((label) => {
+      const on = this.state.cat === label;
+      const count = label === 'All' ? all.length : all.filter((s) => this.platformLabel(s.platform) === label).length;
+      return {
+        label,
+        count,
+        onClick: () => this.setState({ cat: label }),
+        style: catStyleBase + (on ? ';background:#2D2467;color:#fff;border-color:#2D2467' : ';background:#fff;color:#5A5766;border-color:#E4E1DA'),
+        countStyle: 'font-family:Mulish,sans-serif;font-weight:700;font-size:11px;padding:1px 7px;border-radius:999px;' + (on ? 'background:rgba(255,255,255,.18);color:#fff' : 'background:#F0ECFB;color:#4B3F8F'),
+      };
+    });
+
+    const decorate = (s) => ({
+      ...s,
+      bg: s.thumbnail_url ? 'url("' + s.thumbnail_url + '")' : 'url("' + this.R('images/g_rally.png') + '")',
+      pos: 'center',
+      category: this.platformLabel(s.platform),
+      sourceLabel: s.source || this.platformLabel(s.platform),
+      ago: this._fmtAgo(s.published_at),
+      summary: s.summary ? (s.summary.length > 220 ? s.summary.slice(0, 217) + '…' : s.summary) : '',
+    });
+
+    const now = Date.now();
+    const todayCount = all.filter((s) => s.published_at && (now - new Date(s.published_at).getTime()) < 24 * 60 * 60 * 1000).length;
+    const sourceSet = Array.from(new Set(all.map((s) => s.source).filter(Boolean)));
+
+    return {
+      showTranslateBanner: this.state.showTranslateBanner,
+      onTranslate: () => this._translateToMalayalam(),
+      onDismissTranslateBanner: () => this.setState({ showTranslateBanner: false }),
+      navSocialOpen,
+      navChevron: navSocialOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+      onToggleNavSocial: (e) => { e.stopPropagation(); this.setState((s) => ({ socialMenu: s.socialMenu === 'nav' ? null : 'nav' })); },
+      refreshedAgo: this.state.newsroomUpdatedAt ? this._fmtAgo(new Date(this.state.newsroomUpdatedAt).toISOString()) : (this.state.newsroomLoading ? 'loading…' : 'just now'),
+      statStories: all.length,
+      statSources: sourceSet.length,
+      statToday: todayCount,
+      query: this.state.query,
+      onQuery: (e) => this.setState({ query: e.target.value }),
+      categories: cats,
+      loading: this.state.newsroomLoading && all.length === 0,
+      hasLead: !!lead,
+      lead: lead ? decorate(lead) : {},
+      listHeading: filtering ? 'Filtered coverage' : 'Latest coverage',
+      resultCount: list.length + (list.length === 1 ? ' story' : ' stories'),
+      hasResults: rest.length > 0,
+      noResults: !this.state.newsroomLoading && list.length === 0,
+      stories: rest.map(decorate),
+      trending: list.slice(0, 4).map((s, i) => ({
+        rank: i + 1, url: s.url, title: s.title, ago: this._fmtAgo(s.published_at), sourceLabel: s.source || this.platformLabel(s.platform),
+      })),
+      sourceChips: sourceSet,
+    };
+  }
+}
+</script>
+</body>
+</html>

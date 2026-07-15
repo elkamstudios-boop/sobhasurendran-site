@@ -1,0 +1,6 @@
+/* Webfonts — Civic Indigo system.
+   NOTE: The source resume used commercial fonts that ship inside the PDF (a heavy
+   geometric display face + a humanist body sans). We substitute the closest free
+   Google Fonts: Montserrat (display / headings, all-caps) and Mulish (body, justified).
+   Flag to user if exact source fonts are required. */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Mulish:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap');

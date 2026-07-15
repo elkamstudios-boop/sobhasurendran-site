@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/colors.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/typography.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/effects.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/styles.css">
+<script src="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/_ds_bundle.js"></script>
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Mulish',system-ui,sans-serif;background:#14102A;color:#E9E7F2;-webkit-font-smoothing:antialiased;line-height:1.5}
+  ::selection{background:#E8B84B;color:#1A1530}
+  a{color:#E8B84B;text-decoration:none}
+  a:hover{color:#F2D488}
+  .mono{font-family:'Courier New',monospace}
+  @media (max-width:1080px){ .ad-cols{grid-template-columns:1fr !important} .ad-kpis{grid-template-columns:repeat(2,1fr) !important} .ad-pipe{flex-wrap:wrap !important} }
+  @media (max-width:680px){ .ad-kpis{grid-template-columns:1fr !important} .ad-row{grid-template-columns:1fr !important;gap:8px !important} .ad-nav{display:none !important} }
+</style>
+</helmet>
+
+<template id="__bundler_thumbnail" data-bg-color="#14102A">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#14102A"/>
+    <circle cx="220" cy="400" r="60" fill="none" stroke="#E8B84B" stroke-width="10"/>
+    <circle cx="480" cy="400" r="60" fill="none" stroke="#4B3F8F" stroke-width="10"/>
+    <circle cx="740" cy="400" r="60" fill="none" stroke="#4B3F8F" stroke-width="10"/>
+    <circle cx="1000" cy="400" r="60" fill="#2F8F4E"/>
+    <rect x="280" y="394" width="140" height="12" fill="#4B3F8F"/>
+    <rect x="540" y="394" width="140" height="12" fill="#4B3F8F"/>
+    <rect x="800" y="394" width="140" height="12" fill="#4B3F8F"/>
+  </svg>
+</template>
+
+<div style="min-height:100vh">
+  <!-- Top bar -->
+  <header style="background:#1A1530;border-bottom:1px solid rgba(255,255,255,.1);position:sticky;top:0;z-index:40">
+    <div style="max-width:1320px;margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px">
+      <div style="display:flex;align-items:center;gap:14px">
+        <span style="width:34px;height:34px;border-radius:9px;background:#E8B84B;color:#1A1530;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:900;font-size:14px">SS</span>
+        <div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:15px;color:#fff;line-height:1">Newsroom Pipeline</div>
+          <div style="font-family:'Mulish',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5)">Ingestion control</div>
+        </div>
+      </div>
+      <nav class="ad-nav" style="display:flex;align-items:center;gap:6px">
+        <span style="font-family:'Mulish',sans-serif;font-size:13px;font-weight:700;color:#1A1530;background:#E8B84B;padding:7px 15px;border-radius:999px">Overview</span>
+        <a href="#queue" style="font-family:'Mulish',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.8);padding:7px 15px;border:1px solid rgba(255,255,255,.16);border-radius:999px">Queue</a>
+        <a href="#clusters" style="font-family:'Mulish',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.8);padding:7px 15px;border:1px solid rgba(255,255,255,.16);border-radius:999px">Clusters</a>
+        <a href="#log" style="font-family:'Mulish',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.8);padding:7px 15px;border:1px solid rgba(255,255,255,.16);border-radius:999px">Log</a>
+      </nav>
+      <a href="News.dc.html" style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:#E8B84B;display:inline-flex;align-items:center;gap:7px">View live feed <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E8B84B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </header>
+
+  <div style="max-width:1320px;margin:0 auto;padding:32px 28px 72px">
+    <!-- Run status -->
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:26px">
+      <div>
+        <h1 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:26px;color:#fff;margin:0;letter-spacing:-.01em">Last crawl · {{ run.time }}</h1>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+          <span style="display:inline-flex;align-items:center;gap:7px;background:rgba(47,143,78,.16);border:1px solid rgba(47,143,78,.4);color:#7FD79B;font-family:'Mulish',sans-serif;font-weight:700;font-size:12px;padding:5px 12px;border-radius:999px"><span style="width:7px;height:7px;border-radius:50%;background:#2F8F4E"></span>{{ run.status }}</span>
+          <span style="font-family:'Mulish',sans-serif;font-size:13px;color:rgba(255,255,255,.6)">Completed in {{ run.duration }} · next run {{ run.next }}</span>
+        </div>
+      </div>
+      <button type="button" style="background:#E8B84B;color:#1A1530;border:none;font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;padding:13px 24px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;gap:9px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A1530" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 3v6h-6"/></svg>Run pipeline now</button>
+    </div>
+
+    <!-- KPIs -->
+    <div class="ad-kpis" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:16px">
+      <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+        <div style="background:#1F1940;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px">
+          <div style="font-family:'Mulish',sans-serif;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55)">{{ k.label }}</div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:34px;color:#fff;line-height:1;margin-top:12px">{{ k.value }}</div>
+          <div style="font-family:'Mulish',sans-serif;font-size:12px;color:{{ k.deltaColor }};margin-top:8px">{{ k.delta }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- Pipeline stages -->
+    <div style="background:#1F1940;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px 26px;margin-bottom:28px">
+      <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#E8B84B;margin-bottom:20px">LangGraph pipeline · this run</div>
+      <div class="ad-pipe" style="display:flex;align-items:stretch;gap:0">
+        <sc-for list="{{ stages }}" as="st" hint-placeholder-count="6">
+          <div style="flex:1;min-width:150px;display:flex;align-items:center;gap:0">
+            <div style="flex:1;background:{{ st.bg }};border:1px solid {{ st.border }};border-radius:12px;padding:16px 14px">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+                <span style="width:24px;height:24px;border-radius:7px;background:{{ st.iconBg }};color:{{ st.iconColor }};display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:900;font-size:11px">{{ st.n }}</span>
+                <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:#fff">{{ st.name }}</span>
+              </div>
+              <div class="mono" style="font-size:12px;color:#B9B3D6">{{ st.node }}</div>
+              <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:20px;color:#fff;margin-top:12px">{{ st.count }}</div>
+              <div style="font-family:'Mulish',sans-serif;font-size:11px;color:rgba(255,255,255,.5)">{{ st.sub }}</div>
+            </div>
+            <sc-if value="{{ st.arrow }}" hint-placeholder-val="{{ true }}">
+              <div style="flex:none;padding:0 6px;color:rgba(255,255,255,.3)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div class="ad-cols" style="display:grid;grid-template-columns:1.5fr 1fr;gap:24px">
+      <!-- Publish queue -->
+      <div id="queue" style="background:#1F1940;border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden">
+        <div style="padding:20px 24px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:15px;color:#fff">Publish queue</div>
+          <div style="display:flex;gap:6px">
+            <sc-for list="{{ filters }}" as="f" hint-placeholder-count="4">
+              <button type="button" onClick="{{ f.onClick }}" style="{{ f.style }}">{{ f.label }} <span style="opacity:.7">{{ f.count }}</span></button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="max-height:520px;overflow-y:auto">
+          <sc-for list="{{ items }}" as="it" hint-placeholder-count="7">
+            <div class="ad-row" style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,.06)">
+              <div style="min-width:0">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap">
+                  <span style="{{ it.badgeStyle }}">{{ it.statusLabel }}</span>
+                  <span style="font-family:'Mulish',sans-serif;font-size:11px;color:rgba(255,255,255,.45)">{{ it.source }} · {{ it.ago }}</span>
+                </div>
+                <div style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:14.5px;color:#fff;line-height:1.35;overflow:hidden;text-overflow:ellipsis">{{ it.title }}</div>
+                <sc-if value="{{ it.dupNote }}" hint-placeholder-val="{{ false }}"><div class="mono" style="font-size:11px;color:#8E88B0;margin-top:5px">{{ it.dupText }}</div></sc-if>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px">
+                <sc-for list="{{ it.scores }}" as="sc" hint-placeholder-count="3">
+                  <div style="text-align:center;width:38px">
+                    <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:15px;color:{{ sc.color }}">{{ sc.v }}</div>
+                    <div style="font-family:'Mulish',sans-serif;font-size:9px;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.4)">{{ sc.k }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- Sidebar: clusters + sources -->
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div id="clusters" style="background:#1F1940;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:22px 24px">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:15px;color:#fff;margin-bottom:16px">Duplicate clusters</div>
+          <sc-for list="{{ clusters }}" as="c" hint-placeholder-count="3">
+            <div style="padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+                <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:13.5px;color:#fff;line-height:1.3">{{ c.title }}</div>
+                <span style="flex:none;font-family:'Montserrat',sans-serif;font-weight:800;font-size:12px;color:#1A1530;background:#E8B84B;padding:3px 9px;border-radius:999px">{{ c.count }}</span>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:9px">
+                <sc-for list="{{ c.members }}" as="m" hint-placeholder-count="3">
+                  <span class="mono" style="font-size:10.5px;color:#B9B3D6;background:rgba(255,255,255,.06);padding:2px 7px;border-radius:4px">{{ m }}</span>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="background:#1F1940;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:22px 24px">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:15px;color:#fff;margin-bottom:16px">Source health</div>
+          <sc-for list="{{ sourceHealth }}" as="s" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:13px">
+              <span style="width:8px;height:8px;border-radius:50%;background:{{ s.dot }};flex:none"></span>
+              <span style="font-family:'Mulish',sans-serif;font-size:13px;color:#E9E7F2;flex:1">{{ s.name }}</span>
+              <span class="mono" style="font-size:11px;color:rgba(255,255,255,.5)">{{ s.latency }}</span>
+              <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;color:{{ s.pullColor }}">{{ s.pulls }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- Log -->
+    <div id="log" style="background:#0E0B20;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:22px 24px;margin-top:24px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:15px;color:#fff">Processing log</div>
+        <span class="mono" style="font-size:11px;color:rgba(255,255,255,.4)">run_2026-07-07T14:00Z</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <sc-for list="{{ logs }}" as="l" hint-placeholder-count="8">
+          <div style="display:grid;grid-template-columns:78px 90px 1fr;gap:14px;padding:6px 0;align-items:baseline">
+            <span class="mono" style="font-size:11.5px;color:rgba(255,255,255,.35)">{{ l.t }}</span>
+            <span class="mono" style="font-size:11px;font-weight:700;color:{{ l.lvColor }}">{{ l.lv }}</span>
+            <span class="mono" style="font-size:12px;color:#C6C1E0">{{ l.msg }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1320,&quot;height&quot;:1500}}">
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { filter: 'All' }; }
+
+  allItems() {
+    return [
+      { status: 'published', source: 'The Hindu', ago: '12m', title: 'Surendran takes charge as BJP Kerala General Secretary', scores: [98,96,91], dup: false },
+      { status: 'published', source: 'Manorama', ago: '38m', title: 'Mahila Morcha units active in all 140 constituencies', scores: [95,93,88], dup: false },
+      { status: 'clustered', source: 'ANI', ago: '41m', title: 'BJP announces new Kerala office-bearers', scores: [90,90,84], dup: true, dupText: 'merged → cluster c_thrissur_gs (7 members)' },
+      { status: 'held', source: 'Regional blog', ago: '52m', title: 'Opinion: what the reshuffle means for the front', scores: [61,44,58], dup: false, dupText: '' },
+      { status: 'published', source: 'TNIE', ago: '1h', title: 'Alappuzha vote share climbs 11 points', scores: [92,89,86], dup: false },
+      { status: 'clustered', source: 'Times of India', ago: '1h', title: 'BJP sharpens Kerala focus with new GS', scores: [88,88,82], dup: true, dupText: 'merged → cluster c_thrissur_gs (7 members)' },
+      { status: 'held', source: 'Aggregator feed', ago: '2h', title: 'Kerala politics roundup — weekly digest', scores: [40,52,49], dup: false, dupText: 'below relevance threshold (70)' },
+      { status: 'published', source: 'Mathrubhumi', ago: '2h', title: 'Women-led welfare roadmap ahead of 2026 budget', scores: [86,85,83], dup: false },
+    ];
+  }
+
+  badge(status) {
+    const map = {
+      published: ['Published', '#7FD79B', 'rgba(47,143,78,.18)'],
+      clustered: ['Clustered', '#F2D488', 'rgba(232,184,75,.16)'],
+      held: ['Held for review', '#F2A38E', 'rgba(180,50,42,.2)'],
+    };
+    const [label, color, bg] = map[status] || map.held;
+    return { label, style: 'font-family:Mulish,sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:4px;color:' + color + ';background:' + bg };
+  }
+
+  renderVals() {
+    const filter = this.state.filter;
+    const items = this.allItems();
+    const count = (st) => st === 'All' ? items.length : items.filter((i) => i.status === st.toLowerCase()).length;
+    const fdefs = ['All','Published','Clustered','Held'];
+    const fbase = 'font-family:Mulish,sans-serif;font-weight:700;font-size:12px;padding:6px 12px;border-radius:999px;cursor:pointer;border:1px solid;display:inline-flex;align-items:center;gap:6px';
+
+    const scoreColor = (v) => v >= 80 ? '#7FD79B' : v >= 65 ? '#F2D488' : '#F2A38E';
+    const shown = filter === 'All' ? items : items.filter((i) => i.status === filter.toLowerCase());
+
+    return {
+      run: { time: 'Today · 14:00 IST', status: 'Completed', duration: '2m 14s', next: '15:00 IST' },
+      kpis: [
+        { label: 'Items crawled', value: '312', delta: '+28 vs last run', deltaColor: '#7FD79B' },
+        { label: 'Passed relevance', value: '41', delta: '13.1% pass rate', deltaColor: 'rgba(255,255,255,.55)' },
+        { label: 'Auto-published', value: '9', delta: '3 new clusters', deltaColor: '#7FD79B' },
+        { label: 'Held for review', value: '5', delta: 'awaiting editor', deltaColor: '#F2A38E' },
+      ],
+      stages: [
+        { n: '1', name: 'Ingest', node: 'crawl_sources', count: '312', sub: 'raw items', arrow: true, bg: 'rgba(75,63,143,.18)', border: 'rgba(75,63,143,.4)', iconBg: '#4B3F8F', iconColor: '#fff' },
+        { n: '2', name: 'Extract', node: 'parse_content', count: '298', sub: 'parsed', arrow: true, bg: 'rgba(75,63,143,.18)', border: 'rgba(75,63,143,.4)', iconBg: '#4B3F8F', iconColor: '#fff' },
+        { n: '3', name: 'Score', node: 'llm_score', count: '298', sub: 'relevance / cred / quality', arrow: true, bg: 'rgba(75,63,143,.18)', border: 'rgba(75,63,143,.4)', iconBg: '#4B3F8F', iconColor: '#fff' },
+        { n: '4', name: 'Dedupe', node: 'embed_cluster', count: '41', sub: 'above threshold', arrow: true, bg: 'rgba(75,63,143,.18)', border: 'rgba(75,63,143,.4)', iconBg: '#4B3F8F', iconColor: '#fff' },
+        { n: '5', name: 'Rewrite', node: 'compose_story', count: '14', sub: 'clustered stories', arrow: true, bg: 'rgba(75,63,143,.18)', border: 'rgba(75,63,143,.4)', iconBg: '#4B3F8F', iconColor: '#fff' },
+        { n: '6', name: 'Publish', node: 'publish_gate', count: '9', sub: 'live · 5 held', arrow: false, bg: 'rgba(47,143,78,.16)', border: 'rgba(47,143,78,.45)', iconBg: '#2F8F4E', iconColor: '#fff' },
+      ],
+      filters: fdefs.map((label) => ({
+        label, count: count(label),
+        onClick: () => this.setState({ filter: label }),
+        style: fbase + (filter === label ? ';background:#E8B84B;color:#1A1530;border-color:#E8B84B' : ';background:transparent;color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.16)'),
+      })),
+      items: shown.map((i) => {
+        const b = this.badge(i.status);
+        return {
+          ...i,
+          statusLabel: b.label,
+          badgeStyle: b.style,
+          dupNote: !!i.dupText,
+          scores: [
+            { k: 'Rel', v: i.scores[0], color: scoreColor(i.scores[0]) },
+            { k: 'Cred', v: i.scores[1], color: scoreColor(i.scores[1]) },
+            { k: 'Qual', v: i.scores[2], color: scoreColor(i.scores[2]) },
+          ],
+        };
+      }),
+      clusters: [
+        { title: 'Surendran named Kerala GS', count: 7, members: ['The Hindu','Manorama','Mathrubhumi','ANI','TNIE','+2'] },
+        { title: 'Mahila Morcha 140/140', count: 5, members: ['Manorama','Mathrubhumi','The Hindu','ANI','Janmabhumi'] },
+        { title: 'Alappuzha vote swing', count: 4, members: ['TNIE','ToI','Deccan Herald','The Hindu'] },
+      ],
+      sourceHealth: [
+        { name: 'The Hindu', latency: '240ms', pulls: '18', dot: '#2F8F4E', pullColor: '#7FD79B' },
+        { name: 'Manorama Online', latency: '310ms', pulls: '22', dot: '#2F8F4E', pullColor: '#7FD79B' },
+        { name: 'Mathrubhumi', latency: '520ms', pulls: '15', dot: '#2F8F4E', pullColor: '#7FD79B' },
+        { name: 'ANI wire', latency: '1.2s', pulls: '9', dot: '#E8B84B', pullColor: '#F2D488' },
+        { name: 'Deccan Herald', latency: 'timeout', pulls: '0', dot: '#B4322A', pullColor: '#F2A38E' },
+      ],
+      logs: [
+        { t: '14:00:02', lv: 'INFO', lvColor: '#8E88B0', msg: 'crawl_sources: dispatched 32 source adapters' },
+        { t: '14:00:41', lv: 'INFO', lvColor: '#8E88B0', msg: 'parse_content: 298/312 extracted (14 paywalled/failed)' },
+        { t: '14:01:08', lv: 'INFO', lvColor: '#8E88B0', msg: 'llm_score: batch scored 298 items (gpt-class model)' },
+        { t: '14:01:33', lv: 'WARN', lvColor: '#F2D488', msg: 'source deccan_herald: request timeout, skipped' },
+        { t: '14:01:50', lv: 'INFO', lvColor: '#8E88B0', msg: 'embed_cluster: 41 items → 14 clusters (cos ≥ 0.86)' },
+        { t: '14:02:05', lv: 'INFO', lvColor: '#8E88B0', msg: 'compose_story: rewrote 14 clustered summaries' },
+        { t: '14:02:11', lv: 'WARN', lvColor: '#F2D488', msg: 'publish_gate: 5 items below cred threshold → held' },
+        { t: '14:02:14', lv: 'OK', lvColor: '#7FD79B', msg: 'publish_gate: 9 stories published to feed ✓' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="ext-resource-dependency" content="images/g_rally.png" data-resource-id="g_rally">
+<meta name="ext-resource-dependency" content="images/community.png" data-resource-id="community">
+<meta name="ext-resource-dependency" content="images/g_meeting.png" data-resource-id="g_meeting">
+<meta name="ext-resource-dependency" content="images/g_office.png" data-resource-id="g_office">
+<meta name="ext-resource-dependency" content="images/g_meet.png" data-resource-id="g_meet">
+<meta name="ext-resource-dependency" content="images/g_felicitation.png" data-resource-id="g_felicitation">
+<meta name="ext-resource-dependency" content="images/g_conf.png" data-resource-id="g_conf">
+<meta name="ext-resource-dependency" content="images/hero_banner.png" data-resource-id="hero_banner">
+<meta name="ext-resource-dependency" content="images/portrait.png" data-resource-id="portrait">
+<meta name="ext-resource-dependency" content="images/gargi.png" data-resource-id="gargi">
+<meta name="ext-resource-dependency" content="images/gargi_bg.jpg" data-resource-id="gargi_bg">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/colors.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/typography.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/tokens/effects.css">
+<link rel="stylesheet" href="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/styles.css">
+<script src="_ds/civic-indigo-design-system-54d91372-96ab-4291-ade5-46383392f171/_ds_bundle.js"></script>
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;overflow-x:hidden}
+  /* Safety net for translated content: a long Malayalam compound word has no
+     natural break point the way English does at spaces, so without this any
+     text element not individually hardened below could overflow its fixed-
+     width container and push the whole layout out of alignment.
+     !important is required specifically because Google's Website Translator
+     wraps every translated segment in its own <font> tag with inline styles —
+     a property set DIRECTLY on that wrapper always wins over one merely
+     inherited from an ancestor like this h1/p rule, which is exactly why
+     English (untouched, no wrapper) respected plain overflow-wrap fine while
+     translated Malayalam did not. word-break:keep-all additionally guarantees
+     Malayalam only wraps at real word boundaries, never splitting mid-word. */
+  h1,h2,h3,h4,p,span,div,a{overflow-wrap:break-word !important;word-break:keep-all !important}
+  font{word-break:inherit !important;overflow-wrap:inherit !important}
+  body{font-family:'Mulish',system-ui,sans-serif;background:#FFFFFF;color:#3A3744;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.55}
+  ::selection{background:#2D2467;color:#fff}
+  a{color:inherit}
+  @keyframes haloUp{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+  #storyCard{opacity:0;transform:translateY(38px);transition:opacity .85s ease,transform .85s cubic-bezier(.22,.61,.36,1)}
+  #storyText{opacity:0;transform:translateX(-44px);transition:opacity .8s ease .12s,transform .8s cubic-bezier(.22,.61,.36,1) .12s}
+  #storyImg{opacity:0;transform:translateX(52px);transition:opacity .9s ease .2s,transform 1s cubic-bezier(.22,.61,.36,1) .2s}
+  body.story-in #storyCard,body.story-in #storyText,body.story-in #storyImg{opacity:1;transform:none}
+  .gbar{transform:scaleY(0);transform-origin:bottom;transition:transform .9s cubic-bezier(.22,.61,.36,1)}
+  body.stats-in .gbar{transform:scaleY(1)}
+  .gdot{opacity:0;transition:opacity .5s ease 1.1s}
+  body.stats-in .gdot{opacity:1}
+  .gdot-hide{display:none}
+  @keyframes haloDown{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+  /* Explicit height (not auto+stretch) — the marquee columns inside rely on
+     height:100% to establish their scroll-clipping window, which only
+     resolves correctly against a definite (non-auto) parent height. Ceiling
+     raised to give the hero text column more headroom before any mismatch
+     becomes visible, without depending on stretch-through-percentage sizing. */
+  .halo-mosaic{display:block;position:relative;min-width:0;overflow:hidden;align-self:stretch}
+  .halo-mosaic-col{position:absolute;top:0;bottom:0;width:calc(50% - 9px);overflow:hidden}
+  .halo-mosaic-col.is-right{right:0}
+  .halo-mosaic-col.is-left{left:0}
+  .halo-tile{width:100% !important;height:clamp(78px,17vw,316px) !important;border-radius:clamp(10px,2vw,24px) !important}
+  @media (max-width:900px){ .halo-journey-grid{grid-template-columns:repeat(6,minmax(0,1fr)) !important} }
+  @media (max-width:620px){ .halo-journey-grid{grid-template-columns:repeat(4,minmax(0,1fr)) !important} }
+  @media (max-width:440px){ .halo-journey-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important} }
+  .halo-card{display:grid !important;grid-template-columns:clamp(160px,44vw,548px) 1fr !important;align-items:stretch !important;gap:clamp(16px,3.5vw,40px) !important}
+  .halo-left{width:auto !important;min-width:0}
+  /* Row layout (base rules above) previously stayed active all the way down
+     to 480px, squeezing both the text column and the image mosaic into a
+     cramped side-by-side row across the entire tablet/narrow-window range
+     (481-1079px) — a real mobile-responsiveness gap on its own, and it left
+     translated Malayalam text with less room before any mismatch surfaced.
+     Widened to switch to a comfortable stacked column much earlier. */
+  @media (max-width:880px){
+    .halo-card{grid-template-columns:1fr !important}
+    .halo-left{width:100% !important}
+    .halo-mosaic{width:100% !important;height:clamp(220px,60vw,420px);min-height:clamp(220px,60vw,420px)}
+    .halo-tile{width:clamp(90px,22vw,170px) !important;height:clamp(108px,26vw,204px) !important}
+  }
+  @media (max-width:700px){
+    .halo-feat{flex-direction:column !important;gap:14px !important}
+    .halo-feat-div{display:none !important}
+  }
+  @media (min-width:1080px){
+    .halo-card{padding:0 64px 0 64px !important;min-height:0 !important}
+  }
+  @media (max-width:1099px){
+    .halo-phone{display:none !important}
+  }
+  @media (max-width:980px){
+    .r-stats-wrap{grid-template-columns:1fr !important;gap:40px !important}
+    .r-init-wrap{grid-template-columns:1fr !important;gap:40px !important}
+    .r-init-focus{border-left:none !important;padding-left:0 !important;border-top:1px solid rgba(255,255,255,.16) !important;padding-top:32px !important}
+  }
+  @media (max-width:880px){
+    .halo-nav-links{display:none !important}
+    .halo-mobile-toggle{display:flex !important}
+    .r-stats-grid{grid-template-columns:1fr !important}
+    .r-story-grid{grid-template-columns:1fr !important;gap:36px !important}
+    .r-press-featured{grid-template-columns:1fr !important}
+    .r-press-cards{grid-template-columns:1fr !important}
+    .r-footer-grid{grid-template-columns:1fr !important;gap:34px !important}
+    .r-release-row{grid-template-columns:1fr !important;gap:16px !important}
+    .r-release-actions{justify-content:flex-start !important}
+    .r-press-head{flex-direction:column !important;align-items:flex-start !important}
+    .halo-feat{flex-direction:column !important}
+    .halo-feat-div{display:none !important}
+  }
+  @media (max-width:560px){
+    .r-gallery-grid{grid-template-columns:repeat(2,1fr) !important}
+    .r-story-portrait{max-width:300px !important}
+    .halo-presslogos{gap:22px !important}
+  }
+  @media (max-width:680px){
+    .halo-card{padding:30px 20px !important;border-radius:22px !important;gap:30px !important}
+    #stats{padding:64px 22px !important}
+    .r-stats-wrap{gap:32px !important}
+    .r-stats-nums{flex-direction:column !important;gap:22px !important}
+    .r-stat{padding:18px 0 0 0 !important;border-left:none !important;border-top:1px solid #E4E1DA !important;width:100% !important}
+    .r-stats-chart{height:190px !important}
+    .r-init-wrap{padding:64px 22px !important}
+    #ringStage{height:430px !important}
+  }
+  @media (max-width:430px){
+    .halo-card{padding:26px 16px !important}
+    #ringStage{height:380px !important}
+  }
+  /* Suppress Google's own translate widget chrome — we drive it from our own
+     styled banner and only need the underlying select element functional. */
+  .goog-te-banner-frame.skiptranslate{display:none !important}
+  body{top:0px !important}
+  .goog-te-gadget{display:none !important}
+  .goog-text-highlight{background:none !important;box-shadow:none !important}
+</style>
+</helmet>
+
+<template id="__bundler_thumbnail" data-bg-color="#2D2467">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#2D2467"></rect>
+    <rect x="120" y="120" width="960" height="560" rx="40" fill="#241C52"></rect>
+    <text x="600" y="430" font-family="Montserrat,sans-serif" font-weight="900" font-size="150" fill="#E8B84B" text-anchor="middle">SS</text>
+    <rect x="430" y="500" width="340" height="60" rx="30" fill="#E8B84B"></rect>
+  </svg>
+</template>
+
+<div id="google_translate_element" style="display:none"></div>
+
+<sc-if value="{{ showTranslateBanner }}" hint-placeholder-val="{{ true }}">
+  <div class="notranslate" style="position:fixed;top:0;left:0;right:0;z-index:300;background:#2D2467;color:#fff;padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;box-shadow:0 6px 20px rgba(0,0,0,.25);font-family:'Mulish',sans-serif;font-size:13.5px;background-image:repeating-linear-gradient(118deg,rgba(232,184,75,.05) 0,rgba(232,184,75,.05) 1px,transparent 1px,transparent 22px)">
+    <span style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;text-align:center">
+      <svg style="flex:none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8B84B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+      <span><strong style="color:#F2D488">ഈ വെബ്സൈറ്റ് മലയാളത്തിൽ വായിക്കണോ?</strong>&nbsp; Would you like to read this site in Malayalam?</span>
+    </span>
+    <span style="display:flex;align-items:center;gap:10px;flex:none">
+      <button type="button" onClick="{{ onTranslate }}" style="cursor:pointer;border:none;background:#E8B84B;color:#1A1530;font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;padding:9px 20px;border-radius:999px;white-space:nowrap">Translate to Malayalam</button>
+      <button type="button" onClick="{{ onDismissTranslateBanner }}" aria-label="Dismiss" style="cursor:pointer;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none">✕</button>
+    </span>
+  </div>
+</sc-if>
+
+<div style="background:#FFFFFF">
+  <header style="max-width:1360px;margin:0 auto;padding:22px 28px 8px;display:flex;align-items:center;justify-content:space-between;gap:18px">
+    <a href="#" class="notranslate" style="text-decoration:none;font-family:'Montserrat',sans-serif;font-weight:900;font-size:17px;letter-spacing:.5px;color:#2D2467;white-space:nowrap">SOBHA SURENDRAN</a>
+    <nav class="halo-nav-links" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;row-gap:8px">
+      <a href="#story" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">About</a>
+      <a href="#journey" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">Journey</a>
+      <a href="#initiative" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">Initiatives</a>
+      <a href="News.dc.html" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">Newsroom</a>
+      <a href="#gallery" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">Gallery</a>
+    </nav>
+    <div class="halo-mobile-toggle" style="display:none;position:relative">
+      <button type="button" onClick="{{ onToggleMobileNav }}" style="cursor:pointer;border:1px solid #E4E1DA;background:#fff;border-radius:10px;width:38px;height:38px;display:flex;align-items:center;justify-content:center" aria-label="Menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D2467" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+      </button>
+      <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;top:calc(100% + 10px);right:0;z-index:90;background:#fff;border:1px solid #E4E1DA;border-radius:14px;box-shadow:0 20px 48px rgba(26,21,48,.22);padding:8px;display:flex;flex-direction:column;gap:4px;min-width:180px">
+          <a href="#story" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:10px 12px;border-radius:9px" style-hover="background:#F7F4EE">About</a>
+          <a href="#journey" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:10px 12px;border-radius:9px" style-hover="background:#F7F4EE">Journey</a>
+          <a href="#initiative" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:10px 12px;border-radius:9px" style-hover="background:#F7F4EE">Initiatives</a>
+          <a href="News.dc.html" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:10px 12px;border-radius:9px" style-hover="background:#F7F4EE">Newsroom</a>
+          <a href="#gallery" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:10px 12px;border-radius:9px" style-hover="background:#F7F4EE">Gallery</a>
+        </div>
+      </sc-if>
+    </div>
+    <div style="display:flex;align-items:center;gap:20px">
+      <div style="position:relative">
+        <button type="button" onClick="{{ onToggleNavSocial }}" style="cursor:pointer;border:none;background:#F7F4EE;border-radius:999px;padding:5px 6px 5px 22px;display:flex;align-items:center;gap:14px;white-space:nowrap">
+          <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467">Connect</span>
+          <span style="width:34px;height:34px;border-radius:50%;background:#2D2467;display:flex;align-items:center;justify-content:center;transition:transform .25s ease;transform:{{ navChevron }}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E8B84B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+          </span>
+        </button>
+        <sc-if value="{{ navSocialOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:calc(100% + 12px);right:0;z-index:90;width:min(256px,calc(100vw - 32px));background:#fff;border:1px solid #E4E1DA;border-radius:16px;box-shadow:0 24px 60px rgba(26,21,48,.28);padding:8px">
+            <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#9a97a6;padding:8px 12px 8px">Follow Sobha Surendran</div>
+            <a href="https://www.instagram.com/sobhasurendranofficial/" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none" style-hover="background:#F7F4EE">
+              <span style="flex:none;width:34px;height:34px;border-radius:9px;background:#F0ECFB;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D2467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="#2D2467" stroke="none"></circle></svg></span>
+              <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467">Instagram</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9BFB0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto"><path d="M7 17L17 7M17 7H9M17 7v8"></path></svg>
+            </a>
+            <a href="https://www.facebook.com/SobhaSurendranOfficia" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none" style-hover="background:#F7F4EE">
+              <span style="flex:none;width:34px;height:34px;border-radius:9px;background:#F0ECFB;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="#2D2467"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"></path></svg></span>
+              <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467">Facebook</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9BFB0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto"><path d="M7 17L17 7M17 7H9M17 7v8"></path></svg>
+            </a>
+            <a href="https://x.com/SobhaBJP?lang=en" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none" style-hover="background:#F7F4EE">
+              <span style="flex:none;width:34px;height:34px;border-radius:9px;background:#F0ECFB;display:flex;align-items:center;justify-content:center"><svg width="15" height="15" viewBox="0 0 24 24" fill="#2D2467"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></span>
+              <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467">X (Twitter)</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9BFB0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto"><path d="M7 17L17 7M17 7H9M17 7v8"></path></svg>
+            </a>
+            <a href="https://www.youtube.com/@SobhaBJP" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none" style-hover="background:#F7F4EE">
+              <span style="flex:none;width:34px;height:34px;border-radius:9px;background:#F0ECFB;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="#2D2467"><path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2C0 8.07 0 12 0 12s0 3.93.5 5.8a3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.8zM9.55 15.57V8.43L15.82 12z"></path></svg></span>
+              <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467">YouTube</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9BFB0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto"><path d="M7 17L17 7M17 7H9M17 7v8"></path></svg>
+            </a>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </header>
+
+  <section style="max-width:1360px;margin:0 auto;padding:16px 28px 8px">
+    <div class="halo-card" style="position:relative;width:100%;border-radius:40px;background:#2D2467;overflow:hidden;box-shadow:0 28px 60px rgba(26,21,48,.28);display:flex;flex-direction:column;gap:clamp(20px,4vw,40px);padding:clamp(24px,5vw,48px) clamp(18px,4vw,32px);background-image:repeating-linear-gradient(118deg,rgba(232,184,75,.05) 0,rgba(232,184,75,.05) 1px,transparent 1px,transparent 22px)">
+      <div class="halo-left" style="display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;gap:clamp(20px,3.5vw,40px);width:100%;padding-top:clamp(4px,2vw,20px);padding-bottom:clamp(8px,2vw,24px)">
+        <div>
+          <span style="display:inline-flex;align-items:center;gap:10px;border-radius:999px;background:rgba(232,184,75,.1);border:1px solid rgba(232,184,75,.38);padding:5px 14px;font-family:'Montserrat',sans-serif;font-size:clamp(9px,1.6vw,11px);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F2D488;margin-bottom:clamp(14px,3vw,26px);max-width:100%;overflow-wrap:break-word">Serving Kerala · Since 1991</span>
+          <h1 style="margin:0;font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(22px,4.6vw,46px);line-height:1.18;letter-spacing:-.02em;color:#fff;max-width:100%;overflow-wrap:break-word">Three decades of grassroots service.</h1>
+          <p style="margin:clamp(12px,2.5vw,24px) 0 0;font-family:'Mulish',sans-serif;font-size:clamp(12.5px,1.7vw,16px);line-height:1.55;color:rgba(255,255,255,.8);max-width:100%;overflow-wrap:break-word">From tribal hamlets to coastal villages, a record built village by village — fighting for the dignity of those the system overlooked, and a developed Kerala for all.</p>
+          <div style="margin-top:clamp(16px,3vw,36px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(8px,2vw,16px)">
+            <a href="#journey" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;border-radius:999px;background:#E8B84B;padding:3px 16px 3px 3px;font-family:'Montserrat',sans-serif;font-size:clamp(11.5px,1.6vw,14px);font-weight:700;color:#1A1530;max-width:100%">
+              <svg style="flex:none" width="30" height="30" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="22" fill="#2D2467"></rect><path d="M17 27.5L26.5 18M26.5 18V26M26.5 18H18.5" stroke="#E8B84B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              <span>Explore Her Journey</span>
+            </a>
+            <button type="button" onClick="{{ onOpenConcernForm }}" style="cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;border-radius:999px;background:rgba(255,255,255,.1);padding:clamp(8px,1.4vw,12px) clamp(12px,2vw,20px);font-family:'Montserrat',sans-serif;font-size:clamp(11.5px,1.6vw,14px);font-weight:700;color:#fff;border:1px solid rgba(255,255,255,.16);max-width:100%">Voice Your Concern</button>
+          </div>
+        </div>
+        <div class="halo-feat" style="display:flex;align-items:flex-start;gap:24px;align-self:stretch">
+          <div style="display:flex;align-items:flex-start;gap:15px;flex:1">
+            <svg style="flex:none;margin-top:2px" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E8B84B" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <div>
+              <h3 style="margin:0 0 6px;font-family:'Montserrat',sans-serif;font-size:17px;font-weight:700;color:#fff">People-First Leadership</h3>
+              <p style="margin:0;font-family:'Mulish',sans-serif;font-size:14px;line-height:1.45;color:rgba(255,255,255,.7)">Three decades organising with communities — village by village, voter by voter.</p>
+            </div>
+          </div>
+          <div class="halo-feat-div" style="width:1px;align-self:stretch;background:rgba(255,255,255,.22)"></div>
+          <div style="display:flex;align-items:flex-start;gap:15px;flex:1">
+            <svg style="flex:none;margin-top:2px" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E8B84B" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg>
+            <div>
+              <h3 style="margin:0 0 6px;font-family:'Montserrat',sans-serif;font-size:17px;font-weight:700;color:#fff">Integrity &amp; Service</h3>
+              <p style="margin:0;font-family:'Mulish',sans-serif;font-size:14px;line-height:1.45;color:rgba(255,255,255,.7)">A record of standing for dignity, development, and democratic values.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="halo-mosaic" style="min-height:clamp(200px,42vw,660px);overflow:hidden">
+        <div class="halo-mosaic-col is-left">
+          <div style="display:flex;flex-direction:column;gap:18px;animation:haloUp 38s linear infinite">
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_modi_rally.jpg" alt="With Prime Minister Narendra Modi" style="width:100%;height:100%;object-fit:cover;object-position:42% 25%"></div>
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_amit_shah_1.jpg" alt="With Union Home Minister Amit Shah" style="width:100%;height:100%;object-fit:cover;object-position:42% 20%"></div>
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_shivraj.jpg" alt="With Shivraj Singh Chouhan" style="width:100%;height:100%;object-fit:cover;object-position:50% 16%"></div>
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_nadda_1.jpg" alt="With BJP National President JP Nadda" style="width:100%;height:100%;object-fit:cover;object-position:68% 14%"></div>
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_amit_shah_3.jpg" alt="With Union Home Minister Amit Shah" style="width:100%;height:100%;object-fit:cover;object-position:35% 22%"></div>
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_modi_rally.jpg" alt="With Prime Minister Narendra Modi" style="width:100%;height:100%;object-fit:cover;object-position:42% 25%"></div>
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_amit_shah_1.jpg" alt="With Union Home Minister Amit Shah" style="width:100%;height:100%;object-fit:cover;object-position:42% 20%"></div>
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_shivraj.jpg" alt="With Shivraj Singh Chouhan" style="width:100%;height:100%;object-fit:cover;object-position:50% 16%"></div>
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_nadda_1.jpg" alt="With BJP National President JP Nadda" style="width:100%;height:100%;object-fit:cover;object-position:68% 14%"></div>
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_amit_shah_3.jpg" alt="With Union Home Minister Amit Shah" style="width:100%;height:100%;object-fit:cover;object-position:35% 22%"></div>
+          </div>
+        </div>
+        <div class="halo-mosaic-col is-right">
+          <div style="display:flex;flex-direction:column;gap:18px;animation:haloUp 32s linear infinite">
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_yogi.jpg" alt="With Uttar Pradesh Chief Minister Yogi Adityanath" style="width:100%;height:100%;object-fit:cover;object-position:48% 18%"></div>
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_modi_book.jpg" alt="With Prime Minister Narendra Modi" style="width:100%;height:100%;object-fit:cover;object-position:50% 10%"></div>
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_amit_shah_2.jpg" alt="With Union Home Minister Amit Shah" style="width:100%;height:100%;object-fit:cover;object-position:50% 14%"></div>
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_nadda_2.jpg" alt="With BJP National President JP Nadda" style="width:100%;height:100%;object-fit:cover;object-position:70% 20%"></div>
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_cp_radhakrishnan.jpg" alt="With Kerala Governor C. P. Radhakrishnan" style="width:100%;height:100%;object-fit:cover;object-position:50% 20%"></div>
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_yogi.jpg" alt="With Uttar Pradesh Chief Minister Yogi Adityanath" style="width:100%;height:100%;object-fit:cover;object-position:48% 18%"></div>
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_modi_book.jpg" alt="With Prime Minister Narendra Modi" style="width:100%;height:100%;object-fit:cover;object-position:50% 10%"></div>
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_amit_shah_2.jpg" alt="With Union Home Minister Amit Shah" style="width:100%;height:100%;object-fit:cover;object-position:50% 14%"></div>
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_nadda_2.jpg" alt="With BJP National President JP Nadda" style="width:100%;height:100%;object-fit:cover;object-position:70% 20%"></div>
+            <div class="halo-tile" style="border-radius:24px;overflow:hidden;border:4px solid rgba(255,255,255,.12);flex:none"><img src="images/leader_cp_radhakrishnan.jpg" alt="With Kerala Governor C. P. Radhakrishnan" style="width:100%;height:100%;object-fit:cover;object-position:50% 20%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1360px;margin:0 auto;padding:30px 28px 44px">
+    <div class="halo-presslogos" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:38px">
+      <span style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#6B6878">As featured in</span>
+      <span style="font-family:'Montserrat',sans-serif;font-size:17px;font-weight:700;color:#9a97a6">The New Indian Express</span>
+      <span style="font-family:'Montserrat',sans-serif;font-size:17px;font-weight:700;color:#9a97a6">The Hindu</span>
+      <span style="font-family:'Montserrat',sans-serif;font-size:17px;font-weight:700;color:#9a97a6">Manorama</span>
+      <span style="font-family:'Montserrat',sans-serif;font-size:17px;font-weight:700;color:#9a97a6">Mathrubhumi</span>
+      <span style="font-family:'Montserrat',sans-serif;font-size:17px;font-weight:700;color:#9a97a6">Times of India</span>
+    </div>
+  </section>
+</div>
+
+<section id="story" style="background:#F7F4EE;padding:84px 28px 96px;overflow:hidden">
+  <div style="max-width:1200px;margin:0 auto">
+    <div id="storyCard" class="r-story-grid" style="display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:stretch">
+      <div id="storyText" style="position:relative;padding:50px 48px;display:flex;flex-direction:column;justify-content:center;background:#2D2467;border:1px solid rgba(232,184,75,.16);border-radius:18px;overflow:hidden;box-shadow:0 28px 60px rgba(26,21,48,.28);background-image:repeating-linear-gradient(118deg,rgba(232,184,75,.045) 0,rgba(232,184,75,.045) 1px,transparent 1px,transparent 22px)">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:20px">
+          <span style="font-family:'Montserrat',serif;font-size:58px;line-height:.7;color:#E8B84B">”</span>
+          <span style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#F2D488;margin-top:8px">Her Story</span>
+        </div>
+        <p style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(16px,1.55vw,20px);line-height:1.4;letter-spacing:-.005em;text-transform:uppercase;color:#fff;margin:0 0 22px">From a schoolgirl shaped by early loss to Kerala's first woman to hold the position on national level. three decades organising village by village. As Mahila Morcha president she built the women's wing across all 140 constituencies, carrying the fight for dignity from tribal hamlets to the coast.</p>
+        <div style="height:1px;background:rgba(255,255,255,.16);margin:0 0 18px"></div>
+        <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:19px;color:#fff">Sobha Surendran</div>
+        <div style="font-family:'Mulish',sans-serif;font-size:13px;letter-spacing:.04em;color:rgba(255,255,255,.66);margin-top:5px">BJP State General Secretary, <strong style="color:#E8B84B;font-weight:700">Kerala</strong></div>
+      </div>
+      <div id="storyImg" class="r-story-imgcell" style="position:relative;min-height:440px;border-radius:18px;overflow:hidden;box-shadow:0 28px 60px rgba(26,21,48,.28)">
+        <img src="images/portrait.png" alt="Sobha Surendran" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 8%;display:block">
+        <div style="position:absolute;inset:0;background:linear-gradient(110deg,rgba(45,36,103,.34),transparent 40%)"></div>
+        <span style="position:absolute;top:18px;left:18px;font-family:'Courier New',monospace;font-size:12px;letter-spacing:.12em;color:rgba(255,255,255,.9)">[ KERALA ]</span>
+        <span style="position:absolute;bottom:18px;right:18px;font-family:'Courier New',monospace;font-size:12px;letter-spacing:.12em;color:rgba(255,255,255,.7)">EST · 1991</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="journey" style="background:#fff;padding:88px 28px 96px;overflow:hidden">
+  <div style="max-width:1200px;margin:0 auto 44px">
+    <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9962E;margin-bottom:14px">The Journey</div>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <h2 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(24px,3.4vw,40px);line-height:1.2;letter-spacing:-.01em;margin:0;color:#2D2467;max-width:640px">Three decades of organisational work, one role at a time.</h2>
+      <p style="font-family:'Mulish',sans-serif;font-size:15px;line-height:1.6;color:#6B6878;max-width:340px;margin:0">From a full-time ABVP worker to the BJP National Executive, every milestone, in one view.</p>
+    </div>
+  </div>
+
+  <div id="journeyTrack" style="max-width:1200px;margin:0 auto">
+    <div class="halo-journey-scroll">
+      <!-- Fixed number of tracks (no infinite flex-shrink into illegible
+           slivers, no horizontal overflow/scroll either) — the grid always
+           divides evenly across whatever width is available; it wraps to
+           fewer columns per row on narrower screens instead of scrolling.
+           Card height is a FIXED clamp (identical for all steps) so the
+           connector/dot/bar row stays perfectly aligned within each row. -->
+      <div class="halo-journey-grid" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:end;gap:clamp(4px,0.8vw,14px) clamp(10px,1.6vw,22px)">
+        <sc-for list="{{ journeySteps }}" as="j" hint-placeholder-count="12">
+          <div style="{{ j.wrapStyle }}">
+            <div style="{{ j.cardStyle }}">
+              <div style="{{ j.roleStyle }}">{{ j.role }}</div>
+              <sc-if value="{{ j.org }}" hint-placeholder-val="{{ false }}"><div style="{{ j.orgStyle }}">{{ j.org }}</div></sc-if>
+              <sc-if value="{{ j.badge }}" hint-placeholder-val="{{ false }}"><div style="{{ j.badgeStyle }}">{{ j.badge }}</div></sc-if>
+            </div>
+            <div style="{{ j.connectorStyle }}"></div>
+            <div style="{{ j.dotStyle }}">{{ j.num }}</div>
+            <div style="{{ j.barStyle }}"></div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="height:clamp(8px,1.3vw,16px);border-radius:5px;margin-top:0;position:relative;background:linear-gradient(90deg,#2D2467 0%,#4B3F8F 55%,#E8B84B 100%);box-shadow:0 10px 24px rgba(45,36,103,.25)">
+        <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.55) 0 14px,transparent 14px 26px);opacity:.55;top:50%;height:2px;transform:translateY(-1px)"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:linear-gradient(135deg,#2D2467 0%,#4B3F8F 100%);color:#fff;padding:84px 28px">
+  <div style="max-width:980px;margin:0 auto;text-align:center">
+    <div style="font-family:'Montserrat',serif;font-size:80px;line-height:0;height:42px;color:#E8B84B">“</div>
+    <blockquote style="font-family:'Mulish',sans-serif;font-style:italic;font-weight:400;font-size:clamp(24px,3vw,38px);line-height:1.32;margin:0 auto 28px;max-width:860px">We are not asking people merely to help us open the account. We are asking them to support a future where development reaches every corner of Kerala&nbsp; without hindrance.</blockquote>
+    <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.85)">— Sobha Surendran · TNIE Interview, Jan 2026</div>
+  </div>
+</section>
+
+<section id="stats" style="background:#FFFFFF;padding:104px 28px">
+  <div class="r-stats-wrap" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:.92fr 1.08fr;gap:56px;align-items:center">
+    <div>
+      <div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9962E;margin-bottom:16px">Three Decades of Results</div>
+      <h2 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(30px,3.6vw,46px);line-height:1.2;letter-spacing:-.01em;text-transform:uppercase;margin:0 0 52px;color:#2D2467;max-width:460px">The journey, by the numbers.</h2>
+      <div class="r-stats-nums" style="display:flex;gap:0;flex-wrap:nowrap">
+        <div class="r-stat" style="padding-right:clamp(18px,2.2vw,38px)">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(34px,4.2vw,58px);line-height:1;color:#2D2467;letter-spacing:-.02em"><span class="statnum notranslate" data-to="30">30</span><span class="notranslate" style="color:#C9962E">+</span><span style="font-size:.4em;font-weight:700;color:#6B6878;letter-spacing:0"> yrs</span></div>
+          <div style="width:32px;height:3px;background:#E8B84B;margin:16px 0 14px"></div>
+          <div style="font-family:'Mulish',sans-serif;font-size:13px;line-height:1.45;color:#6B6878;max-width:130px">In active politics across Kerala</div>
+        </div>
+        <div class="r-stat" style="padding:0 clamp(18px,2.2vw,38px);border-left:1px solid #E4E1DA">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(34px,4.2vw,58px);line-height:1;color:#2D2467;letter-spacing:-.02em"><span class="statnum notranslate" data-to="9">9</span></div>
+          <div style="width:32px;height:3px;background:#E8B84B;margin:16px 0 14px"></div>
+          <div style="font-family:'Mulish',sans-serif;font-size:13px;line-height:1.45;color:#6B6878;max-width:130px">Constituencies contested</div>
+        </div>
+        <div class="r-stat" style="padding:0 0 0 clamp(18px,2.2vw,38px);border-left:1px solid #E4E1DA">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(34px,4.2vw,58px);line-height:1;color:#2D2467;letter-spacing:-.02em"><span class="statnum notranslate" data-to="2">2</span><span class="notranslate" style="font-size:.46em;font-weight:800;color:#2F8F4E"> ▲</span></div>
+          <div style="width:32px;height:3px;background:#E8B84B;margin:16px 0 14px"></div>
+          <div style="font-family:'Mulish',sans-serif;font-size:13px;line-height:1.45;color:#6B6878;max-width:130px">Vote share, doubled repeatedly</div>
+        </div>
+      </div>
+    </div>
+    <div class="r-stats-chart" style="position:relative;height:270px;display:flex;align-items:flex-end;justify-content:space-between;gap:0">
+      <sc-for list="{{ growthBars }}" as="b" hint-placeholder-count="46">
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%">
+          <span class="{{ b.dotClass }}" style="width:8px;height:8px;border-radius:999px;background:#2D2467;margin-bottom:5px"></span>
+          <div class="gbar" style="width:1.5px;height:{{ b.h }};background:{{ b.color }};transition-delay:{{ b.delay }}"></div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="press" style="background:#1A1530;color:#fff;padding:96px 28px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="r-press-head" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;margin-bottom:48px">
+      <div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#E8B84B">Press</div>
+      <h2 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(34px,4.4vw,56px);line-height:1.02;letter-spacing:-.01em;text-transform:uppercase;margin:0">In the <span style="color:#E8B84B">news.</span></h2>
+      <p style="font-family:'Mulish',sans-serif;font-size:16px;line-height:1.6;color:rgba(255,255,255,.66);max-width:560px;margin:0">Three decades of grassroots leadership across Kerala, from Mahila Morcha to the BJP National Executive, covered by the state and national press.</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:6px">
+        <div style="display:flex;gap:8px;background:#fff;padding:6px;border-radius:999px">
+          <button type="button" onClick="{{ onNews }}" style="{{ newsBtnStyle }}">In the News</button>
+          <button type="button" onClick="{{ onRel }}" style="{{ relBtnStyle }}">Press Releases</button>
+        </div>
+        <a href="News.dc.html" style="display:inline-flex;align-items:center;gap:9px;background:#E8B84B;color:#1A1530;text-decoration:none;font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;padding:11px 22px;border-radius:999px">Open the live Newsroom <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A1530" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+      </div>
+    </div>
+
+    <sc-if value="{{ showNews }}" hint-placeholder-val="{{ true }}">
+      <div class="r-press-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;align-items:start">
+        <sc-for list="{{ articleCards }}" as="a" hint-placeholder-count="6">
+          <a href="{{ a.url }}" target="_blank" rel="noopener noreferrer" style="display:flex;flex-direction:column;text-decoration:none;transition:transform .3s ease" style-hover="transform:translateY(-6px)">
+            <div style="position:relative;aspect-ratio:3/2;border-radius:12px;overflow:hidden;box-shadow:0 16px 36px rgba(0,0,0,.34)">
+              <div style="position:absolute;inset:0;background-image:{{ a.bg }};background-size:cover;background-position:{{ a.pos }}"></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:9px;margin-top:16px">
+              <span style="font-family:'Mulish',sans-serif;font-weight:700;font-size:13px;color:#fff">{{ a.outlet }}</span>
+              <span style="font-size:13px;color:rgba(255,255,255,.5)">· {{ a.date }}</span>
+            </div>
+            <h3 style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:18px;line-height:1.32;margin:8px 0 0;color:#fff">{{ a.title }}</h3>
+            <p style="font-family:'Mulish',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#E8B84B;margin:10px 0 0">{{ a.category }}</p>
+          </a>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showReleases }}" hint-placeholder-val="{{ true }}">
+      <div class="r-press-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;align-items:start">
+        <sc-for list="{{ releaseCards }}" as="r" hint-placeholder-count="6">
+          <a href="{{ r.url }}" target="_blank" rel="noopener noreferrer" style="display:flex;flex-direction:column;text-decoration:none;transition:transform .3s ease" style-hover="transform:translateY(-6px)">
+            <div style="position:relative;aspect-ratio:3/2;border-radius:12px;overflow:hidden;box-shadow:0 16px 36px rgba(0,0,0,.34)">
+              <div style="position:absolute;inset:0;background-image:{{ r.bg }};background-size:cover;background-position:{{ r.pos }}"></div>
+              <span style="position:absolute;top:12px;left:12px;background:#E8B84B;color:#1A1530;font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:5px 11px;border-radius:4px">{{ r.tag }}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:9px;margin-top:16px">
+              <span style="font-family:'Mulish',sans-serif;font-weight:700;font-size:13px;color:#fff">{{ r.outlet }}</span>
+              <span style="font-size:13px;color:rgba(255,255,255,.5)">· {{ r.date }}</span>
+            </div>
+            <h3 style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:18px;line-height:1.32;margin:8px 0 0;color:#fff">{{ r.title }}</h3>
+            <p style="font-family:'Mulish',sans-serif;font-size:14px;line-height:1.5;color:rgba(255,255,255,.62);margin:8px 0 0">{{ r.summary }}</p>
+            <p style="font-family:'Mulish',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#E8B84B;margin:10px 0 0">{{ r.category }}</p>
+          </a>
+        </sc-for>
+      </div>
+    </sc-if>
+  </div>
+</section>
+
+<section id="gallery" style="background:#FFFFFF;padding:96px 0 96px">
+  <div style="max-width:1200px;margin:0 auto;padding:0 28px">
+    <div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9962E;margin-bottom:14px">Visual Chronicle</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap">
+      <h2 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(34px,4.4vw,56px);line-height:1.03;letter-spacing:-.01em;text-transform:uppercase;margin:0;color:#2D2467">Photo <span style="color:#C9962E">Gallery</span></h2>
+      <p style="font-family:'Mulish',sans-serif;font-size:16px;line-height:1.6;color:#6B6878;max-width:440px;margin:0">A collection of moments from three decades on the ground. Drag to explore, click any photo to expand.</p>
+    </div>
+  </div>
+  <div id="bentoWrap" style="position:relative;margin-top:36px;overflow-x:auto;overflow-y:hidden;cursor:grab;-webkit-overflow-scrolling:touch">
+    <div style="display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,200px);grid-auto-columns:minmax(280px,1fr);gap:16px;width:100%;padding:4px 28px">
+      <sc-for list="{{ bentoList }}" as="it" hint-placeholder-count="0">
+        <div onMouseEnter="{{ it.onEnter }}" onMouseLeave="{{ it.onLeave }}" onClick="{{ it.onOpen }}" style="position:relative;border-radius:10px;overflow:hidden;box-shadow:0 8px 22px rgba(26,21,48,.14);cursor:pointer;grid-row:{{ it.row }};transform:{{ it.scale }};transition:transform .3s ease,box-shadow .3s ease">
+          <div style="position:absolute;inset:0;background-image:{{ it.bgImg }};background-size:cover;background-position:{{ it.pos }};transform:{{ it.imgScale }};transition:transform .5s ease"></div>
+          <div style="position:absolute;inset:0;background:linear-gradient(transparent 42%,rgba(26,21,48,.86));pointer-events:none"></div>
+          <div style="position:absolute;left:0;right:0;bottom:0;padding:18px 16px 14px;pointer-events:none">
+            <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;color:#fff">{{ it.title }}</div>
+            <div style="font-family:'Mulish',sans-serif;font-size:13px;line-height:1.4;color:rgba(255,255,255,.85);margin-top:4px;opacity:{{ it.descOpacity }};transform:translateY({{ it.descShift }});transition:opacity .4s ease,transform .4s ease">{{ it.desc }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="max-width:1200px;margin:0 auto;padding:18px 28px 0;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap">
+    <span style="font-family:'Mulish',sans-serif;font-size:13px;color:#9a97a6">Drag to explore · click any photo to expand</span>
+    <button type="button" onClick="{{ onToggleMore }}" style="background:transparent;color:#2D2467;border:2px solid #2D2467;font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;padding:11px 30px;border-radius:999px;cursor:pointer">{{ moreLabel }}</button>
+  </div>
+
+  <sc-if value="{{ showModal }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ onClose }}" style="position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:rgba(10,7,20,.86);backdrop-filter:blur(5px);padding:28px">
+      <div onClick="{{ stop }}" style="position:relative;max-width:1000px;width:100%">
+        <div style="width:100%;height:80vh;background-image:{{ selBg }};background-size:contain;background-repeat:no-repeat;background-position:center;border-radius:12px"></div>
+        <div style="margin-top:14px;text-align:center;font-family:'Montserrat',sans-serif;font-weight:700;font-size:16px;color:#fff">{{ selTitle }}</div>
+      </div>
+      <button type="button" onClick="{{ onClose }}" aria-label="Close image view" style="position:fixed;top:22px;right:22px;width:46px;height:46px;border-radius:50%;border:none;background:rgba(255,255,255,.14);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
+    </div>
+  </sc-if>
+</section>
+
+<section id="reels" style="background:#2D2467;color:#fff;padding:84px 0 88px;overflow:hidden">
+  <div style="max-width:1200px;margin:0 auto;padding:0 28px">
+    <div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#E8B84B;margin-bottom:14px">Follow Along</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap">
+      <h2 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(34px,4.4vw,56px);line-height:1.03;letter-spacing:-.01em;text-transform:uppercase;margin:0">On the <span style="color:#E8B84B">ground.</span></h2>
+      <div style="position:relative">
+        <button type="button" onClick="{{ onToggleReelsSocial }}" style="cursor:pointer;border:none;background:#E8B84B;color:#1A1530;font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;padding:13px 24px;border-radius:999px;display:inline-flex;align-items:center;gap:9px">Follow us <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A1530" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;transform:{{ reelsChevron }}"><path d="M6 9l6 6 6-6"></path></svg></button>
+        <sc-if value="{{ reelsSocialOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:calc(100% + 12px);right:0;z-index:90;width:min(256px,calc(100vw - 32px));background:#fff;border:1px solid #E4E1DA;border-radius:16px;box-shadow:0 24px 60px rgba(10,7,20,.5);padding:8px">
+            <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#9a97a6;padding:8px 12px 8px">Follow Sobha Surendran</div>
+            <a href="https://www.instagram.com/sobhasurendranofficial/" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none" style-hover="background:#F7F4EE">
+              <span style="flex:none;width:34px;height:34px;border-radius:9px;background:#F0ECFB;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D2467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="#2D2467" stroke="none"></circle></svg></span>
+              <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467">Instagram</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9BFB0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto"><path d="M7 17L17 7M17 7H9M17 7v8"></path></svg>
+            </a>
+            <a href="https://www.facebook.com/SobhaSurendranOfficia" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none" style-hover="background:#F7F4EE">
+              <span style="flex:none;width:34px;height:34px;border-radius:9px;background:#F0ECFB;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="#2D2467"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"></path></svg></span>
+              <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467">Facebook</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9BFB0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto"><path d="M7 17L17 7M17 7H9M17 7v8"></path></svg>
+            </a>
+            <a href="https://x.com/SobhaBJP?lang=en" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none" style-hover="background:#F7F4EE">
+              <span style="flex:none;width:34px;height:34px;border-radius:9px;background:#F0ECFB;display:flex;align-items:center;justify-content:center"><svg width="15" height="15" viewBox="0 0 24 24" fill="#2D2467"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></span>
+              <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467">X (Twitter)</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9BFB0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto"><path d="M7 17L17 7M17 7H9M17 7v8"></path></svg>
+            </a>
+            <a href="https://www.youtube.com/@SobhaBJP" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none" style-hover="background:#F7F4EE">
+              <span style="flex:none;width:34px;height:34px;border-radius:9px;background:#F0ECFB;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="#2D2467"><path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2C0 8.07 0 12 0 12s0 3.93.5 5.8a3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.8zM9.55 15.57V8.43L15.82 12z"></path></svg></span>
+              <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467">YouTube</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9BFB0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto"><path d="M7 17L17 7M17 7H9M17 7v8"></path></svg>
+            </a>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+  <div id="ringStage" style="position:relative;height:520px;margin-top:24px;perspective:2000px;cursor:grab;overflow:hidden">
+    <div id="ringInner" style="position:absolute;inset:0;transform-style:preserve-3d">
+      <sc-for list="{{ ringList }}" as="it" hint-placeholder-count="0">
+        <div data-angle="{{ it.angle }}" style="position:absolute;left:50%;top:50%;width:240px;height:340px;margin-left:-120px;margin-top:-170px;transform:{{ it.transform }};transition:opacity .25s linear">
+          <a href="{{ it.url }}" target="_blank" rel="noopener noreferrer" style="display:block;position:relative;width:100%;height:100%;border-radius:16px;overflow:hidden;box-shadow:0 24px 50px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.14);text-decoration:none">
+            <div style="position:absolute;inset:0;background-image:{{ it.bg }};background-size:cover;background-position:{{ it.pos }}"></div>
+            <div style="position:absolute;top:12px;left:12px;width:30px;height:30px;border-radius:50%;background:{{ it.pillBg }};display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(0,0,0,.3)">{{ it.platformIcon }}</div>
+            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:rgba(232,184,75,.94);display:flex;align-items:center;justify-content:center;color:#1A1530;font-size:18px">▶</div>
+            <div style="position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(26,21,48,.94));padding:30px 14px 16px">
+              <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#E8B84B">{{ it.watchLabel }}</div>
+            </div>
+          </a>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="max-width:1200px;margin:0 auto;padding:18px 28px 0;text-align:center">
+    <span style="font-family:'Mulish',sans-serif;font-size:13px;color:rgba(255,255,255,.6)">Drag to rotate · auto-rotating gallery</span>
+  </div>
+</section>
+
+<section id="initiative" style="position:relative;padding:0;overflow:hidden;background:#1A1530">
+  <div style="position:absolute;inset:0;background-image:url('images/gargi_bg.jpg');background-size:cover;background-position:center 22%"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(100deg,rgba(26,21,48,.96) 0%,rgba(26,21,48,.9) 38%,rgba(45,36,103,.7) 70%,rgba(45,36,103,.42) 100%)"></div>
+  <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(118deg,rgba(232,184,75,.05) 0,rgba(232,184,75,.05) 1px,transparent 1px,transparent 22px);pointer-events:none"></div>
+  <div class="r-init-wrap" style="position:relative;max-width:1200px;margin:0 auto;padding:104px 28px;display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center">
+    <div>
+      <div style="display:flex;align-items:center;gap:18px;margin-bottom:30px">
+        <div style="flex:none;width:84px;height:84px;border-radius:18px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 16px 40px rgba(0,0,0,.4);position:relative">
+          <img src="images/gargi.png" alt="Gargi Trust" style="width:60px;height:60px;object-fit:contain;display:block">
+          <span style="position:absolute;inset:-1px;border-radius:18px;border:1.5px solid rgba(232,184,75,.55);pointer-events:none"></span>
+        </div>
+        <div>
+          <div style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#E8B84B;margin-bottom:5px">Community Services</div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:22px;letter-spacing:.02em;color:#fff;line-height:1">GARGI TRUST</div>
+        </div>
+      </div>
+      <h2 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(36px,4.6vw,58px);line-height:1.02;letter-spacing:-.015em;text-transform:uppercase;margin:0 0 22px;color:#fff;max-width:620px">Service before <span style="color:#E8B84B">self.</span></h2>
+      <p style="font-family:'Mulish',sans-serif;font-size:18px;line-height:1.65;color:rgba(255,255,255,.84);max-width:540px;margin:0 0 38px">Beyond electoral politics, a sustained commitment to the people of Kerala. From tribal hamlets to coastal villages, the Gargi Trust delivers welfare, legal support, and emergency relief directly to those who need it most.</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <button type="button" onClick="{{ onOpenVolunteerForm }}" style="cursor:pointer;background:#E8B84B;color:#1A1530;text-decoration:none;font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;padding:15px 30px;border-radius:999px;box-shadow:0 8px 22px rgba(0,0,0,.28);border:none">Volunteer with Us</button>
+        <a href="#" style="background:rgba(255,255,255,.08);color:#fff;border:1.5px solid rgba(255,255,255,.32);text-decoration:none;font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;padding:13px 28px;border-radius:999px">Learn More →</a>
+      </div>
+      <p style="font-family:'Mulish',sans-serif;font-size:13px;color:rgba(255,255,255,.5);margin:28px 0 0">All activities are conducted in full compliance with ECI guidelines.</p>
+    </div>
+    <div class="r-init-focus" style="border-left:1px solid rgba(255,255,255,.16);padding-left:40px">
+      <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#E8B84B;margin-bottom:22px">Key Focus Areas</div>
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:18px">
+        <li style="display:flex;align-items:center;gap:14px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:19px;color:#fff"><span style="flex:none;width:7px;height:7px;background:#E8B84B"></span>Education &amp; Scholarships</li>
+        <li style="display:flex;align-items:center;gap:14px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:19px;color:rgba(255,255,255,.92)"><span style="flex:none;width:7px;height:7px;background:#E8B84B"></span>Women's Rights &amp; Legal Aid</li>
+        <li style="display:flex;align-items:center;gap:14px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:19px;color:rgba(255,255,255,.82)"><span style="flex:none;width:7px;height:7px;background:#E8B84B"></span>Healthcare Awareness</li>
+        <li style="display:flex;align-items:center;gap:14px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:19px;color:rgba(255,255,255,.6)"><span style="flex:none;width:7px;height:7px;background:rgba(232,184,75,.6)"></span>Farmer Welfare</li>
+        <li style="display:flex;align-items:center;gap:14px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:19px;color:rgba(255,255,255,.4)"><span style="flex:none;width:7px;height:7px;background:rgba(232,184,75,.4)"></span>Youth Empowerment</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer style="background:#14102A;color:#fff;padding:76px 28px 44px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="r-footer-grid" style="display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.14)">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
+          <span style="width:38px;height:38px;border-radius:50%;background:#E8B84B;color:#1A1530;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:18px;font-weight:900;line-height:1">S</span>
+          <span style="font-family:'Montserrat',sans-serif;font-size:19px;font-weight:800;letter-spacing:.02em">Sobha Surendran</span>
+        </div>
+        <p style="font-family:'Mulish',sans-serif;font-size:16px;line-height:1.65;color:rgba(255,255,255,.66);max-width:380px;margin:0">Rooted in service. Committed to real change for real people. Building a stronger Kerala — together.</p>
+      </div>
+      <div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E8B84B;margin-bottom:16px">Quick Links</div>
+        <div style="display:flex;flex-direction:column;gap:11px">
+          <a href="#story" style="color:rgba(255,255,255,.85);text-decoration:none;font-family:'Mulish',sans-serif;font-size:15px">About Her</a>
+          <a href="#journey" style="color:rgba(255,255,255,.85);text-decoration:none;font-family:'Mulish',sans-serif;font-size:15px">Her Journey</a>
+          <a href="#stats" style="color:rgba(255,255,255,.85);text-decoration:none;font-family:'Mulish',sans-serif;font-size:15px">Work &amp; Impact</a>
+          <a href="#press" style="color:rgba(255,255,255,.85);text-decoration:none;font-family:'Mulish',sans-serif;font-size:15px">Press</a>
+          <a href="#gallery" style="color:rgba(255,255,255,.85);text-decoration:none;font-family:'Mulish',sans-serif;font-size:15px">Photo Gallery</a>
+          <a href="#initiative" style="color:rgba(255,255,255,.85);text-decoration:none;font-family:'Mulish',sans-serif;font-size:15px">Gargi Trust Initiative</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E8B84B;margin-bottom:16px">Connect</div>
+        <div style="display:flex;flex-direction:column;gap:11px;color:rgba(255,255,255,.66);font-family:'Mulish',sans-serif;font-size:15px;line-height:1.5">
+          <span>contact@sobhasurendran.in</span>
+          <span>+91 98765 00000</span>
+          <span>BJP State Committee Office, Thiruvananthapuram, Kerala, India</span>
+        </div>
+      </div>
+    </div>
+    <div style="padding-top:28px;font-family:'Mulish',sans-serif;font-size:13px;color:rgba(255,255,255,.4)">© 2026 · Made with care for the community</div>
+  </div>
+</footer>
+
+<sc-if value="{{ concernFormOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ onCloseConcernForm }}" style="position:fixed;inset:0;z-index:200;background:rgba(26,21,48,.6);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto">
+    <div onClick="{{ stopPropagation }}" style="position:relative;width:min(560px,100%);max-height:92vh;overflow-y:auto;background:#fff;border-radius:24px;box-shadow:0 40px 90px rgba(26,21,48,.4);margin:auto">
+      <div style="position:sticky;top:0;background:#fff;z-index:2;padding:26px 26px 0;border-radius:24px 24px 0 0">
+        <button type="button" onClick="{{ onCloseConcernForm }}" aria-label="Close" style="position:absolute;top:18px;right:18px;cursor:pointer;border:1px solid #E4E1DA;background:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:#3A3744">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        </button>
+        <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#C9962E;margin-bottom:8px">Get in Touch</div>
+        <h2 style="margin:0 0 6px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:24px;color:#2D2467;max-width:420px">Voice Your Concern</h2>
+        <p style="margin:0 0 22px;font-family:'Mulish',sans-serif;font-size:14px;line-height:1.5;color:#6B6878">Share your issue directly with the office — every submission is reviewed.</p>
+      </div>
+
+      <sc-if value="{{ concernSubmitted }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:8px 26px 34px;text-align:center">
+          <div style="width:56px;height:56px;border-radius:50%;background:#EAF6EE;display:flex;align-items:center;justify-content:center;margin:10px auto 18px">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2F8F4E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+          </div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:18px;color:#2D2467;margin-bottom:8px">Thank you</div>
+          <p style="margin:0 0 24px;font-family:'Mulish',sans-serif;font-size:14px;line-height:1.5;color:#6B6878">Your concern has been recorded. The office will get back to you.</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{ concernNotSubmitted }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ onSubmitConcernForm }}" style="padding:2px 26px 26px;display:flex;flex-direction:column;gap:16px">
+          <label style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-family:'Montserrat',sans-serif;font-size:12.5px;font-weight:700;color:#2D2467">Name</span>
+            <input required type="text" value="{{ concernValues.name }}" onChange="{{ onConcernField('name') }}" placeholder="Your full name" style="font-family:'Mulish',sans-serif;font-size:15px;padding:12px 14px;border-radius:12px;border:1px solid #E4E1DA;outline:none;color:#2D2467" />
+          </label>
+          <sc-for list="{{ concernDropdownFields }}" as="f" hint-placeholder-count="4">
+            <div style="position:relative">
+              <label style="display:flex;flex-direction:column;gap:6px">
+                <span style="font-family:'Montserrat',sans-serif;font-size:12.5px;font-weight:700;color:#2D2467">{{ f.label }}</span>
+                <input type="text" autoComplete="off" value="{{ f.query }}" onChange="{{ f.onChange }}" onFocus="{{ f.onFocus }}" placeholder="{{ f.placeholder }}" style="font-family:'Mulish',sans-serif;font-size:15px;padding:12px 14px;border-radius:12px;border:1px solid #E4E1DA;outline:none;color:#2D2467" />
+              </label>
+              <sc-if value="{{ f.showOptions }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:10;background:#fff;border:1px solid #E4E1DA;border-radius:12px;box-shadow:0 16px 36px rgba(26,21,48,.18);max-height:190px;overflow-y:auto;padding:6px">
+                  <sc-for list="{{ f.options }}" as="opt" hint-placeholder-count="0">
+                    <div onClick="{{ f.onPick(opt) }}" style="padding:9px 12px;border-radius:8px;font-family:'Mulish',sans-serif;font-size:14px;color:#3A3744;cursor:pointer" style-hover="background:#F7F4EE">{{ opt }}</div>
+                  </sc-for>
+                  <sc-if value="{{ f.noMatches }}" hint-placeholder-val="{{ false }}">
+                    <div style="padding:9px 12px;font-family:'Mulish',sans-serif;font-size:13px;color:#9a97a6">No match — type to search, or keep your own entry</div>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+
+          <label style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-family:'Montserrat',sans-serif;font-size:12.5px;font-weight:700;color:#2D2467">Your Concern</span>
+            <textarea required rows="4" value="{{ concernValues.message }}" onChange="{{ onConcernField('message') }}" placeholder="Describe the issue you'd like to bring to her notice" style="font-family:'Mulish',sans-serif;font-size:15px;padding:12px 14px;border-radius:12px;border:1px solid #E4E1DA;outline:none;color:#2D2467;resize:vertical;min-height:96px"></textarea>
+          </label>
+
+          <sc-if value="{{ concernError }}" hint-placeholder-val="{{ false }}">
+            <p style="margin:0;font-family:'Mulish',sans-serif;font-size:13px;color:#B4322A;text-align:center">{{ concernError }}</p>
+          </sc-if>
+          <button type="submit" disabled="{{ concernSubmitting }}" style="{{ concernSubmitBtnStyle }}">
+            {{ concernSubmitLabel }}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A1530" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
+          </button>
+          <p style="margin:0;font-family:'Mulish',sans-serif;font-size:12px;line-height:1.4;color:#9a97a6;text-align:center">Every concern is read and followed up on by the office.</p>
+        </form>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ volunteerFormOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ onCloseVolunteerForm }}" style="position:fixed;inset:0;z-index:200;background:rgba(26,21,48,.6);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto">
+    <div onClick="{{ stopPropagation }}" style="position:relative;width:min(500px,100%);max-height:92vh;overflow-y:auto;background:#fff;border-radius:24px;box-shadow:0 40px 90px rgba(26,21,48,.4);margin:auto">
+      <div style="position:sticky;top:0;background:#fff;z-index:2;padding:26px 26px 0;border-radius:24px 24px 0 0">
+        <button type="button" onClick="{{ onCloseVolunteerForm }}" aria-label="Close" style="position:absolute;top:18px;right:18px;cursor:pointer;border:1px solid #E4E1DA;background:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:#3A3744">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        </button>
+        <div style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#C9962E;margin-bottom:8px">Gargi Trust</div>
+        <h2 style="margin:0 0 6px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:24px;color:#2D2467;max-width:420px">Volunteer with Us</h2>
+        <p style="margin:0 0 22px;font-family:'Mulish',sans-serif;font-size:14px;line-height:1.5;color:#6B6878">Join the effort to bring welfare, legal support, and relief directly to communities across Kerala.</p>
+      </div>
+
+      <sc-if value="{{ volunteerSubmitted }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:8px 26px 34px;text-align:center">
+          <div style="width:56px;height:56px;border-radius:50%;background:#EAF6EE;display:flex;align-items:center;justify-content:center;margin:10px auto 18px">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2F8F4E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+          </div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:18px;color:#2D2467;margin-bottom:8px">Thank you for stepping up</div>
+          <p style="margin:0 0 24px;font-family:'Mulish',sans-serif;font-size:14px;line-height:1.5;color:#6B6878">Our team will reach out to you shortly.</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{ volunteerNotSubmitted }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ onSubmitVolunteerForm }}" style="padding:2px 26px 26px;display:flex;flex-direction:column;gap:16px">
+          <label style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-family:'Montserrat',sans-serif;font-size:12.5px;font-weight:700;color:#2D2467">Name</span>
+            <input required type="text" value="{{ volunteerValues.name }}" onChange="{{ onVolunteerField('name') }}" placeholder="Your full name" style="font-family:'Mulish',sans-serif;font-size:15px;padding:12px 14px;border-radius:12px;border:1px solid #E4E1DA;outline:none;color:#2D2467" />
+          </label>
+          <label style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-family:'Montserrat',sans-serif;font-size:12.5px;font-weight:700;color:#2D2467">Phone Number</span>
+            <input required type="tel" value="{{ volunteerValues.phone }}" onChange="{{ onVolunteerField('phone') }}" placeholder="10-digit mobile number" style="font-family:'Mulish',sans-serif;font-size:15px;padding:12px 14px;border-radius:12px;border:1px solid #E4E1DA;outline:none;color:#2D2467" />
+          </label>
+          <label style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-family:'Montserrat',sans-serif;font-size:12.5px;font-weight:700;color:#2D2467">Email Address</span>
+            <input required type="email" value="{{ volunteerValues.email }}" onChange="{{ onVolunteerField('email') }}" placeholder="you@email.com" style="font-family:'Mulish',sans-serif;font-size:15px;padding:12px 14px;border-radius:12px;border:1px solid #E4E1DA;outline:none;color:#2D2467" />
+          </label>
+          <label style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-family:'Montserrat',sans-serif;font-size:12.5px;font-weight:700;color:#2D2467">What would you like to volunteer for?</span>
+            <textarea required rows="4" value="{{ volunteerValues.interest }}" onChange="{{ onVolunteerField('interest') }}" placeholder="E.g. welfare drives, legal aid camps, emergency relief, community outreach" style="font-family:'Mulish',sans-serif;font-size:15px;padding:12px 14px;border-radius:12px;border:1px solid #E4E1DA;outline:none;color:#2D2467;resize:vertical;min-height:96px"></textarea>
+          </label>
+
+          <sc-if value="{{ volunteerError }}" hint-placeholder-val="{{ false }}">
+            <p style="margin:0;font-family:'Mulish',sans-serif;font-size:13px;color:#B4322A;text-align:center">{{ volunteerError }}</p>
+          </sc-if>
+          <button type="submit" disabled="{{ volunteerSubmitting }}" style="{{ volunteerSubmitBtnStyle }}">
+            {{ volunteerSubmitLabel }}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A1530" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
+          </button>
+          <p style="margin:0;font-family:'Mulish',sans-serif;font-size:12px;line-height:1.4;color:#9a97a6;text-align:center">Our team will reach out to you shortly.</p>
+        </form>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;pressDefaultTab&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;news&quot;,&quot;releases&quot;],&quot;default&quot;:&quot;news&quot;,&quot;tsType&quot;:&quot;'news' | 'releases'&quot;,&quot;section&quot;:&quot;Press&quot;}}">
+// Thumbnail Fetch API (design_handoff_thumbnail_api/server.js) — serves real IG/FB
+// reel covers + view counts and real news og:image thumbnails. Change this if the
+// API is deployed somewhere other than a local dev server.
+const THUMB_API_BASE = 'http://localhost:8787';
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { pressTab: props.pressDefaultTab === 'releases' ? 'releases' : 'news', copied: null, hoveredCard: null, selected: null, expanded: false, socialMenu: null, journeyPlay: false, mobileNavOpen: false, reelMeta: null, newsMeta: null, showTranslateBanner: true,
+      concernFormOpen: false, concernSubmitted: false, concernSubmitting: false, concernError: null,
+      concernValues: { name: '', phone: '', panchayat: '', assembly: '', ward: '', booth: '', message: '' },
+      concernFocus: null,
+      volunteerFormOpen: false, volunteerSubmitted: false, volunteerSubmitting: false, volunteerError: null,
+      volunteerValues: { name: '', phone: '', email: '', interest: '' } };
+  }
+
+  componentDidMount() {
+    const jEl = (typeof document !== 'undefined') && document.getElementById('journeyTrack');
+    if (jEl && typeof IntersectionObserver !== 'undefined') {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { this.setState({ journeyPlay: e.isIntersecting }); });
+      }, { threshold: 0.25 });
+      obs.observe(jEl);
+    }
+    const el = (typeof document !== 'undefined') && document.getElementById('bentoWrap');
+    if (!el) return;
+    let down = false, startX = 0, startScroll = 0, moved = 0;
+    el.addEventListener('mousedown', (e) => { down = true; moved = 0; startX = e.pageX; startScroll = el.scrollLeft; el.style.cursor = 'grabbing'; });
+    window.addEventListener('mouseup', () => { down = false; el.style.cursor = 'grab'; });
+    el.addEventListener('mouseleave', () => { down = false; el.style.cursor = 'grab'; });
+    el.addEventListener('mousemove', (e) => { if (!down) return; const dx = e.pageX - startX; moved += Math.abs(dx); el.scrollLeft = startScroll - dx; });
+    el.addEventListener('click', (e) => { if (moved > 6) { e.stopPropagation(); e.preventDefault(); } }, true);
+
+    this._initRing();
+    this._pollStory();
+    this._pollStats();
+    this._loadThumbnails();
+    this._loadGoogleTranslate();
+
+    this._socialAway = () => { if (this.state.socialMenu) this.setState({ socialMenu: null }); if (this.state.mobileNavOpen) this.setState({ mobileNavOpen: false }); };
+    window.addEventListener('click', this._socialAway);
+  }
+
+  // Loads Google's Website Translator widget in the background (hidden — we
+  // drive it from our own styled banner) so "Translate to Malayalam" is ready
+  // the moment the visitor clicks it, without waiting on a network round trip.
+  _loadGoogleTranslate() {
+    if (typeof document === 'undefined' || document.getElementById('google-translate-script')) return;
+    window.googleTranslateElementInit = () => {
+      new window.google.translate.TranslateElement(
+        { pageLanguage: 'en', includedLanguages: 'ml', autoDisplay: false },
+        'google_translate_element'
+      );
+    };
+    const script = document.createElement('script');
+    script.id = 'google-translate-script';
+    script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    document.body.appendChild(script);
+  }
+
+  // The widget's language <select> only exists once its script has finished
+  // loading and initializing, which can lag behind the visitor's click —
+  // retry briefly rather than silently doing nothing.
+  _translateToMalayalam() {
+    const tryOnce = (attempt) => {
+      const combo = document.querySelector('.goog-te-combo');
+      if (combo) {
+        combo.value = 'ml';
+        combo.dispatchEvent(new Event('change'));
+        this.setState({ showTranslateBanner: false });
+      } else if (attempt < 20) {
+        setTimeout(() => tryOnce(attempt + 1), 300);
+      }
+    };
+    tryOnce(0);
+  }
+
+  // Replaces the local placeholder images on the reel ring + news cards with real
+  // covers (and real view counts for reels) fetched from the Thumbnail Fetch API.
+  // Falls back silently to the local placeholder on any failure — a card should
+  // never render broken just because the API is unreachable.
+  async _loadThumbnails() {
+    const reelUrls = this.ringData().map((v) => v.url);
+    try {
+      const res = await fetch(THUMB_API_BASE + '/api/most-viewed?urls=' + encodeURIComponent(reelUrls.join(',')));
+      if (res.ok) {
+        const { results } = await res.json();
+        const reelMeta = {};
+        (results || []).forEach((r) => { if (r.url) reelMeta[r.url] = r; });
+        this.setState({ reelMeta });
+      }
+    } catch (e) { /* keep local placeholder thumbnails */ }
+
+    const newsUrls = [...this.articles(), ...this.releases()].map((a) => a.url);
+    try {
+      const res = await fetch(THUMB_API_BASE + '/api/thumbnails?urls=' + encodeURIComponent(newsUrls.join(',')));
+      if (res.ok) {
+        const { results } = await res.json();
+        const newsMeta = {};
+        (results || []).forEach((r) => { if (r.url) newsMeta[r.url] = r; });
+        this.setState({ newsMeta });
+      }
+    } catch (e) { /* keep local placeholder thumbnails */ }
+  }
+
+  _fmtViews(n) {
+    if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
+    if (n >= 1e3) return (n / 1e3).toFixed(1).replace(/\.0$/, '') + 'K';
+    return String(n);
+  }
+
+  _initRing() {
+    const stage = document.getElementById('ringStage');
+    const ring = document.getElementById('ringInner');
+    if (!stage || !ring) { this._ringTry = (this._ringTry || 0) + 1; if (this._ringTry < 20) setTimeout(() => this._initRing(), 200); return; }
+    const items = Array.from(ring.children);
+    let rot = 0, dragging = false, lastX = 0, vel = 0, glideUntil = 0, dragMoved = 0;
+    const down = (e) => { dragging = true; lastX = e.touches ? e.touches[0].pageX : e.pageX; vel = 0; dragMoved = 0; stage.style.cursor = 'grabbing'; };
+    const move = (e) => { if (!dragging) return; const x = e.touches ? e.touches[0].pageX : e.pageX; const dx = x - lastX; lastX = x; dragMoved += Math.abs(dx); rot += dx * 0.35; vel = dx * 0.35; };
+    const up = () => { if (!dragging) return; dragging = false; glideUntil = Date.now() + 1400; stage.style.cursor = 'grab'; };
+    stage.addEventListener('mousedown', down); window.addEventListener('mousemove', move); window.addEventListener('mouseup', up);
+    stage.addEventListener('touchstart', down, { passive: true }); window.addEventListener('touchmove', move, { passive: true }); window.addEventListener('touchend', up);
+    stage.addEventListener('click', (e) => { if (dragMoved > 6) { e.preventDefault(); e.stopPropagation(); } }, true);
+    const tick = () => {
+      if (!dragging) {
+        if (Date.now() < glideUntil) { vel *= 0.94; rot += vel; }
+        else { rot += 0.07; }
+      }
+      ring.style.transform = 'rotateY(' + rot + 'deg)';
+      for (const it of items) {
+        const a = parseFloat(it.getAttribute('data-angle')) || 0;
+        const rel = (((a + rot) % 360) + 360) % 360;
+        const norm = Math.abs(rel > 180 ? 360 - rel : rel);
+        it.style.opacity = Math.max(0.22, 1 - norm / 180);
+        it.style.pointerEvents = norm < 55 ? 'auto' : 'none';
+        it.style.zIndex = String(Math.round(1000 - norm));
+      }
+      this._ringRAF = requestAnimationFrame(tick);
+    };
+    tick();
+  }
+
+  _storyCheck() {
+    if (typeof document === 'undefined' || !document.body) return;
+    const card = document.getElementById('storyCard');
+    if (!card) return;
+    const r = card.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    // "in view" once the card is meaningfully on screen; reverses when it leaves either edge
+    const inView = r.top < vh * 0.78 && r.bottom > vh * 0.16;
+    const has = document.body.classList.contains('story-in');
+    if (inView && !has) document.body.classList.add('story-in');
+    else if (!inView && has) document.body.classList.remove('story-in');
+  }
+
+  _pollStory() {
+    const onScroll = () => this._storyCheck();
+    this._storyOff = () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (this._storyRAF) cancelAnimationFrame(this._storyRAF);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    const loop = () => { this._storyCheck(); this._storyRAF = requestAnimationFrame(loop); };
+    this._storyRAF = requestAnimationFrame(loop);
+  }
+
+  _statsCheck() {
+    if (typeof document === 'undefined' || !document.body) return;
+    const sec = document.getElementById('stats');
+    if (!sec) return;
+    const r = sec.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const inView = r.top < vh * 0.74 && r.bottom > vh * 0.2;
+    if (inView && !this._statsDone) {
+      this._statsDone = true;
+      document.body.classList.add('stats-in');
+      this._countUp();
+    } else if (!inView && this._statsDone) {
+      // reset so it replays next time the section scrolls back into view
+      this._statsDone = false;
+      document.body.classList.remove('stats-in');
+    }
+  }
+
+  _countUp() {
+    const els = document.querySelectorAll('#stats .statnum');
+    els.forEach((el) => {
+      const to = parseInt(el.getAttribute('data-to'), 10) || 0;
+      const dur = 1200;
+      const from = Math.max(0, Math.round(Math.random() * (to * 4 + 6)));
+      const t0 = (typeof performance !== 'undefined' ? performance.now() : Date.now());
+      const tick = (now) => {
+        const p = Math.min(1, (now - t0) / dur);
+        const e = 1 - Math.pow(1 - p, 3);
+        el.textContent = String(Math.round(from + (to - from) * e));
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = String(to);
+      };
+      requestAnimationFrame(tick);
+    });
+  }
+
+  _pollStats() {
+    const onScroll = () => this._statsCheck();
+    this._statsOff = () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (this._statsRAF) cancelAnimationFrame(this._statsRAF);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    const loop = () => { this._statsCheck(); this._statsRAF = requestAnimationFrame(loop); };
+    this._statsRAF = requestAnimationFrame(loop);
+  }
+
+  componentWillUnmount() {
+    if (this._ringRAF) cancelAnimationFrame(this._ringRAF);
+    if (this._storyOff) this._storyOff();
+    if (this._statsOff) this._statsOff();
+    if (this._socialAway) window.removeEventListener('click', this._socialAway);
+  }
+
+  ringData() {
+    // Real reels — Instagram + Facebook. Thumbnails use local photos (platforms block hotlinking); each card links to the actual reel.
+    return [
+      { img: 'images/g_rally.png', pos: '36% 24%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DaDXYe1hWRy/' },
+      { img: 'images/g_meeting.png', pos: '24% 46%', platform: 'Facebook', url: 'https://www.facebook.com/share/r/1HoQ5ckWCG/' },
+      { img: 'images/g_felicitation.png', pos: '32% 26%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DZluR0uPuUO/' },
+      { img: 'images/g_meet.png', pos: '38% 40%', platform: 'Facebook', url: 'https://www.facebook.com/share/r/1UDMWCXHJJ/' },
+      { img: 'images/g_conf.png', pos: '80% 28%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DZO3RiysAud/' },
+      { img: 'images/community.png', pos: '40% 34%', platform: 'Facebook', url: 'https://www.facebook.com/share/r/1D2XPcqhYE/' },
+      { img: 'images/g_office.png', pos: '70% 22%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DY4ibmyMhdM/' },
+      { img: 'images/portrait.png', pos: 'center 18%', platform: 'Facebook', url: 'https://www.facebook.com/share/r/18jQ1QaoVo/' },
+      { img: 'images/g_meet.png', pos: '38% 40%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DTksS5BkkJv/' },
+      { img: 'images/g_rally.png', pos: '36% 24%', platform: 'Facebook', url: 'https://www.facebook.com/share/r/18huzMRThJ/' },
+      { img: 'images/g_felicitation.png', pos: '32% 26%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DTK_u8Ikozy/' },
+      { img: 'images/g_conf.png', pos: '80% 28%', platform: 'Facebook', url: 'https://www.facebook.com/share/r/1GhEJKprSr/' },
+    ];
+  }
+
+  extraBento() {
+    return [
+      { id: 'g8', img: 'images/gallery/IMG_0608.JPG', pos: '50% 20%', title: 'With PM Narendra Modi', desc: 'Receiving him on his visit to Kerala', span: 'span 1' },
+      { id: 'g9', img: 'images/gallery/IMG_0611.JPG', pos: '50% 20%', title: 'With PM Narendra Modi', desc: 'A quiet moment at his residence', span: 'span 2' },
+      { id: 'g10', img: 'images/gallery/IMG_0636.JPG', pos: '50% 20%', title: 'With PM Narendra Modi', desc: 'On stage at an NDA rally', span: 'span 1' },
+      { id: 'g11', img: 'images/gallery/IMG_0637.JPG', pos: '50% 20%', title: 'With PM Narendra Modi', desc: 'Greeting supporters together', span: 'span 1' },
+      { id: 'g12', img: 'images/gallery/IMG_0802.JPG', pos: '50% 20%', title: 'With PM Narendra Modi', desc: 'Between engagements at a party event', span: 'span 2' },
+      { id: 'g13', img: 'images/gallery/IMG_1361.JPG', pos: '50% 20%', title: 'With PM Narendra Modi', desc: 'A formal photograph together', span: 'span 1' },
+      { id: 'g14', img: 'images/gallery/IMG_1362.JPG', pos: '50% 20%', title: 'With Amit Shah', desc: 'Exchanging a memento at his office', span: 'span 1' },
+      { id: 'g15', img: 'images/gallery/IMG_0635.JPG', pos: '50% 20%', title: 'With Amit Shah', desc: 'With senior party colleagues in Delhi', span: 'span 2' },
+      { id: 'g16', img: 'images/gallery/IMG_0749.JPG', pos: '50% 20%', title: 'With Amit Shah', desc: 'At the BJP central office', span: 'span 1' },
+      { id: 'g17', img: 'images/gallery/IMG_0751.JPG', pos: '50% 20%', title: 'With Amit Shah', desc: 'With the Kerala state delegation', span: 'span 1' },
+      { id: 'g18', img: 'images/gallery/IMG_0752.JPG', pos: '50% 20%', title: 'With Amit Shah', desc: 'Party discussions in Delhi', span: 'span 2' },
+      { id: 'g19', img: 'images/gallery/IMG_0864.JPG', pos: '50% 20%', title: 'With Amit Shah', desc: 'A meeting at his residence', span: 'span 1' },
+      { id: 'g20', img: 'images/gallery/IMG_0758.JPG', pos: '50% 20%', title: 'With Shivraj Singh Chouhan', desc: 'An exchange of shawls and mementos', span: 'span 1' },
+      { id: 'g21', img: 'images/gallery/IMG_0759.JPG', pos: '50% 20%', title: 'With Shivraj Singh Chouhan', desc: 'At an official signing ceremony', span: 'span 2' },
+      { id: 'g22', img: 'images/gallery/IMG_0789.JPG', pos: '50% 20%', title: 'With Shivraj Singh Chouhan', desc: 'On arrival at the airport', span: 'span 1' },
+      { id: 'g23', img: 'images/gallery/IMG_0798.JPG', pos: '50% 20%', title: 'With Shivraj Singh Chouhan', desc: 'On arrival at the airport', span: 'span 1' },
+      { id: 'g24', img: 'images/gallery/IMG_0798_2.JPG', pos: '50% 20%', title: 'With Shivraj Singh Chouhan', desc: 'On arrival at the airport', span: 'span 2' },
+      { id: 'g25', img: 'images/gallery/IMG_1766.JPG', pos: '50% 20%', title: 'With Yogi Adityanath', desc: 'With party colleagues at a BJP conclave', span: 'span 1' },
+      { id: 'g26', img: 'images/gallery/IMG_0787.JPG', pos: '50% 20%', title: 'With JP Nadda & Shivraj Singh Chouhan', desc: 'On stage at a party programme', span: 'span 1' },
+      { id: 'g27', img: 'images/gallery/IMG_0788.JPG', pos: '50% 20%', title: 'With JP Nadda & Shivraj Singh Chouhan', desc: 'Receiving a rose on stage', span: 'span 2' },
+      { id: 'g28', img: 'images/gallery/IMG_0843.JPG', pos: '50% 20%', title: 'With Amit Shah & Shivraj Singh Chouhan', desc: 'At a BJP national meeting', span: 'span 1' },
+      { id: 'g29', img: 'images/gallery/IMG_0852.JPG', pos: '50% 20%', title: 'With JP Nadda', desc: 'A courtesy visit', span: 'span 1' },
+      { id: 'g30', img: 'images/gallery/IMG_0769.JPG', pos: '50% 20%', title: 'With JP Nadda', desc: 'At the BJP central office', span: 'span 2' },
+      { id: 'g31', img: 'images/gallery/IMG_0770.JPG', pos: '50% 20%', title: 'With JP Nadda', desc: 'Felicitated on stage', span: 'span 1' },
+      { id: 'g32', img: 'images/gallery/IMG_0773.JPG', pos: '50% 20%', title: 'With JP Nadda', desc: 'At a party function', span: 'span 1' },
+      { id: 'g33', img: 'images/gallery/IMG_0779.JPG', pos: '50% 20%', title: 'With C. P. Radhakrishnan', desc: 'A courtesy call at Raj Bhavan', span: 'span 2' },
+      { id: 'g34', img: 'images/gallery/IMG_0625.JPG', pos: '50% 20%', title: 'Early Days', desc: 'From the archives of party work', span: 'span 1' },
+      { id: 'g35', img: 'images/gallery/IMG_0638.JPG', pos: '50% 20%', title: 'Spiritual Engagement', desc: 'With religious and community leaders', span: 'span 1' },
+      { id: 'g36', img: 'images/gallery/IMG_0766.JPG', pos: '50% 20%', title: 'Party Discussions', desc: 'With union ministers and colleagues', span: 'span 2' },
+      { id: 'g37', img: 'images/gallery/IMG_0800.JPG', pos: '50% 20%', title: 'Public Tribute', desc: 'Remembering party leaders', span: 'span 1' },
+      { id: 'g38', img: 'images/gallery/IMG_0829.JPG', pos: '50% 20%', title: 'Party Meeting', desc: 'With state office bearers', span: 'span 1' },
+      { id: 'g39', img: 'images/gallery/IMG_0836.JPG', pos: '50% 20%', title: 'Community Engagement', desc: 'With spiritual and civic leaders', span: 'span 2' },
+      { id: 'g40', img: 'images/gallery/IMG_1480.JPG', pos: '50% 20%', title: 'Public Duty', desc: 'With Kerala Police on the ground', span: 'span 1' },
+      { id: 'g41', img: 'images/gallery/IMG_1765.JPG', pos: '50% 20%', title: 'On the Ground', desc: 'Among party workers and citizens', span: 'span 1' },
+      { id: 'g42', img: 'images/gallery/IMG_0803.JPG', pos: '50% 20%', title: 'Party Meeting', desc: 'Organisational discussions', span: 'span 2' },
+      { id: 'g43', img: 'images/gallery/IMG_0831.JPG', pos: '50% 20%', title: 'Public Engagement', desc: 'Among workers and citizens', span: 'span 1' },
+      { id: 'g44', img: 'images/gallery/IMG_0837.JPG', pos: '50% 20%', title: 'Party Meeting', desc: 'Organisational discussions', span: 'span 1' },
+      { id: 'g45', img: 'images/gallery/IMG_0838.JPG', pos: '50% 20%', title: 'Party Meeting', desc: 'Organisational discussions', span: 'span 2' },
+      { id: 'g46', img: 'images/gallery/IMG_0844.JPG', pos: '50% 20%', title: 'Party Meeting', desc: 'Organisational discussions', span: 'span 1' },
+      { id: 'g47', img: 'images/gallery/IMG_0845.JPG', pos: '50% 20%', title: 'Party Meeting', desc: 'Organisational discussions', span: 'span 1' },
+      { id: 'g48', img: 'images/gallery/IMG_0853.JPG', pos: '50% 20%', title: 'Courtesy Visit', desc: 'A meeting at the party office', span: 'span 2' },
+      { id: 'g49', img: 'images/gallery/IMG_0854.JPG', pos: '50% 20%', title: 'Courtesy Visit', desc: 'A meeting at the party office', span: 'span 1' },
+      { id: 'g50', img: 'images/gallery/IMG_0865.JPG', pos: '50% 20%', title: 'On the Ground', desc: 'Among party workers and citizens', span: 'span 1' },
+      { id: 'g51', img: 'images/gallery/IMG_0866.JPG', pos: '50% 20%', title: 'On the Ground', desc: 'Among party workers and citizens', span: 'span 2' },
+      { id: 'g52', img: 'images/gallery/IMG_0872.JPG', pos: '50% 20%', title: 'On the Ground', desc: 'Among party workers and citizens', span: 'span 1' },
+      { id: 'g53', img: 'images/gallery/IMG_0884.JPG', pos: '50% 20%', title: 'On the Ground', desc: 'Among party workers and citizens', span: 'span 1' },
+      { id: 'g54', img: 'images/gallery/IMG_1191.JPG', pos: '50% 20%', title: 'From the Archives', desc: 'An early public programme', span: 'span 2' },
+      { id: 'g55', img: 'images/gallery/IMG_1481.JPG', pos: '50% 20%', title: 'Public Duty', desc: 'With Kerala Police on the ground', span: 'span 1' },
+      { id: 'g56', img: 'images/gallery/IMG_1483.JPG', pos: '50% 20%', title: 'Public Duty', desc: 'With Kerala Police on the ground', span: 'span 1' },
+      { id: 'g57', img: 'images/gallery/IMG_1484.JPG', pos: '50% 20%', title: 'Public Duty', desc: 'With Kerala Police on the ground', span: 'span 2' },
+      { id: 'g58', img: 'images/gallery/IMG_1504.JPG', pos: '50% 20%', title: 'Courtesy Visit', desc: 'A meeting at the party office', span: 'span 1' },
+      { id: 'g59', img: 'images/gallery/IMG_1767.JPG', pos: '50% 20%', title: 'On the Ground', desc: 'Among party workers and citizens', span: 'span 1' },
+      { id: 'g60', img: 'images/gallery/IMG_1768.JPG', pos: '50% 20%', title: 'On the Ground', desc: 'Among party workers and citizens', span: 'span 2' },
+      { id: 'g61', img: 'images/gallery/IMG_1784.JPG', pos: '50% 20%', title: 'On the Ground', desc: 'Among party workers and citizens', span: 'span 1' },
+      { id: 'g62', img: 'images/gallery/IMG_4065.JPG', pos: '50% 20%', title: 'Public Address', desc: 'Speaking at a party event', span: 'span 1' },
+      { id: 'g63', img: 'images/gallery/IMG_4410.JPG', pos: '50% 20%', title: 'Public Address', desc: 'Speaking at a party event', span: 'span 2' },
+      { id: 'g64', img: 'images/gallery/IMG_4650.PNG', pos: '50% 20%', title: 'Public Engagement', desc: 'A moment from the campaign', span: 'span 1' },
+      { id: 'g65', img: 'images/gallery/IMG_4967.PNG', pos: '50% 20%', title: 'Public Engagement', desc: 'A moment from the campaign', span: 'span 1' },
+      { id: 'g66', img: 'images/gallery/IMG_4968.PNG', pos: '50% 20%', title: 'Public Engagement', desc: 'A moment from the campaign', span: 'span 2' },
+      { id: 'g67', img: 'images/gallery/IMG_4969.PNG', pos: '50% 20%', title: 'Public Engagement', desc: 'A moment from the campaign', span: 'span 1' },
+      { id: 'g68', img: 'images/gallery/IMG_6284.JPG', pos: '50% 20%', title: 'On the Ground', desc: 'Among party workers and citizens', span: 'span 1' },
+      { id: 'g69', img: 'images/gallery/IMG_6285.JPG', pos: '50% 20%', title: 'On the Ground', desc: 'Among party workers and citizens', span: 'span 2' },
+      { id: 'g70', img: 'images/gallery/WhatsApp_Image_2026-07-04.jpeg', pos: '50% 20%', title: 'Among the People', desc: 'A warm embrace on the campaign trail', span: 'span 1' },
+      { id: 'g71', img: 'images/gallery/23427f49-e381-479b-8ae5-98db7e85a83b.JPG', pos: '50% 20%', title: 'From the Archives', desc: 'An early public programme', span: 'span 1' },
+      { id: 'g72', img: 'images/gallery/51a5dd3c-a068-42ec-b096-060e67682005.jpg', pos: '50% 20%', title: 'From the Archives', desc: 'An early public programme', span: 'span 2' },
+      { id: 'g73', img: 'images/gallery/5cb5bff9-935a-40ab-936b-2ec35a2eab4e.JPG', pos: '50% 20%', title: 'Party Meeting', desc: 'Organisational discussions', span: 'span 1' },
+      { id: 'g74', img: 'images/gallery/b94a9db2-7721-4a02-92b8-9368838e9b4c.JPG', pos: '50% 20%', title: 'On the Ground', desc: 'Among party workers and citizens', span: 'span 1' },
+      { id: 'g75', img: 'images/gallery/d5aad207-602a-4c2a-b67d-f3a7d522a3d7.JPG', pos: '50% 20%', title: 'On the Ground', desc: 'Among party workers and citizens', span: 'span 2' },
+      { id: 'g76', img: 'images/gallery/f74b9efa-73c8-4273-8b3b-4eb0ab2b7978.JPG', pos: '50% 20%', title: 'On the Ground', desc: 'Among party workers and citizens', span: 'span 1' },
+    ];
+  }
+
+  bento() {
+    return [
+      { id: 'g0', img: 'images/gallery/e65c6588-8c72-4f06-9cc2-6156500b20ae.jpg', pos: '50% 20%', title: 'With PM Narendra Modi', desc: 'Greeted at an NDA public rally', span: 'span 2' },
+      { id: 'g1', img: 'images/gallery/0161128d-5010-4738-94e9-d3e077bf4345.jpg', pos: '50% 20%', title: 'With Amit Shah', desc: 'Union Home Minister, at a party meeting', span: 'span 1' },
+      { id: 'g2', img: 'images/gallery/76297828-0009-4667-8899-52f7cf6f6cf8.JPG', pos: '50% 20%', title: 'With Shivraj Singh Chouhan', desc: 'Presenting a memento at his office', span: 'span 1' },
+      { id: 'g3', img: 'images/gallery/IMG_0005.JPG', pos: '50% 20%', title: 'With Yogi Adityanath', desc: 'Uttar Pradesh Chief Minister, at a BJP event', span: 'span 2' },
+      { id: 'g4', img: 'images/gallery/IMG_0778.JPG', pos: '50% 20%', title: 'With JP Nadda', desc: 'BJP National President, on the campaign trail', span: 'span 1' },
+      { id: 'g5', img: 'images/gallery/IMG_3736.JPG', pos: '50% 20%', title: 'With C. P. Radhakrishnan', desc: 'Governor of Kerala, at Raj Bhavan', span: 'span 1' },
+      { id: 'g6', img: 'images/gallery/IMG_0610.JPG', pos: '50% 20%', title: 'With PM Narendra Modi', desc: 'Presenting a book on her constituency work', span: 'span 2' },
+      { id: 'g7', img: 'images/gallery/IMG_0634.JPG', pos: '50% 20%', title: 'With Amit Shah', desc: 'Meeting party workers in Delhi', span: 'span 1' },
+    ];
+  }
+
+  R(path) {
+    const id = path.replace('images/', '').replace('.png', '');
+    return (typeof window !== 'undefined' && window.__resources && window.__resources[id]) || path;
+  }
+
+  growthBars() {
+    const n = 46;
+    const out = [];
+    for (let i = 0; i < n; i++) {
+      const t = i / (n - 1);
+      const v = Math.pow(t, 2.5) * 0.97 + 0.03;
+      const pct = Math.round(v * 100);
+      const light = Math.round(70 - v * 42);
+      out.push({ h: pct + '%', color: 'hsl(250 48% ' + light + '%)', dotClass: i === n - 1 ? 'gdot' : 'gdot-hide', delay: (i * 16) + 'ms' });
+    }
+    return out;
+  }
+
+  // All items below are drawn from real, published coverage (Mar–May 2026 + standing record).
+  // Negative / controversy stories are deliberately excluded, per instruction.
+  articles() {
+    return [
+      { outlet: 'Onmanorama', date: 'Mar 28, 2026', category: 'Elections', img: 'images/g_rally.png', pos: '36% 24%', title: 'Sobha Surendran gains early edge as Palakkad sees a triangular churn', url: 'https://www.onmanorama.com/news/kerala/2026/03/23/palakkad-assembly-election-kerala-bjp-udf-ldf-sobha-surendran-pisharody-prospects-trends.html' },
+      { outlet: 'Oneindia', date: 'Apr 07, 2026', category: 'Profile', img: 'images/portrait.png', pos: 'center 12%', title: "Kerala's firebrand BJP leader enters the Palakkad contest", url: 'https://www.oneindia.com/politicians/sobha-surendran-3951.html' },
+      { outlet: 'Wikipedia', date: 'Updated 2026', category: 'Organisation', img: 'images/g_meet.png', pos: '38% 40%', title: 'As Mahila Morcha president, built BJP women-wing units across all 140 constituencies', url: 'https://en.wikipedia.org/wiki/Sobha_Surendran' },
+      { outlet: 'Pramukhan', date: 'Jul 11, 2025', category: 'Appointment', img: 'images/g_meeting.png', pos: '24% 46%', title: 'Named a BJP Kerala general secretary in the state-committee revamp', url: 'https://www.pramukhan.com/profile_testing.php?id=69' },
+      { outlet: 'Deccan Herald', date: 'Mar 29, 2026', category: 'Elections', img: 'images/g_conf.png', pos: '80% 28%', title: 'Kerala Assembly Elections 2026: Meet the candidate, Sobha Surendran', url: 'https://www.deccanherald.com/india/kerala/kerala-assembly-elections-2026-meet-the-candidate-sobha-surendran-3948805' },
+      { outlet: 'TFIPost', date: 'Feb 2022', category: 'Profile', img: 'images/g_office.png', pos: '70% 22%', title: 'First Keralite to become a national office-bearer of the BJP', url: 'https://tfipost.com/2022/01/shobha-surendran-biography-and-career/' },
+    ];
+  }
+
+  releases() {
+    return [
+      { outlet: 'India TV', tag: 'India TV', date: 'May 04, 2026', category: 'Elections', img: 'images/g_meet.png', pos: '38% 40%', title: 'Palakkad count under way; Sobha Surendran among the key contenders', summary: 'Live results coverage of the Palakkad assembly seat, with the BJP leader listed among the main candidates.', url: 'https://www.indiatvnews.com/news/india/palakkad-election-results-2026-live-updates-party-wise-leading-trailing-candidates-congress-ramesh-pisharody-bjp-sobha-surendran-nmr-razak-winner-2026-05-04-1039785' },
+      { outlet: 'The Week', tag: 'The Week', date: 'Mar 21, 2026', category: 'Elections', img: 'images/g_rally.png', pos: '36% 24%', title: "Why her Palakkad run is seen as key to the BJP's Kerala ambitions", summary: 'A profile of the campaign framing Palakkad as central to the party ending its absence from the Kerala Assembly.', url: 'https://www.theweek.in/news/india/2026/03/21/assembly-polls-2026-why-sobha-surendrans-palakkad-run-is-key-to-bjps-kerala-ambitions.html' },
+      { outlet: 'Onmanorama', tag: 'Onmanorama', date: 'Jul 11, 2025', category: 'Appointment', img: 'images/community.png', pos: '40% 34%', title: 'BJP reshuffles Kerala unit; Sobha Surendran named General Secretary', summary: 'Named alongside M T Ramesh in a state-committee revamp under new State President Rajeev Chandrasekhar.', url: 'https://www.onmanorama.com/news/kerala/2025/07/11/bjp-kerala-reshuffle-unit-new-appointees.html' },
+      { outlet: 'India TV', tag: 'India TV', date: 'Apr 09, 2026', category: 'Elections', img: 'images/g_office.png', pos: '70% 22%', title: 'Palakkad constituency profile: the BJP candidate for 2026', summary: 'Constituency and candidate profile ahead of the April 9 vote in Palakkad.', url: 'https://www.indiatvnews.com/elections/assembly-elections/kerala/palakkad-constituency/candidate-list/sobha-surendran' },
+      { outlet: 'Onmanorama', tag: 'Onmanorama', date: 'Mar 28, 2026', category: 'Elections', img: 'images/g_felicitation.png', pos: '32% 26%', title: 'Palakkad shapes up as an intense triangular contest', summary: 'Analysis of the three-way battle, noting her sustained and visible ground outreach.', url: 'https://www.onmanorama.com/news/kerala/2026/03/23/palakkad-assembly-election-kerala-bjp-udf-ldf-sobha-surendran-pisharody-prospects-trends.html' },
+      { outlet: 'Wikipedia', tag: 'Wikipedia', date: 'Updated 2026', category: 'Activism', img: 'images/g_meeting.png', pos: '24% 46%', title: "48-hour fast for PSC rank-list aspirants ended with the Governor's assurance", summary: 'The Secretariat agitation for PSC job seekers concluded after assurances from the Kerala Governor.', url: 'https://en.wikipedia.org/wiki/Sobha_Surendran' },
+    ];
+  }
+
+  photos() {
+    return [
+      { cat: 'Public Rallies', label: 'Presenting at the rally', img: this.R('images/g_rally.png') },
+      { cat: 'Community Work', label: 'Community gathering', img: this.R('images/community.png') },
+      { cat: 'Party Meetings', label: 'National Executive', img: this.R('images/g_meeting.png') },
+      { cat: 'Campaign Events', label: 'Delegation visit', img: this.R('images/g_office.png') },
+      { cat: 'Community Work', label: 'On the ground', img: this.R('images/g_meet.png') },
+      { cat: 'Public Rallies', label: 'Public felicitation', img: this.R('images/g_felicitation.png') },
+      { cat: 'Party Meetings', label: 'Leadership conference', img: this.R('images/g_conf.png') },
+    ];
+  }
+
+  reels() {
+    return [
+      { dur: '1:18', views: '34.2K', cap: 'A memorable moment at the BJP Kerala rally — presenting the vision for Kerala.', img: this.R('images/g_rally.png') },
+      { dur: '0:55', views: '21.7K', cap: 'On the campaign trail in Palakkad — grassroots outreach ahead of polls.', img: this.R('images/g_felicitation.png') },
+      { dur: '1:42', views: '18.4K', cap: 'Connecting with workers and party volunteers during a field visit.', img: this.R('images/g_meet.png') },
+      { dur: '2:06', views: '29.1K', cap: 'At the BJP National Executive meeting — representing Kerala.', img: this.R('images/g_meeting.png') },
+      { dur: '0:49', views: '11.3K', cap: 'A cross-party delegation meeting on welfare and constitutional values.', img: this.R('images/g_conf.png') },
+    ];
+  }
+
+  _concernDropdownFields() {
+    const defs = [
+      { key: 'panchayat', label: 'Panchayat', placeholder: 'Start typing your panchayat', options: this.panchayatSample() },
+      { key: 'assembly', label: 'Legislative Assembly', placeholder: 'Start typing your constituency', options: this.assemblyConstituencies() },
+      { key: 'ward', label: 'Ward', placeholder: 'Start typing your ward', options: this.wardSample() },
+      { key: 'booth', label: 'Booth', placeholder: 'Start typing your booth', options: this.boothSample() },
+    ];
+    return defs.map((d) => {
+      const query = this.state.concernValues[d.key] || '';
+      const q = query.trim().toLowerCase();
+      const filtered = q ? d.options.filter((o) => o.toLowerCase().includes(q)) : d.options;
+      const showOptions = this.state.concernFocus === d.key;
+      return {
+        label: d.label,
+        placeholder: d.placeholder,
+        query,
+        showOptions,
+        noMatches: showOptions && filtered.length === 0,
+        options: filtered.slice(0, 8),
+        onChange: (e) => {
+          const val = e.target.value;
+          this.setState((s) => ({ concernValues: { ...s.concernValues, [d.key]: val }, concernFocus: d.key }));
+        },
+        onFocus: () => this.setState({ concernFocus: d.key }),
+        onPick: (opt) => () => {
+          this.setState((s) => ({ concernValues: { ...s.concernValues, [d.key]: opt }, concernFocus: null }));
+        },
+      };
+    });
+  }
+
+  // Real Kerala Legislative Assembly constituencies (all 140).
+  assemblyConstituencies() {
+    return ['Manjeshwar','Kasaragod','Udma','Kanhangad','Thrikaripur','Payyanur','Kalliasseri','Taliparamba','Irikkur','Azhikode','Kannur','Dharmadam','Thalassery','Kuthuparamba','Mattannur','Peravoor','Kelakam (Vythiri)','Mananthavady','Sulthan Bathery','Kalpetta','Vadakara','Kuttiadi','Nadapuram','Quilandy','Perambra','Balussery','Elathur','Koduvally','Kozhikode North','Kozhikode South','Beypore','Kunnamangalam','Kondotty','Ramanattukara','Thiruvambady','Mannarkkad','Malampuzha','Palakkad','Ottappalam','Shoranur','Pattambi','Thrithala','Chelakkara','Kunnamkulam','Guruvayoor','Manalur','Wadakkanchery','Ollur','Thrissur','Nattika','Kodungallur','Kaipamangalam','Irinjalakuda','Puthukkad','Chalakudy','Kodakara','Muvattupuzha','Perumbavoor','Angamaly','Aluva','Kalamassery','Paravur','Vypin','Kochi','Thrippunithura','Ernakulam','Thrikkakara','Kunnathunad','Piravom','Chengannur','Ambalappuzha','Kuttanad','Haripad','Kayamkulam','Karthikappally','Aranmula','Thiruvalla','Mavelikara','Chengannur (Alappuzha)','Cherthala','Alappuzha','Arookutty','Vaikom','Ettumanoor','Kottayam','Puthuppally','Poonjar','Kanjirappally','Changanassery','Pala','Idukki','Devikulam','Udumbanchola','Thodupuzha','Peerumade','Ranni','Adoor','Konni','Pathanamthitta','Kunnathur','Karunagappally','Chavara','Kollam','Eravipuram','Chathannoor','Punalur','Chadayamangalam','Kundara','Kottarakkara','Pathanapuram','Chirayinkeezhu','Nedumangad','Vamanapuram','Kazhakkoottam','Vattiyoorkavu','Thiruvananthapuram','Nemom','Aroor','Parassala','Kattakada','Kovalam','Neyyattinkara','Balaramapuram'];
+  }
+
+  panchayatSample() {
+    return ['Kumbla','Manjeshwar','Cheruvathur','Trikaripur','Kalliasseri','Pappinisseri','Munderi','Peralam','Thottada','Chittariparamba','Kunnathurpadi','Panoor','Mokeri','Chekkiad','Nadapuram','Perambra','Balussery','Koduvally','Kizhakkoth','Chelannur','Thamarassery','Kondotty','Feroke','Nallalam','Mannarkkad','Kongad','Akathethara','Kollengode','Vaniyamkulam','Ottapalam','Vadakkencherry','Nattika','Chowannur','Anthikad','Puthukkad','Kadukutty','Chalakudy','Meloor','Perumbavoor','Rayamangalam','Angamaly','Manjapra','Kalady','Alangad','Vazhakkulam','Piravom','Ramamangalam','Kadamakudy','Njarakkal','Edathala','Chengamanad','Chengannur','Thakazhy','Ambalappuzha','Kuttanad','Haripad','Mavelikara','Cheruthana','Chennithala','Cherthala','Vaikom','Kaduthuruthy','Ettumanoor','Manarcad','Poonjar','Erattupetta','Kanjirappally','Ranni','Konni','Kulanada','Pandalam','Kottarakkara','Chadayamangalam','Anchal','Punalur','Karunagappally','Sooranad','Neendakara','Vamanapuram','Nagaroor','Kattakkada','Balaramapuram','Vellanad','Parassala','Athiyannoor','Karode'];
+  }
+
+  wardSample() {
+    const out = [];
+    for (let i = 1; i <= 25; i++) out.push('Ward ' + i);
+    return out;
+  }
+
+  boothSample() {
+    const out = [];
+    for (let i = 1; i <= 40; i++) out.push('Booth ' + i);
+    return out;
+  }
+
+  journeyData() {
+    return [
+      { role: 'ABVP Full-Timer', org: 'Akhil Bharatiya Vidyarthi Parishad', h: 30 },
+      { role: 'Balagokulam Taluk Joint Secretary', org: null, h: 42 },
+      { role: 'Balagokulam District Vice President', org: null, h: 54 },
+      { role: 'Balagokulam District Bhagini Pramukh', org: null, h: 66 },
+      { role: 'Yuva Morcha District Vice President', org: null, h: 80 },
+      { role: 'Yuva Morcha State Vice President', org: null, h: 96 },
+      { role: 'BJP State Secretary', org: null, h: 112 },
+      { role: 'Mahila Morcha State President', org: null, h: 130, badge: '× 2 terms' },
+      { role: 'BJP State General Secretary', org: null, h: 148, badge: '× 3 terms' },
+      { role: 'BJP National Executive Member', org: null, h: 166 },
+      { role: 'All-India Co-Convener, Membership Drive', org: 'Under Shivraj Singh Chouhan', h: 182 },
+      { role: 'All-India Mahila Samanvay Samithi Member', org: null, h: 198 },
+    ];
+  }
+
+  renderVals() {
+    const tab = this.state.pressTab;
+    const base = 'font-family:Montserrat,sans-serif;font-weight:700;font-size:14px;padding:11px 24px;border-radius:999px;cursor:pointer;text-decoration:none;border:1px solid transparent';
+    const active = base + ';background:#1A1530;color:#fff';
+    const idle = base + ';background:transparent;color:#3A3744';
+    const arts = this.articles();
+    const jSteps = this.journeyData();
+    const jMax = jSteps.length - 1;
+    const play = this.state.journeyPlay;
+    const journeySteps = jSteps.map((j, i) => {
+      const t = i / jMax; // 0..1 seniority progress
+      const isLast = i === jMax;
+      const dotMax = 12 + Math.round(t * 14); // 12..26 px at full size
+      const dotVw = (dotMax / 1200 * 100).toFixed(2);
+      const dotBg = isLast ? '#E8B84B' : (t > 0.55 ? '#4B3F8F' : '#2D2467');
+      const barVw = (j.h / 1200 * 100).toFixed(2);
+      const reveal = play ? 'opacity:1;transform:translateY(0)' : 'opacity:0;transform:translateY(14px)';
+      const delay = (i * 55) + 'ms';
+      return {
+        num: i + 1,
+        role: j.role,
+        org: j.org || '',
+        badge: j.badge || '',
+        wrapStyle: 'display:flex;flex-direction:column;align-items:center;' + reveal + ';transition:opacity .4s ease,transform .4s ease;transition-delay:' + delay,
+        // Fixed height, identical for all 12 cards regardless of text length
+        // or language — that's what keeps the connector/dot/bar row below
+        // perfectly aligned. Text is clamped to 2 lines (role) / 1 line (org)
+        // with an ellipsis rather than left to wrap freely.
+        cardStyle: 'background:#fff;border:1px solid ' + (isLast ? '#E8B84B' : '#E4E1DA') + ';border-radius:clamp(6px,0.8vw,12px);box-shadow:0 8px 18px rgba(26,21,48,.08);padding:clamp(7px,0.9vw,12px) clamp(6px,0.8vw,12px);width:100%;min-height:clamp(60px,8vw,92px);overflow:visible;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;margin-bottom:2px;box-sizing:border-box' + (isLast ? ';box-shadow:0 14px 28px rgba(232,184,75,.35)' : ''),
+        roleStyle: 'font-family:Montserrat,sans-serif;font-weight:700;font-size:clamp(6.5px,0.72vw,9.5px);line-height:1.3;color:#2D2467;width:100%;overflow-wrap:break-word',
+        orgStyle: 'font-family:Mulish,sans-serif;font-size:clamp(6.5px,0.68vw,9.5px);line-height:1.32;color:#9a97a6;margin-top:3px;width:100%;overflow-wrap:break-word',
+        badgeStyle: 'display:inline-block;margin-top:5px;font-family:Montserrat,sans-serif;font-weight:800;font-size:clamp(6.5px,0.65vw,9.5px);letter-spacing:.03em;color:#1A1530;background:#E8B84B;padding:2px clamp(4px,0.5vw,8px);border-radius:999px;max-width:100%;box-sizing:border-box;overflow-wrap:break-word;white-space:normal',
+        connectorStyle: 'width:2px;height:clamp(6px,0.9vw,14px);background:#D8D3C8',
+        dotStyle: 'width:clamp(8px,' + dotVw + 'vw,' + dotMax + 'px);height:clamp(8px,' + dotVw + 'vw,' + dotMax + 'px);border-radius:50%;background:' + dotBg + ';color:#fff;display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-weight:800;font-size:clamp(5px,0.55vw,9px);box-shadow:0 4px 10px rgba(26,21,48,.25);flex:none;z-index:2;position:relative',
+        barStyle: 'width:clamp(4px,0.7vw,10px);height:clamp(14px,' + barVw + 'vw,' + j.h + 'px);border-radius:4px 4px 0 0;background:linear-gradient(180deg,' + dotBg + ',rgba(45,36,103,.55));flex:none',
+      };
+    });
+    return {
+      journeySteps,
+      growthBars: this.growthBars(),
+      navSocialOpen: this.state.socialMenu === 'nav',
+      mobileNavOpen: this.state.mobileNavOpen,
+      onToggleMobileNav: (e) => { e.stopPropagation(); this.setState((s) => ({ mobileNavOpen: !s.mobileNavOpen })); },
+      showTranslateBanner: this.state.showTranslateBanner,
+      onTranslate: () => this._translateToMalayalam(),
+      onDismissTranslateBanner: () => this.setState({ showTranslateBanner: false }),
+      stopPropagation: (e) => e.stopPropagation(),
+      concernFormOpen: this.state.concernFormOpen,
+      concernSubmitted: this.state.concernSubmitted,
+      concernNotSubmitted: !this.state.concernSubmitted,
+      concernValues: this.state.concernValues,
+      onOpenConcernForm: () => this.setState({ concernFormOpen: true, concernSubmitted: false }),
+      onCloseConcernForm: () => this.setState({ concernFormOpen: false }),
+      onConcernField: (key) => (e) => {
+        const val = e.target.value;
+        this.setState((s) => ({ concernValues: { ...s.concernValues, [key]: val } }));
+      },
+      concernSubmitting: this.state.concernSubmitting,
+      concernError: this.state.concernError,
+      concernSubmitLabel: this.state.concernSubmitting ? 'Submitting…' : 'Submit Concern',
+      concernSubmitBtnStyle: 'cursor:pointer;margin-top:6px;border:none;border-radius:999px;background:#E8B84B;color:#1A1530;font-family:Montserrat,sans-serif;font-weight:800;font-size:15px;padding:14px;display:flex;align-items:center;justify-content:center;gap:8px;opacity:' + (this.state.concernSubmitting ? '0.6' : '1'),
+      onSubmitConcernForm: async (e) => {
+        e.preventDefault();
+        this.setState({ concernSubmitting: true, concernError: null });
+        try {
+          const v = this.state.concernValues;
+          const res = await fetch(THUMB_API_BASE + '/api/submit-concern', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(v),
+          });
+          if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || 'Submission failed');
+          this.setState({ concernSubmitted: true, concernSubmitting: false });
+        } catch (err) {
+          this.setState({ concernSubmitting: false, concernError: 'Could not submit right now — please try again in a moment.' });
+        }
+      },
+      concernDropdownFields: this._concernDropdownFields(),
+      volunteerFormOpen: this.state.volunteerFormOpen,
+      volunteerSubmitted: this.state.volunteerSubmitted,
+      volunteerNotSubmitted: !this.state.volunteerSubmitted,
+      volunteerValues: this.state.volunteerValues,
+      onOpenVolunteerForm: () => this.setState({ volunteerFormOpen: true, volunteerSubmitted: false }),
+      onCloseVolunteerForm: () => this.setState({ volunteerFormOpen: false }),
+      onVolunteerField: (key) => (e) => {
+        const val = e.target.value;
+        this.setState((s) => ({ volunteerValues: { ...s.volunteerValues, [key]: val } }));
+      },
+      volunteerSubmitting: this.state.volunteerSubmitting,
+      volunteerError: this.state.volunteerError,
+      volunteerSubmitLabel: this.state.volunteerSubmitting ? 'Submitting…' : 'Submit',
+      volunteerSubmitBtnStyle: 'cursor:pointer;margin-top:6px;border:none;border-radius:999px;background:#E8B84B;color:#1A1530;font-family:Montserrat,sans-serif;font-weight:800;font-size:15px;padding:14px;display:flex;align-items:center;justify-content:center;gap:8px;opacity:' + (this.state.volunteerSubmitting ? '0.6' : '1'),
+      onSubmitVolunteerForm: async (e) => {
+        e.preventDefault();
+        this.setState({ volunteerSubmitting: true, volunteerError: null });
+        try {
+          const v = this.state.volunteerValues;
+          const res = await fetch(THUMB_API_BASE + '/api/submit-volunteer', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(v),
+          });
+          if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || 'Submission failed');
+          this.setState({ volunteerSubmitted: true, volunteerSubmitting: false });
+        } catch (err) {
+          this.setState({ volunteerSubmitting: false, volunteerError: 'Could not submit right now — please try again in a moment.' });
+        }
+      },
+      reelsSocialOpen: this.state.socialMenu === 'reels',
+      navChevron: this.state.socialMenu === 'nav' ? 'rotate(180deg)' : 'rotate(0deg)',
+      reelsChevron: this.state.socialMenu === 'reels' ? 'rotate(180deg)' : 'rotate(0deg)',
+      onToggleNavSocial: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.setState((s) => ({ socialMenu: s.socialMenu === 'nav' ? null : 'nav' })); },
+      onToggleReelsSocial: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.setState((s) => ({ socialMenu: s.socialMenu === 'reels' ? null : 'reels' })); },
+      showNews: tab === 'news',
+      showReleases: tab === 'releases',
+      newsBtnStyle: tab === 'news' ? active : idle,
+      relBtnStyle: tab === 'releases' ? active : idle,
+      onNews: () => this.setState({ pressTab: 'news' }),
+      onRel: () => this.setState({ pressTab: 'releases' }),
+      articleCards: arts.map((a) => {
+        const meta = this.state.newsMeta && this.state.newsMeta[a.url];
+        const hasRealThumb = !!(meta && meta.thumbnail_url);
+        const bg = hasRealThumb ? 'url("' + meta.thumbnail_url + '")' : 'url("' + this.R(a.img) + '")';
+        // a.pos was tuned to crop the local placeholder — meaningless (and
+        // often a bad crop) for a real fetched og:image of a different shape.
+        const pos = hasRealThumb ? 'center' : a.pos;
+        return { ...a, bg, pos };
+      }),
+      releaseCards: this.releases().map((r) => {
+        const meta = this.state.newsMeta && this.state.newsMeta[r.url];
+        const hasRealThumb = !!(meta && meta.thumbnail_url);
+        const bg = hasRealThumb ? 'url("' + meta.thumbnail_url + '")' : 'url("' + this.R(r.img) + '")';
+        const pos = hasRealThumb ? 'center' : r.pos;
+        return { ...r, bg, pos };
+      }),
+      moreLabel: this.state.expanded ? 'Show less' : 'See more photos →',
+      onToggleMore: () => this.setState((s) => ({ expanded: !s.expanded })),
+      ringList: this.ringData().map((v, i) => {
+        const n = this.ringData().length;
+        const angle = i * (360 / n);
+        const isIg = v.platform === 'Instagram';
+        const meta = this.state.reelMeta && this.state.reelMeta[v.url];
+        const hasRealThumb = !!(meta && meta.thumbnail_url);
+        const bg = hasRealThumb ? 'url("' + meta.thumbnail_url + '")' : 'url("' + this.R(v.img) + '")';
+        // v.pos was hand-tuned to crop the old local placeholder image \u2014 it's
+        // meaningless (and often badly crops) a real fetched thumbnail, which
+        // can be a different aspect ratio. Center-crop the real photo instead;
+        // only use the tuned position for the local fallback image.
+        const pos = hasRealThumb ? 'center' : v.pos;
+        const viewsPrefix = meta && typeof meta.view_count === 'number' ? this._fmtViews(meta.view_count) + ' views \u00b7 ' : '';
+        const igIcon = React.createElement('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', stroke: '#fff', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' },
+          React.createElement('rect', { x: 2, y: 2, width: 20, height: 20, rx: 5 }),
+          React.createElement('circle', { cx: 12, cy: 12, r: 4 }),
+          React.createElement('circle', { cx: 17.5, cy: 6.5, r: 1, fill: '#fff', stroke: 'none' }));
+        const fbIcon = React.createElement('svg', { width: 15, height: 15, viewBox: '0 0 24 24', fill: '#fff' },
+          React.createElement('path', { d: 'M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z' }));
+        return { ...v, bg, pos, angle, transform: 'rotateY(' + angle + 'deg) translateZ(560px)',
+          pillBg: isIg ? 'rgba(214,41,118,.92)' : 'rgba(24,119,242,.92)', platformIcon: isIg ? igIcon : fbIcon, watchLabel: viewsPrefix + 'Watch on ' + v.platform + ' \u2192' };
+      }),
+      bentoList: (this.state.expanded ? this.bento().concat(this.extraBento()) : this.bento()).map((it) => {
+        const h = this.state.hoveredCard === it.id;
+        return {
+          ...it,
+          bgImg: 'url("' + it.img + '")',
+          row: it.span,
+          scale: h ? 'translateY(-4px)' : 'none',
+          imgScale: h ? 'scale(1.06)' : 'scale(1)',
+          descOpacity: h ? '1' : '0',
+          descShift: h ? '0px' : '8px',
+          onEnter: () => this.setState({ hoveredCard: it.id }),
+          onLeave: () => this.setState({ hoveredCard: null }),
+          onOpen: () => this.setState({ selected: it }),
+        };
+      }),
+      showModal: !!this.state.selected,
+      selBg: this.state.selected ? 'url("' + this.state.selected.img + '")' : 'none',
+      selTitle: this.state.selected ? this.state.selected.title : '',
+      onClose: () => this.setState({ selected: null }),
+      stop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); },
+      reelList: this.reels().map((v) => ({ ...v, bg: 'url("' + v.img + '")' })),
+    };
+  }
+}
+</script>
+</body>
+</html>

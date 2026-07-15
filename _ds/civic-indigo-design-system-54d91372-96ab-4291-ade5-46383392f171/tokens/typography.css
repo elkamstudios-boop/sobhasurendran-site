@@ -1,0 +1,67 @@
+/* ============================================================
+   TYPOGRAPHY — Civic Indigo
+   Display: Montserrat (geometric, heavy, ALL-CAPS section heads & name)
+   Body:    Mulish (humanist sans, set justified in long passages)
+   ============================================================ */
+:root {
+  --font-display: 'Montserrat', system-ui, sans-serif;
+  --font-body:    'Mulish', system-ui, sans-serif;
+
+  /* weights */
+  --fw-regular: 400; /* @kind font */
+  --fw-medium:  500; /* @kind font */
+  --fw-semibold:600; /* @kind font */
+  --fw-bold:    700; /* @kind font */
+  --fw-extra:   800; /* @kind font */
+  --fw-black:   900; /* @kind font */
+
+  /* Type scale (px) — tuned for 1280px resume pages.
+     Min usable size on a page is 16px (captions). */
+  --fs-display:   76px;  /* hero name */
+  --fs-h1:        44px;  /* page / section heads (ALL CAPS) */
+  --fs-h2:        30px;  /* sub-section heads */
+  --fs-h3:        22px;  /* card / label heads */
+  --fs-stat:      52px;  /* the BIG election multiplier (2x / 3x) */
+  --fs-vote:      19px;  /* vote-count numerals (bold emphasis) */
+  --fs-lead:      19px;  /* intro paragraph */
+  --fs-body:      17px;  /* default body */
+  --fs-small:     15px;  /* captions, contact lines */
+  --fs-eyebrow:   14px;  /* tracked eyebrow labels */
+
+  /* line-heights */
+  --lh-tight:   1.04; /* @kind font */
+  --lh-snug:    1.18; /* @kind font */
+  --lh-body:    1.55; /* @kind font */
+
+  /* tracking */
+  --ls-tight:   -0.02em; /* @kind font */
+  --ls-normal:  0; /* @kind font */
+  --ls-caps:    0.04em; /* @kind font */
+  --ls-eyebrow: 0.18em; /* @kind font */
+}
+
+/* Optional helper classes (foundations + cards may use these) */
+.t-eyebrow {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--accent-strong);
+}
+.t-h1 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-extra);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  text-transform: uppercase;
+  color: var(--text-heading);
+}
+.t-body {
+  font-family: var(--font-body);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text-body);
+}

@@ -1,0 +1,27 @@
+/* ============================================================
+   EFFECTS — radii, borders, shadows
+   The system is deliberately SHARP & structural: square result
+   bars, hard achievement chips, hairline rules. Rounding is
+   reserved for the pill CTA and avatars.
+   ============================================================ */
+:root {
+  --radius-0:    0px;     /* result bars, achievement chips — squared */
+  --radius-sm:   4px;     /* small tags */
+  --radius-md:   10px;    /* cards, photo frames */
+  --radius-lg:   18px;    /* large panels */
+  --radius-pill: 999px;   /* CTA buttons, avatars */
+
+  --border-thin: 1px solid var(--border-hairline);
+  --border-accent: 3px solid var(--accent);
+  --border-indigo: 2px solid var(--c-indigo-700);
+
+  /* shadows — soft, cool-tinted, never heavy */
+  --shadow-xs: 0 1px 2px rgba(26,21,48,0.06);
+  --shadow-sm: 0 4px 14px rgba(26,21,48,0.08);
+  --shadow-md: 0 14px 36px rgba(26,21,48,0.12);
+  --shadow-lg: 0 28px 60px rgba(26,21,48,0.16);
+
+  /* the signature indigo hero gradient */
+  --grad-indigo: linear-gradient(135deg, #2D2467 0%, #4B3F8F 100%); /* @kind other */
+  --grad-ink:    linear-gradient(180deg, #241C52 0%, #1A1530 100%); /* @kind other */
+}
