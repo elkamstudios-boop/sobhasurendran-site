@@ -350,27 +350,27 @@
            wrapping into extra rows, so it always stays one continuous row
            matching the desktop layout. Card height is a FIXED clamp
            (identical for all steps) so the connector/dot/bar row stays
-           perfectly aligned within the row. The grid and the gradient track
-           bar below it are wrapped together at width:max-content so the bar
-           always spans exactly as wide as the (possibly overflowing) grid
-           and scrolls in sync with it, instead of stopping at the visible
-           container width while the cards scroll past it. -->
-      <div style="width:max-content;min-width:100%">
-        <div class="halo-journey-grid" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:end;gap:clamp(4px,0.8vw,14px) clamp(10px,1.6vw,22px)">
-          <sc-for list="{{ journeySteps }}" as="j" hint-placeholder-count="12">
-            <div style="{{ j.wrapStyle }}">
-              <div style="{{ j.cardStyle }}">
-                <div style="{{ j.roleStyle }}">{{ j.role }}</div>
-                <sc-if value="{{ j.org }}" hint-placeholder-val="{{ false }}"><div style="{{ j.orgStyle }}">{{ j.org }}</div></sc-if>
-                <sc-if value="{{ j.badge }}" hint-placeholder-val="{{ false }}"><div style="{{ j.badgeStyle }}">{{ j.badge }}</div></sc-if>
-              </div>
-              <div style="{{ j.connectorStyle }}"></div>
-              <div style="{{ j.dotStyle }}">{{ j.num }}</div>
-              <div style="{{ j.barStyle }}"></div>
+           perfectly aligned within the row. The gradient track bar is a
+           second row inside the SAME grid (grid-column:1/-1) rather than an
+           independent sibling box — a plain sibling's width tracks the
+           visible container, not the grid's actual (possibly overflowing)
+           column tracks, so on mobile/tablet it used to stop short while the
+           cards scrolled past it. Spanning it across the grid's own columns
+           keeps it pixel-locked to the cards at every width. -->
+      <div class="halo-journey-grid" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:end;gap:clamp(4px,0.8vw,14px) clamp(10px,1.6vw,22px)">
+        <sc-for list="{{ journeySteps }}" as="j" hint-placeholder-count="12">
+          <div style="{{ j.wrapStyle }}">
+            <div style="{{ j.cardStyle }}">
+              <div style="{{ j.roleStyle }}">{{ j.role }}</div>
+              <sc-if value="{{ j.org }}" hint-placeholder-val="{{ false }}"><div style="{{ j.orgStyle }}">{{ j.org }}</div></sc-if>
+              <sc-if value="{{ j.badge }}" hint-placeholder-val="{{ false }}"><div style="{{ j.badgeStyle }}">{{ j.badge }}</div></sc-if>
             </div>
-          </sc-for>
-        </div>
-        <div style="height:clamp(8px,1.3vw,16px);border-radius:5px;margin-top:0;position:relative;background:linear-gradient(90deg,#2D2467 0%,#4B3F8F 55%,#E8B84B 100%);box-shadow:0 10px 24px rgba(45,36,103,.25)">
+            <div style="{{ j.connectorStyle }}"></div>
+            <div style="{{ j.dotStyle }}">{{ j.num }}</div>
+            <div style="{{ j.barStyle }}"></div>
+          </div>
+        </sc-for>
+        <div style="grid-column:1 / -1;grid-row:2;position:relative;height:clamp(8px,1.3vw,16px);border-radius:5px;background:linear-gradient(90deg,#2D2467 0%,#4B3F8F 55%,#E8B84B 100%);box-shadow:0 10px 24px rgba(45,36,103,.25)">
           <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.55) 0 14px,transparent 14px 26px);opacity:.55;top:50%;height:2px;transform:translateY(-1px)"></div>
         </div>
       </div>
