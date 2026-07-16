@@ -765,9 +765,8 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;pressDefaultTab&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;news&quot;,&quot;releases&quot;],&quot;default&quot;:&quot;news&quot;,&quot;tsType&quot;:&quot;'news' | 'releases'&quot;,&quot;section&quot;:&quot;Press&quot;}}">
 // Thumbnail Fetch API (design_handoff_thumbnail_api/server.js) — serves real IG/FB
-// reel covers + view counts and real news og:image thumbnails. Change this if the
-// API is deployed somewhere other than a local dev server.
-const THUMB_API_BASE = 'http://localhost:8787';
+// reel covers + view counts and real news og:image thumbnails.
+const THUMB_API_BASE = 'https://api.sobhasurendran.in';
 
 class Component extends DCLogic {
   constructor(props) {

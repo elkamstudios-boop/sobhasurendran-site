@@ -305,9 +305,8 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:1400}}">
 // Thumbnail Fetch API (design_handoff_thumbnail_api/server.js) — serves the
-// unified newsroom feed. Change this if the API is deployed somewhere other
-// than a local dev server.
-const THUMB_API_BASE = 'http://localhost:8787';
+// unified newsroom feed.
+const THUMB_API_BASE = 'https://api.sobhasurendran.in';
 
 class Component extends DCLogic {
   constructor(props) {
