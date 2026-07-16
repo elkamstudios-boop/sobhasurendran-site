@@ -350,13 +350,15 @@
            wrapping into extra rows, so it always stays one continuous row
            matching the desktop layout. Card height is a FIXED clamp
            (identical for all steps) so the connector/dot/bar row stays
-           perfectly aligned within the row. The gradient track bar is a
-           second row inside the SAME grid (grid-column:1/-1) rather than an
-           independent sibling box — a plain sibling's width tracks the
-           visible container, not the grid's actual (possibly overflowing)
-           column tracks, so on mobile/tablet it used to stop short while the
-           cards scrolled past it. Spanning it across the grid's own columns
-           keeps it pixel-locked to the cards at every width. -->
+           perfectly aligned within the row. The gradient track bar reuses
+           the .halo-journey-grid class as its own independent grid (rather
+           than living inside the cards' grid, which this templating runtime
+           silently drops any sibling appended after an <sc-for> block from —
+           or being a plain sibling box, whose width tracks the visible
+           container, not the grid's actual overflowing column tracks). Both
+           grids resolve identical column math at every breakpoint, so the
+           bar — spanning grid-column:1/-1 — always lines up with and scrolls
+           in lockstep with the cards above it. -->
       <div class="halo-journey-grid" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:end;gap:clamp(4px,0.8vw,14px) clamp(10px,1.6vw,22px)">
         <sc-for list="{{ journeySteps }}" as="j" hint-placeholder-count="12">
           <div style="{{ j.wrapStyle }}">
@@ -370,7 +372,9 @@
             <div style="{{ j.barStyle }}"></div>
           </div>
         </sc-for>
-        <div style="grid-column:1 / -1;grid-row:2;position:relative;height:clamp(8px,1.3vw,16px);border-radius:5px;background:linear-gradient(90deg,#2D2467 0%,#4B3F8F 55%,#E8B84B 100%);box-shadow:0 10px 24px rgba(45,36,103,.25)">
+      </div>
+      <div class="halo-journey-grid" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));margin-top:clamp(4px,0.8vw,14px)">
+        <div style="grid-column:1 / -1;position:relative;height:clamp(8px,1.3vw,16px);border-radius:5px;background:linear-gradient(90deg,#2D2467 0%,#4B3F8F 55%,#E8B84B 100%);box-shadow:0 10px 24px rgba(45,36,103,.25)">
           <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.55) 0 14px,transparent 14px 26px);opacity:.55;top:50%;height:2px;transform:translateY(-1px)"></div>
         </div>
       </div>
