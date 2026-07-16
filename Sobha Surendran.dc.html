@@ -74,7 +74,7 @@
      track switches to fixed-width columns and scrolls horizontally instead
      — same card sizing as desktop, just pannable on narrow screens. */
   .halo-journey-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
-  @media (max-width:900px){ .halo-journey-grid{grid-template-columns:none !important;grid-auto-flow:column !important;grid-auto-columns:minmax(92px,1fr) !important} }
+  @media (max-width:900px){ .halo-journey-grid{grid-template-columns:repeat(12,minmax(92px,1fr)) !important} }
   .halo-card{display:grid !important;grid-template-columns:clamp(160px,44vw,548px) 1fr !important;align-items:stretch !important;gap:clamp(16px,3.5vw,40px) !important}
   .halo-left{width:auto !important;min-width:0}
   /* Row layout (base rules above) previously stayed active all the way down
