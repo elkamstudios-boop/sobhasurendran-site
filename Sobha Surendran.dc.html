@@ -68,9 +68,13 @@
   .halo-mosaic-col.is-right{right:0}
   .halo-mosaic-col.is-left{left:0}
   .halo-tile{width:100% !important;height:clamp(78px,17vw,316px) !important;border-radius:clamp(10px,2vw,24px) !important}
-  @media (max-width:900px){ .halo-journey-grid{grid-template-columns:repeat(6,minmax(0,1fr)) !important} }
-  @media (max-width:620px){ .halo-journey-grid{grid-template-columns:repeat(4,minmax(0,1fr)) !important} }
-  @media (max-width:440px){ .halo-journey-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important} }
+  /* Below 900px, 12 evenly-shrinking columns get too narrow to stay legible.
+     Rather than wrapping into extra rows (which broke the connector/dot/bar
+     alignment and no longer matched the single-row desktop layout), the
+     track switches to fixed-width columns and scrolls horizontally instead
+     — same card sizing as desktop, just pannable on narrow screens. */
+  .halo-journey-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+  @media (max-width:900px){ .halo-journey-grid{grid-template-columns:none !important;grid-auto-flow:column !important;grid-auto-columns:minmax(92px,1fr) !important} }
   .halo-card{display:grid !important;grid-template-columns:clamp(160px,44vw,548px) 1fr !important;align-items:stretch !important;gap:clamp(16px,3.5vw,40px) !important}
   .halo-left{width:auto !important;min-width:0}
   /* Row layout (base rules above) previously stayed active all the way down
@@ -83,7 +87,7 @@
     .halo-card{grid-template-columns:1fr !important}
     .halo-left{width:100% !important}
     .halo-mosaic{width:100% !important;height:clamp(220px,60vw,420px);min-height:clamp(220px,60vw,420px)}
-    .halo-tile{width:clamp(90px,22vw,170px) !important;height:clamp(108px,26vw,204px) !important}
+    .halo-tile{height:clamp(108px,26vw,204px) !important}
   }
   @media (max-width:700px){
     .halo-feat{flex-direction:column !important;gap:14px !important}
@@ -340,12 +344,13 @@
 
   <div id="journeyTrack" style="max-width:1200px;margin:0 auto">
     <div class="halo-journey-scroll">
-      <!-- Fixed number of tracks (no infinite flex-shrink into illegible
-           slivers, no horizontal overflow/scroll either) — the grid always
-           divides evenly across whatever width is available; it wraps to
-           fewer columns per row on narrower screens instead of scrolling.
-           Card height is a FIXED clamp (identical for all steps) so the
-           connector/dot/bar row stays perfectly aligned within each row. -->
+      <!-- 12 columns share the row's width evenly down to 900px. Below that,
+           columns switch to a fixed minimum width (see .halo-journey-grid
+           media query above) and the track scrolls horizontally instead of
+           wrapping into extra rows, so it always stays one continuous row
+           matching the desktop layout. Card height is a FIXED clamp
+           (identical for all steps) so the connector/dot/bar row stays
+           perfectly aligned within the row. -->
       <div class="halo-journey-grid" style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:end;gap:clamp(4px,0.8vw,14px) clamp(10px,1.6vw,22px)">
         <sc-for list="{{ journeySteps }}" as="j" hint-placeholder-count="12">
           <div style="{{ j.wrapStyle }}">
