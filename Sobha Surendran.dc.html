@@ -672,6 +672,10 @@
             <span style="font-family:'Montserrat',sans-serif;font-size:12.5px;font-weight:700;color:#2D2467">Name</span>
             <input required type="text" value="{{ concernValues.name }}" onChange="{{ onConcernField('name') }}" placeholder="Your full name" style="font-family:'Mulish',sans-serif;font-size:15px;padding:12px 14px;border-radius:12px;border:1px solid #E4E1DA;outline:none;color:#2D2467" />
           </label>
+          <label style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-family:'Montserrat',sans-serif;font-size:12.5px;font-weight:700;color:#2D2467">Phone Number</span>
+            <input required type="tel" value="{{ concernValues.phone }}" onChange="{{ onConcernField('phone') }}" placeholder="10-digit mobile number" style="font-family:'Mulish',sans-serif;font-size:15px;padding:12px 14px;border-radius:12px;border:1px solid #E4E1DA;outline:none;color:#2D2467" />
+          </label>
           <sc-for list="{{ concernDropdownFields }}" as="f" hint-placeholder-count="4">
             <div style="position:relative">
               <label style="display:flex;flex-direction:column;gap:6px">
@@ -1061,7 +1065,6 @@ class Component extends DCLogic {
       { id: 'g58', img: 'images/gallery/IMG_1504.JPG', pos: '50% 20%', title: 'Courtesy Visit', desc: 'A meeting at the party office', span: 'span 1' },
       { id: 'g59', img: 'images/gallery/IMG_1767.JPG', pos: '50% 20%', title: 'On the Ground', desc: 'Among party workers and citizens', span: 'span 1' },
       { id: 'g60', img: 'images/gallery/IMG_1768.JPG', pos: '50% 20%', title: 'On the Ground', desc: 'Among party workers and citizens', span: 'span 2' },
-      { id: 'g61', img: 'images/gallery/IMG_1784.JPG', pos: '50% 20%', title: 'On the Ground', desc: 'Among party workers and citizens', span: 'span 1' },
       { id: 'g62', img: 'images/gallery/IMG_4065.JPG', pos: '50% 20%', title: 'Public Address', desc: 'Speaking at a party event', span: 'span 1' },
       { id: 'g63', img: 'images/gallery/IMG_4410.JPG', pos: '50% 20%', title: 'Public Address', desc: 'Speaking at a party event', span: 'span 2' },
       { id: 'g64', img: 'images/gallery/IMG_4650.PNG', pos: '50% 20%', title: 'Public Engagement', desc: 'A moment from the campaign', span: 'span 1' },
