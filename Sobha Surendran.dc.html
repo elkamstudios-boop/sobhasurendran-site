@@ -488,7 +488,7 @@
     </div>
   </div>
   <div id="bentoWrap" style="position:relative;margin-top:36px;overflow-x:auto;overflow-y:hidden;cursor:grab;-webkit-overflow-scrolling:touch">
-    <div style="display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,200px);grid-auto-columns:minmax(280px,1fr);gap:16px;width:100%;padding:4px 28px">
+    <div style="display:grid;grid-auto-flow:column dense;grid-template-rows:repeat(2,200px);grid-auto-columns:minmax(280px,1fr);gap:16px;width:100%;padding:4px 28px">
       <sc-for list="{{ bentoList }}" as="it" hint-placeholder-count="0">
         <div onMouseEnter="{{ it.onEnter }}" onMouseLeave="{{ it.onLeave }}" onClick="{{ it.onOpen }}" style="position:relative;border-radius:10px;overflow:hidden;box-shadow:0 8px 22px rgba(26,21,48,.14);cursor:pointer;grid-row:{{ it.row }};transform:{{ it.scale }};transition:transform .3s ease,box-shadow .3s ease">
           <div style="position:absolute;inset:0;background-image:{{ it.bgImg }};background-size:cover;background-position:{{ it.pos }};transform:{{ it.imgScale }};transition:transform .5s ease"></div>
