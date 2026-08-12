@@ -20,7 +20,6 @@
 <x-dc>
 <helmet>
 <meta name="ext-resource-dependency" content="images/g_rally.png" data-resource-id="g_rally">
-<meta name="ext-resource-dependency" content="images/community.png" data-resource-id="community">
 <meta name="ext-resource-dependency" content="images/g_meeting.png" data-resource-id="g_meeting">
 <meta name="ext-resource-dependency" content="images/g_office.png" data-resource-id="g_office">
 <meta name="ext-resource-dependency" content="images/g_meet.png" data-resource-id="g_meet">
@@ -498,7 +497,7 @@
 </section>
 
 <section id="initiative" style="position:relative;padding:0;overflow:hidden;background:#1A1530">
-  <div style="position:absolute;inset:0;background-image:url('images/community.png');background-size:cover;background-position:center 30%"></div>
+  <div style="position:absolute;inset:0;background-image:url('images/gargi_bg.jpg');background-size:cover;background-position:center 22%"></div>
   <div style="position:absolute;inset:0;background:linear-gradient(100deg,rgba(26,21,48,.96) 0%,rgba(26,21,48,.9) 38%,rgba(45,36,103,.7) 70%,rgba(45,36,103,.42) 100%)"></div>
   <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(118deg,rgba(232,184,75,.05) 0,rgba(232,184,75,.05) 1px,transparent 1px,transparent 22px);pointer-events:none"></div>
   <div class="r-init-wrap" style="position:relative;max-width:1200px;margin:0 auto;padding:104px 28px;display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center">
@@ -721,7 +720,7 @@ class Component extends DCLogic {
       { img: 'images/g_felicitation.png', pos: '32% 26%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DZluR0uPuUO/' },
       { img: 'images/g_meet.png', pos: '38% 40%', platform: 'Facebook', url: 'https://www.facebook.com/share/r/1UDMWCXHJJ/' },
       { img: 'images/g_conf.png', pos: '80% 28%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DZO3RiysAud/' },
-      { img: 'images/community.png', pos: '40% 34%', platform: 'Facebook', url: 'https://www.facebook.com/share/r/1D2XPcqhYE/' },
+      { img: 'images/g_rally.png', pos: '40% 34%', platform: 'Facebook', url: 'https://www.facebook.com/share/r/1D2XPcqhYE/' },
       { img: 'images/g_office.png', pos: '70% 22%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DY4ibmyMhdM/' },
       { img: 'images/portrait.png', pos: 'center 18%', platform: 'Facebook', url: 'https://www.facebook.com/share/r/18jQ1QaoVo/' },
       { img: 'images/g_meet.png', pos: '38% 40%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DTksS5BkkJv/' },
@@ -852,7 +851,7 @@ class Component extends DCLogic {
     return [
       { outlet: 'India TV', tag: 'India TV', date: 'May 04, 2026', category: 'Elections', img: 'images/g_meet.png', pos: '38% 40%', title: 'Palakkad count under way; Sobha Surendran among the key contenders', summary: 'Live results coverage of the Palakkad assembly seat, with the BJP leader listed among the main candidates.', url: 'https://www.indiatvnews.com/news/india/palakkad-election-results-2026-live-updates-party-wise-leading-trailing-candidates-congress-ramesh-pisharody-bjp-sobha-surendran-nmr-razak-winner-2026-05-04-1039785' },
       { outlet: 'The Week', tag: 'The Week', date: 'Mar 21, 2026', category: 'Elections', img: 'images/g_rally.png', pos: '36% 24%', title: "Why her Palakkad run is seen as key to the BJP's Kerala ambitions", summary: 'A profile of the campaign framing Palakkad as central to the party ending its absence from the Kerala Assembly.', url: 'https://www.theweek.in/news/india/2026/03/21/assembly-polls-2026-why-sobha-surendrans-palakkad-run-is-key-to-bjps-kerala-ambitions.html' },
-      { outlet: 'The Week', tag: 'The Week', date: 'Mar 21, 2026', category: 'National', img: 'images/community.png', pos: '40% 34%', title: "2024 Alappuzha turned an 'A-class' seat as BJP vote share rose 11%", summary: 'The Lok Sabha bid is credited with reshaping the region and lifting the party into competitive territory.', url: 'https://www.theweek.in/news/india/2026/03/21/assembly-polls-2026-why-sobha-surendrans-palakkad-run-is-key-to-bjps-kerala-ambitions.html' },
+      { outlet: 'The Week', tag: 'The Week', date: 'Mar 21, 2026', category: 'National', img: 'images/g_rally.png', pos: '40% 34%', title: "2024 Alappuzha turned an 'A-class' seat as BJP vote share rose 11%", summary: 'The Lok Sabha bid is credited with reshaping the region and lifting the party into competitive territory.', url: 'https://www.theweek.in/news/india/2026/03/21/assembly-polls-2026-why-sobha-surendrans-palakkad-run-is-key-to-bjps-kerala-ambitions.html' },
       { outlet: 'India TV', tag: 'India TV', date: 'Apr 09, 2026', category: 'Elections', img: 'images/g_office.png', pos: '70% 22%', title: 'Palakkad constituency profile: the BJP candidate for 2026', summary: 'Constituency and candidate profile ahead of the April 9 vote in Palakkad.', url: 'https://www.indiatvnews.com/elections/assembly-elections/kerala/palakkad-constituency/candidate-list/sobha-surendran' },
       { outlet: 'Onmanorama', tag: 'Onmanorama', date: 'Mar 28, 2026', category: 'Elections', img: 'images/g_felicitation.png', pos: '32% 26%', title: 'Palakkad shapes up as an intense triangular contest', summary: 'Analysis of the three-way battle, noting her sustained and visible ground outreach.', url: 'https://www.onmanorama.com/news/kerala/2026/03/23/palakkad-assembly-election-kerala-bjp-udf-ldf-sobha-surendran-pisharody-prospects-trends.html' },
       { outlet: 'Wikipedia', tag: 'Wikipedia', date: 'Updated 2026', category: 'Activism', img: 'images/g_meeting.png', pos: '24% 46%', title: "48-hour fast for PSC rank-list aspirants ended with the Governor's assurance", summary: 'The Secretariat agitation for PSC job seekers concluded after assurances from the Kerala Governor.', url: 'https://en.wikipedia.org/wiki/Sobha_Surendran' },
@@ -862,7 +861,6 @@ class Component extends DCLogic {
   photos() {
     return [
       { cat: 'Public Rallies', label: 'Presenting at the rally', img: this.R('images/g_rally.png') },
-      { cat: 'Community Work', label: 'Community gathering', img: this.R('images/community.png') },
       { cat: 'Party Meetings', label: 'National Executive', img: this.R('images/g_meeting.png') },
       { cat: 'Campaign Events', label: 'Delegation visit', img: this.R('images/g_office.png') },
       { cat: 'Community Work', label: 'On the ground', img: this.R('images/g_meet.png') },
