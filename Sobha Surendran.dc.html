@@ -992,20 +992,25 @@ class Component extends DCLogic {
   }
 
   ringData() {
-    // Real reels — Instagram + Facebook. Thumbnails use local photos (platforms block hotlinking); each card links to the actual reel.
+    // Real reels — Instagram + Facebook. Thumbnails use local photos (platforms block
+    // hotlinking) as a placeholder until _loadThumbnails() swaps in the real cover +
+    // view count from the backend; each card links to the actual reel.
+    // Refreshed from live account data, ranked by real view count (all 250K+ views) —
+    // re-pull from /api/most-viewed (no ?urls filter) periodically to keep this current
+    // and drop anything that's aged out of the top performers.
     return [
-      { img: 'images/g_rally.png', pos: '36% 24%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DaDXYe1hWRy/' },
-      { img: 'images/g_meeting.png', pos: '24% 46%', platform: 'Facebook', url: 'https://www.facebook.com/share/r/1HoQ5ckWCG/' },
-      { img: 'images/g_felicitation.png', pos: '32% 26%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DZluR0uPuUO/' },
-      { img: 'images/g_meet.png', pos: '38% 40%', platform: 'Facebook', url: 'https://www.facebook.com/share/r/1UDMWCXHJJ/' },
-      { img: 'images/g_conf.png', pos: '80% 28%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DZO3RiysAud/' },
-      { img: 'images/g_rally.png', pos: '40% 34%', platform: 'Facebook', url: 'https://www.facebook.com/share/r/1D2XPcqhYE/' },
-      { img: 'images/g_office.png', pos: '70% 22%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DY4ibmyMhdM/' },
-      { img: 'images/portrait.png', pos: 'center 18%', platform: 'Facebook', url: 'https://www.facebook.com/share/r/18jQ1QaoVo/' },
-      { img: 'images/g_meet.png', pos: '38% 40%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DTksS5BkkJv/' },
-      { img: 'images/g_rally.png', pos: '36% 24%', platform: 'Facebook', url: 'https://www.facebook.com/share/r/18huzMRThJ/' },
-      { img: 'images/g_felicitation.png', pos: '32% 26%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DTK_u8Ikozy/' },
-      { img: 'images/g_conf.png', pos: '80% 28%', platform: 'Facebook', url: 'https://www.facebook.com/share/r/1GhEJKprSr/' },
+      { img: 'images/g_rally.png', pos: '36% 24%', platform: 'Facebook', url: 'https://www.facebook.com/reel/2158334335007833/' },
+      { img: 'images/g_meeting.png', pos: '24% 46%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DWb1Jdjj1mQ/' },
+      { img: 'images/g_felicitation.png', pos: '32% 26%', platform: 'Facebook', url: 'https://www.facebook.com/reel/1059786993294455/' },
+      { img: 'images/g_meet.png', pos: '38% 40%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DWT07nNDJh-/' },
+      { img: 'images/g_conf.png', pos: '80% 28%', platform: 'Facebook', url: 'https://www.facebook.com/reel/1511211293942241/' },
+      { img: 'images/g_rally.png', pos: '40% 34%', platform: 'Facebook', url: 'https://www.facebook.com/reel/27665339503052732/' },
+      { img: 'images/g_office.png', pos: '70% 22%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DYEbmZ7BG9i/' },
+      { img: 'images/portrait.png', pos: 'center 18%', platform: 'Facebook', url: 'https://www.facebook.com/reel/1519431989786116/' },
+      { img: 'images/g_meet.png', pos: '38% 40%', platform: 'Facebook', url: 'https://www.facebook.com/reel/4736572589894945/' },
+      { img: 'images/g_rally.png', pos: '36% 24%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DWWOoDPjKjK/' },
+      { img: 'images/g_felicitation.png', pos: '32% 26%', platform: 'Instagram', url: 'https://www.instagram.com/reel/DVxctelgSVS/' },
+      { img: 'images/g_conf.png', pos: '80% 28%', platform: 'Facebook', url: 'https://www.facebook.com/reel/4549477115375925/' },
     ];
   }
 
