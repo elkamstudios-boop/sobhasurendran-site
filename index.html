@@ -44,6 +44,13 @@
      Malayalam only wraps at real word boundaries, never splitting mid-word. */
   h1,h2,h3,h4,p,span,div,a{overflow-wrap:break-word !important;word-break:keep-all !important}
   font{word-break:inherit !important;overflow-wrap:inherit !important}
+  /* Flex/grid children default to min-width:auto, which refuses to shrink
+     below an unbroken word's full width — silently defeating the
+     overflow-wrap rule above for exactly the long, space-less Malayalam
+     text it exists to handle. Regular block-level divs are unaffected by
+     this (min-width:0 is already their natural behavior), so this is a
+     safe, broad fix rather than a per-component patch. */
+  div,span,a{min-width:0}
   body{font-family:'Mulish',system-ui,sans-serif;background:#FFFFFF;color:#3A3744;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.55}
   ::selection{background:#2D2467;color:#fff}
   a{color:inherit}

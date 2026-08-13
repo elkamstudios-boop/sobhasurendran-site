@@ -50,6 +50,13 @@
      over anything merely inherited from an ancestor. */
   h1,h2,h3,h4,p,span,div,a{overflow-wrap:break-word !important;word-break:keep-all !important}
   font{word-break:inherit !important;overflow-wrap:inherit !important}
+  /* Flex/grid children default to min-width:auto, which refuses to shrink
+     below an unbroken word's full width — silently defeating the
+     overflow-wrap rule above for exactly the long, space-less Malayalam
+     text it exists to handle. Regular block-level divs are unaffected by
+     this (min-width:0 is already their natural behavior), so this is a
+     safe, broad fix rather than a per-component patch. */
+  div,span,a{min-width:0}
   /* Suppress Google's own translate widget chrome — driven from our own
      styled banner instead. */
   .goog-te-banner-frame.skiptranslate{display:none !important}
