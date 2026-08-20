@@ -628,14 +628,14 @@
         <p translate="no" style="font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:16px;line-height:1.65;color:rgba(255,255,255,.66);max-width:380px;margin:0">{{ footerTagline }}</p>
       </div>
       <div>
-        <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E8B84B;margin-bottom:16px">Quick Links</div>
+        <div translate="no" style="font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E8B84B;margin-bottom:16px">{{ quickLinksLabel }}</div>
         <div style="display:flex;flex-direction:column;gap:11px">
-          <a href="#story" style="color:rgba(255,255,255,.85);text-decoration:none;font-family:'Mulish',sans-serif;font-size:15px">About Her</a>
-          <a href="#journey" style="color:rgba(255,255,255,.85);text-decoration:none;font-family:'Mulish',sans-serif;font-size:15px">Her Journey</a>
-          <a href="#stats" style="color:rgba(255,255,255,.85);text-decoration:none;font-family:'Mulish',sans-serif;font-size:15px">Work &amp; Impact</a>
-          <a href="#press" style="color:rgba(255,255,255,.85);text-decoration:none;font-family:'Mulish',sans-serif;font-size:15px">Press</a>
-          <a href="#gallery" style="color:rgba(255,255,255,.85);text-decoration:none;font-family:'Mulish',sans-serif;font-size:15px">Photo Gallery</a>
-          <a href="#initiative" style="color:rgba(255,255,255,.85);text-decoration:none;font-family:'Mulish',sans-serif;font-size:15px">Gargi Trust Initiative</a>
+          <a href="#story" translate="no" style="color:rgba(255,255,255,.85);text-decoration:none;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:15px">{{ quickLinkAbout }}</a>
+          <a href="#journey" translate="no" style="color:rgba(255,255,255,.85);text-decoration:none;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:15px">{{ quickLinkJourney }}</a>
+          <a href="#stats" translate="no" style="color:rgba(255,255,255,.85);text-decoration:none;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:15px">{{ quickLinkImpact }}</a>
+          <a href="#press" translate="no" style="color:rgba(255,255,255,.85);text-decoration:none;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:15px">{{ quickLinkPress }}</a>
+          <a href="#gallery" translate="no" style="color:rgba(255,255,255,.85);text-decoration:none;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:15px">{{ quickLinkGallery }}</a>
+          <a href="#initiative" translate="no" style="color:rgba(255,255,255,.85);text-decoration:none;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:15px">{{ quickLinkGargi }}</a>
         </div>
       </div>
       <div>
@@ -1306,6 +1306,13 @@ class Component extends DCLogic {
     const footerTagline = isMl
       ? 'സേവനത്തിൽ വേരൂന്നി. ജനങ്ങളുടെ ജീവിതത്തിൽ യഥാർത്ഥ മാറ്റത്തിനായി പ്രതിജ്ഞാബദ്ധം. ശക്തമായ കേരളം കെട്ടിപ്പടുക്കാം — ഒരുമിച്ച്.'
       : 'Rooted in service. Committed to real change for real people. Building a stronger Kerala — together.';
+    const quickLinksLabel = isMl ? 'ദ്രുത ലിങ്കുകൾ' : 'Quick Links';
+    const quickLinkAbout = isMl ? 'അവരെക്കുറിച്ച്' : 'About Her';
+    const quickLinkJourney = isMl ? 'അവരുടെ യാത്ര' : 'Her Journey';
+    const quickLinkImpact = isMl ? 'പ്രവർത്തനങ്ങളും സ്വാധീനവും' : 'Work & Impact';
+    const quickLinkPress = isMl ? 'മാധ്യമങ്ങൾ' : 'Press';
+    const quickLinkGallery = isMl ? 'ഫോട്ടോ ഗാലറി' : 'Photo Gallery';
+    const quickLinkGargi = isMl ? 'ഗാർഗി ട്രസ്റ്റ് ഇനിഷ്യേറ്റീവ്' : 'Gargi Trust Initiative';
     return {
       journeySteps,
       navAbout, navJourney, navInitiatives, navNewsroom, navGallery, navConnect, heroBadge, heroCta, heroConcern, featuredIn,
@@ -1313,6 +1320,7 @@ class Component extends DCLogic {
       pressLabel, pressHeadingPrefix, pressHeadingHighlight, pressCta,
       galleryLabel, galleryHeadingPrefix, galleryHeadingHighlight, gallerySub,
       reelsLabel, reelsHeadingPrefix, reelsHeadingHighlight, footerName, footerTagline,
+      quickLinksLabel, quickLinkAbout, quickLinkJourney, quickLinkImpact, quickLinkPress, quickLinkGallery, quickLinkGargi,
       growthBars: this.growthBars(),
       navSocialOpen: this.state.socialMenu === 'nav',
       mobileNavOpen: this.state.mobileNavOpen,
