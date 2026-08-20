@@ -99,15 +99,15 @@
     <div style="max-width:1280px;margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px">
       <a href="Sobha Surendran.dc.html" class="notranslate" style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:17px;letter-spacing:.5px;color:#2D2467;white-space:nowrap">SOBHA SURENDRAN</a>
       <nav class="n-nav-links" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;row-gap:8px">
-        <a href="Sobha Surendran.dc.html#story" style="font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">About</a>
-        <a href="Sobha Surendran.dc.html#journey" style="font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">Journey</a>
-        <a href="Sobha Surendran.dc.html#initiative" style="font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">Initiatives</a>
-        <a href="News.dc.html" style="font-family:'Mulish',sans-serif;font-size:14px;font-weight:700;color:#fff;background:#2D2467;padding:8px 17px;border:1px solid #2D2467;border-radius:999px;white-space:nowrap">Newsroom</a>
-        <a href="Sobha Surendran.dc.html#gallery" style="font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">Gallery</a>
+        <a href="Sobha Surendran.dc.html#story" translate="no" style="font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">{{ navAbout }}</a>
+        <a href="Sobha Surendran.dc.html#journey" translate="no" style="font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">{{ navJourney }}</a>
+        <a href="Sobha Surendran.dc.html#initiative" translate="no" style="font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">{{ navInitiatives }}</a>
+        <a href="News.dc.html" translate="no" style="font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:14px;font-weight:700;color:#fff;background:#2D2467;padding:8px 17px;border:1px solid #2D2467;border-radius:999px;white-space:nowrap">{{ navNewsroom }}</a>
+        <a href="Sobha Surendran.dc.html#gallery" translate="no" style="font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">{{ navGallery }}</a>
       </nav>
       <div style="position:relative">
         <button type="button" onClick="{{ onToggleNavSocial }}" style="cursor:pointer;border:none;background:#F7F4EE;border-radius:999px;padding:5px 6px 5px 22px;display:flex;align-items:center;gap:14px;white-space:nowrap">
-          <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467">Connect</span>
+          <span translate="no" style="font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467">{{ navConnect }}</span>
           <span style="width:34px;height:34px;border-radius:50%;background:#2D2467;display:flex;align-items:center;justify-content:center;transition:transform .25s ease;transform:{{ navChevron }}">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E8B84B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
           </span>
@@ -318,7 +318,7 @@ const THUMB_API_BASE = 'https://api.sobhasurendran.in';
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { cat: 'All', query: '', socialMenu: null, newsroomItems: [], newsroomLoading: true, newsroomUpdatedAt: null, showTranslateBanner: true };
+    this.state = { cat: 'All', query: '', socialMenu: null, newsroomItems: [], newsroomLoading: true, newsroomUpdatedAt: null, showTranslateBanner: true, lang: 'en' };
   }
 
   componentDidMount() {
@@ -371,7 +371,7 @@ class Component extends DCLogic {
       if (combo) {
         combo.value = 'ml';
         combo.dispatchEvent(new Event('change'));
-        this.setState({ showTranslateBanner: false });
+        this.setState({ showTranslateBanner: false, lang: 'ml' });
       } else if (attempt < 20) {
         setTimeout(() => tryOnce(attempt + 1), 300);
       }
@@ -447,7 +447,14 @@ class Component extends DCLogic {
     const todayCount = all.filter((s) => s.published_at && (now - new Date(s.published_at).getTime()) < 24 * 60 * 60 * 1000).length;
     const sourceSet = Array.from(new Set(all.map((s) => s.source).filter(Boolean)));
 
+    const isMl = this.state.lang === 'ml';
     return {
+      navAbout: isMl ? 'എന്നെക്കുറിച്ച്' : 'About',
+      navJourney: isMl ? 'യാത്ര' : 'Journey',
+      navInitiatives: isMl ? 'പദ്ധതികൾ' : 'Initiatives',
+      navNewsroom: isMl ? 'വാർത്തകൾ' : 'Newsroom',
+      navGallery: isMl ? 'ചിത്രശേഖരം' : 'Gallery',
+      navConnect: isMl ? 'ബന്ധപ്പെടാം' : 'Connect',
       showTranslateBanner: this.state.showTranslateBanner,
       onTranslate: () => this._translateToMalayalam(),
       onDismissTranslateBanner: () => this.setState({ showTranslateBanner: false }),

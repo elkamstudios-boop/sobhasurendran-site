@@ -181,11 +181,11 @@
   <header style="max-width:1360px;margin:0 auto;padding:22px 28px 8px;display:flex;align-items:center;justify-content:space-between;gap:18px">
     <a href="#" class="notranslate" style="text-decoration:none;font-family:'Montserrat',sans-serif;font-weight:900;font-size:17px;letter-spacing:.5px;color:#2D2467;white-space:nowrap">SOBHA SURENDRAN</a>
     <nav class="halo-nav-links" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;row-gap:8px">
-      <a href="#story" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">About</a>
-      <a href="#journey" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">Journey</a>
-      <a href="#initiative" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">Initiatives</a>
-      <a href="News.dc.html" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">Newsroom</a>
-      <a href="#gallery" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">Gallery</a>
+      <a href="#story" translate="no" style="text-decoration:none;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">{{ navAbout }}</a>
+      <a href="#journey" translate="no" style="text-decoration:none;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">{{ navJourney }}</a>
+      <a href="#initiative" translate="no" style="text-decoration:none;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">{{ navInitiatives }}</a>
+      <a href="News.dc.html" translate="no" style="text-decoration:none;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">{{ navNewsroom }}</a>
+      <a href="#gallery" translate="no" style="text-decoration:none;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:7px 16px;border:1px solid #E4E1DA;border-radius:999px;white-space:nowrap">{{ navGallery }}</a>
     </nav>
     <div class="halo-mobile-toggle" style="display:none;position:relative">
       <button type="button" onClick="{{ onToggleMobileNav }}" style="cursor:pointer;border:1px solid #E4E1DA;background:#fff;border-radius:10px;width:38px;height:38px;display:flex;align-items:center;justify-content:center" aria-label="Menu">
@@ -193,18 +193,18 @@
       </button>
       <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="{{ false }}">
         <div style="position:absolute;top:calc(100% + 10px);right:0;z-index:90;background:#fff;border:1px solid #E4E1DA;border-radius:14px;box-shadow:0 20px 48px rgba(26,21,48,.22);padding:8px;display:flex;flex-direction:column;gap:4px;min-width:180px">
-          <a href="#story" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:10px 12px;border-radius:9px" style-hover="background:#F7F4EE">About</a>
-          <a href="#journey" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:10px 12px;border-radius:9px" style-hover="background:#F7F4EE">Journey</a>
-          <a href="#initiative" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:10px 12px;border-radius:9px" style-hover="background:#F7F4EE">Initiatives</a>
-          <a href="News.dc.html" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:10px 12px;border-radius:9px" style-hover="background:#F7F4EE">Newsroom</a>
-          <a href="#gallery" style="text-decoration:none;font-family:'Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:10px 12px;border-radius:9px" style-hover="background:#F7F4EE">Gallery</a>
+          <a href="#story" translate="no" style="text-decoration:none;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:10px 12px;border-radius:9px" style-hover="background:#F7F4EE">{{ navAbout }}</a>
+          <a href="#journey" translate="no" style="text-decoration:none;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:10px 12px;border-radius:9px" style-hover="background:#F7F4EE">{{ navJourney }}</a>
+          <a href="#initiative" translate="no" style="text-decoration:none;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:10px 12px;border-radius:9px" style-hover="background:#F7F4EE">{{ navInitiatives }}</a>
+          <a href="News.dc.html" translate="no" style="text-decoration:none;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:10px 12px;border-radius:9px" style-hover="background:#F7F4EE">{{ navNewsroom }}</a>
+          <a href="#gallery" translate="no" style="text-decoration:none;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:14px;font-weight:600;color:#3A3744;padding:10px 12px;border-radius:9px" style-hover="background:#F7F4EE">{{ navGallery }}</a>
         </div>
       </sc-if>
     </div>
     <div style="display:flex;align-items:center;gap:20px">
       <div style="position:relative">
         <button type="button" onClick="{{ onToggleNavSocial }}" style="cursor:pointer;border:none;background:#F7F4EE;border-radius:999px;padding:5px 6px 5px 22px;display:flex;align-items:center;gap:14px;white-space:nowrap">
-          <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467">Connect</span>
+          <span translate="no" style="font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-weight:700;font-size:14px;color:#2D2467">{{ navConnect }}</span>
           <span style="width:34px;height:34px;border-radius:50%;background:#2D2467;display:flex;align-items:center;justify-content:center;transition:transform .25s ease;transform:{{ navChevron }}">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E8B84B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
           </span>
@@ -639,7 +639,7 @@
         </div>
       </div>
       <div>
-        <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E8B84B;margin-bottom:16px">Connect</div>
+        <div translate="no" style="font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E8B84B;margin-bottom:16px">{{ navConnect }}</div>
         <div style="display:flex;flex-direction:column;gap:11px;color:rgba(255,255,255,.66);font-family:'Mulish',sans-serif;font-size:15px;line-height:1.5">
           <span>contact@sobhasurendran.in</span>
           <span>+91 98765 00000</span>
@@ -782,7 +782,7 @@ const THUMB_API_BASE = 'https://api.sobhasurendran.in';
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { pressTab: props.pressDefaultTab === 'releases' ? 'releases' : 'news', copied: null, hoveredCard: null, selected: null, expanded: false, socialMenu: null, journeyPlay: false, mobileNavOpen: false, reelMeta: null, newsMeta: null, showTranslateBanner: true,
+    this.state = { pressTab: props.pressDefaultTab === 'releases' ? 'releases' : 'news', copied: null, hoveredCard: null, selected: null, expanded: false, socialMenu: null, journeyPlay: false, mobileNavOpen: false, reelMeta: null, newsMeta: null, showTranslateBanner: true, lang: 'en',
       concernFormOpen: false, concernSubmitted: false, concernSubmitting: false, concernError: null,
       concernValues: { name: '', phone: '', panchayat: '', assembly: '', ward: '', booth: '', message: '' },
       concernFocus: null,
@@ -843,7 +843,7 @@ class Component extends DCLogic {
       if (combo) {
         combo.value = 'ml';
         combo.dispatchEvent(new Event('change'));
-        this.setState({ showTranslateBanner: false });
+        this.setState({ showTranslateBanner: false, lang: 'ml' });
       } else if (attempt < 20) {
         setTimeout(() => tryOnce(attempt + 1), 300);
       }
@@ -1256,8 +1256,20 @@ class Component extends DCLogic {
         barStyle: 'width:clamp(4px,0.7vw,10px);height:clamp(14px,' + barVw + 'vw,' + j.h + 'px);border-radius:4px 4px 0 0;background:linear-gradient(180deg,' + dotBg + ',rgba(45,36,103,.55));flex:none',
       };
     });
+    // Google's auto-translate widget produces its own (often inconsistent)
+    // Malayalam for short nav labels. These six are pinned to exact,
+    // user-approved translations instead — the nav links carry
+    // translate="no" so Google's engine leaves them alone entirely.
+    const isMl = this.state.lang === 'ml';
+    const navAbout = isMl ? 'എന്നെക്കുറിച്ച്' : 'About';
+    const navJourney = isMl ? 'യാത്ര' : 'Journey';
+    const navInitiatives = isMl ? 'പദ്ധതികൾ' : 'Initiatives';
+    const navNewsroom = isMl ? 'വാർത്തകൾ' : 'Newsroom';
+    const navGallery = isMl ? 'ചിത്രശേഖരം' : 'Gallery';
+    const navConnect = isMl ? 'ബന്ധപ്പെടാം' : 'Connect';
     return {
       journeySteps,
+      navAbout, navJourney, navInitiatives, navNewsroom, navGallery, navConnect,
       growthBars: this.growthBars(),
       navSocialOpen: this.state.socialMenu === 'nav',
       mobileNavOpen: this.state.mobileNavOpen,
