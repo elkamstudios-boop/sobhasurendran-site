@@ -392,8 +392,8 @@
 <section style="background:linear-gradient(135deg,#2D2467 0%,#4B3F8F 100%);color:#fff;padding:84px 28px">
   <div style="max-width:980px;margin:0 auto;text-align:center">
     <div style="font-family:'Montserrat',serif;font-size:80px;line-height:0;height:42px;color:#E8B84B">“</div>
-    <blockquote style="font-family:'Mulish',sans-serif;font-style:italic;font-weight:400;font-size:clamp(24px,3vw,38px);line-height:1.32;margin:0 auto 28px;max-width:860px">We are not asking people merely to help us open the account. We are asking them to support a future where development reaches every corner of Kerala&nbsp; without hindrance.</blockquote>
-    <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.85)">— Sobha Surendran · TNIE Interview, Jan 2026</div>
+    <blockquote translate="no" style="font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-style:italic;font-weight:400;font-size:clamp(24px,3vw,38px);line-height:1.32;margin:0 auto 28px;max-width:860px">{{ tnieQuote }}</blockquote>
+    <div translate="no" style="font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.85)">{{ tnieAttribution }}</div>
   </div>
 </section>
 
@@ -1283,10 +1283,14 @@ class Component extends DCLogic {
     const journeySub = isMl
       ? 'ഒരു മുഴുവൻ സമയ എബിവിപി പ്രവർത്തകയിൽ നിന്ന് ബിജെപി ദേശീയ നിർവാഹക സമിതി അംഗത്വത്തിലേക്കുള്ള യാത്രയിലെ ഓരോ നാഴികക്കല്ലുകളും ഒറ്റനോട്ടത്തിൽ.'
       : 'From a full-time ABVP worker to the BJP National Executive, every milestone, in one view.';
+    const tnieQuote = isMl
+      ? 'അക്കൗണ്ട് തുറക്കാൻ സഹായിക്കണമെന്നു മാത്രമല്ല ഞങ്ങൾ ജനങ്ങളോട് ആവശ്യപ്പെടുന്നത്. മറിച്ച്, യാതൊരു തടസ്സവുമില്ലാതെ വികസനം കേരളത്തിന്റെ ഓരോ കോണിലേക്കും എത്തുന്ന ഒരു ഭാവിക്കായി പിന്തുണ നൽകണമെന്നാണ് ഞങ്ങളുടെ അഭ്യർത്ഥന.'
+      : 'We are not asking people merely to help us open the account. We are asking them to support a future where development reaches every corner of Kerala  without hindrance.';
+    const tnieAttribution = isMl ? '— ശോഭാ സുരേന്ദ്രൻ · TNIE അഭിമുഖം, ജനുവരി 2026' : '— Sobha Surendran · TNIE Interview, Jan 2026';
     return {
       journeySteps,
       navAbout, navJourney, navInitiatives, navNewsroom, navGallery, navConnect, heroBadge, heroCta, heroConcern, featuredIn,
-      storyLabel, storyQuote, storyName, storyRolePrefix, storyRoleKerala, journeyLabel, journeyHeading, journeySub,
+      storyLabel, storyQuote, storyName, storyRolePrefix, storyRoleKerala, journeyLabel, journeyHeading, journeySub, tnieQuote, tnieAttribution,
       growthBars: this.growthBars(),
       navSocialOpen: this.state.socialMenu === 'nav',
       mobileNavOpen: this.state.mobileNavOpen,
