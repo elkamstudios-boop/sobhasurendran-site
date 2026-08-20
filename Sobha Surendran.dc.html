@@ -526,9 +526,9 @@
 
 <section id="reels" style="background:#2D2467;color:#fff;padding:84px 0 88px;overflow:hidden">
   <div style="max-width:1200px;margin:0 auto;padding:0 28px">
-    <div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#E8B84B;margin-bottom:14px">Follow Along</div>
+    <div translate="no" style="font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#E8B84B;margin-bottom:14px">{{ reelsLabel }}</div>
     <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap">
-      <h2 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(34px,4.4vw,56px);line-height:1.03;letter-spacing:-.01em;text-transform:uppercase;margin:0">On the <span style="color:#E8B84B">ground.</span></h2>
+      <h2 translate="no" style="font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-weight:800;font-size:clamp(34px,4.4vw,56px);line-height:1.03;letter-spacing:-.01em;text-transform:uppercase;margin:0">{{ reelsHeadingPrefix }}<span style="color:#E8B84B">{{ reelsHeadingHighlight }}</span></h2>
       <div style="position:relative">
         <button type="button" onClick="{{ onToggleReelsSocial }}" style="cursor:pointer;border:none;background:#E8B84B;color:#1A1530;font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;padding:13px 24px;border-radius:999px;display:inline-flex;align-items:center;gap:9px">Follow us <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A1530" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .25s ease;transform:{{ reelsChevron }}"><path d="M6 9l6 6 6-6"></path></svg></button>
         <sc-if value="{{ reelsSocialOpen }}" hint-placeholder-val="{{ false }}">
@@ -1299,12 +1299,16 @@ class Component extends DCLogic {
     const gallerySub = isMl
       ? 'മൂന്ന് പതിറ്റാണ്ടുകളുടെ പ്രവർത്തനജീവിതത്തിലെ ഓർമ്മച്ചിത്രങ്ങൾ. ചിത്രങ്ങളിലൂടെ സഞ്ചരിക്കാം, വലുതായി കാണാൻ ഏതെങ്കിലും ചിത്രത്തിൽ ക്ലിക്ക് ചെയ്യുക.'
       : 'A collection of moments from three decades on the ground. Drag to explore, click any photo to expand.';
+    const reelsLabel = isMl ? 'ഒപ്പം ചേരുക' : 'Follow Along';
+    const reelsHeadingPrefix = isMl ? '' : 'On the ';
+    const reelsHeadingHighlight = isMl ? 'ജനങ്ങൾക്കിടയിൽ.' : 'ground.';
     return {
       journeySteps,
       navAbout, navJourney, navInitiatives, navNewsroom, navGallery, navConnect, heroBadge, heroCta, heroConcern, featuredIn,
       storyLabel, storyQuote, storyName, storyRolePrefix, storyRoleKerala, journeyLabel, journeyHeading, journeySub, tnieQuote, tnieAttribution, statsLabel, statsHeading,
       pressLabel, pressHeadingPrefix, pressHeadingHighlight, pressCta,
       galleryLabel, galleryHeadingPrefix, galleryHeadingHighlight, gallerySub,
+      reelsLabel, reelsHeadingPrefix, reelsHeadingHighlight,
       growthBars: this.growthBars(),
       navSocialOpen: this.state.socialMenu === 'nav',
       mobileNavOpen: this.state.mobileNavOpen,
