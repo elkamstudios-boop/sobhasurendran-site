@@ -488,10 +488,10 @@
 
 <section id="gallery" style="background:#FFFFFF;padding:96px 0 96px">
   <div style="max-width:1200px;margin:0 auto;padding:0 28px">
-    <div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9962E;margin-bottom:14px">Visual Chronicle</div>
+    <div translate="no" style="font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9962E;margin-bottom:14px">{{ galleryLabel }}</div>
     <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap">
-      <h2 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(34px,4.4vw,56px);line-height:1.03;letter-spacing:-.01em;text-transform:uppercase;margin:0;color:#2D2467">Photo <span style="color:#C9962E">Gallery</span></h2>
-      <p style="font-family:'Mulish',sans-serif;font-size:16px;line-height:1.6;color:#6B6878;max-width:440px;margin:0">A collection of moments from three decades on the ground. Drag to explore, click any photo to expand.</p>
+      <h2 translate="no" style="font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-weight:800;font-size:clamp(34px,4.4vw,56px);line-height:1.03;letter-spacing:-.01em;text-transform:uppercase;margin:0;color:#2D2467">{{ galleryHeadingPrefix }}<span style="color:#C9962E">{{ galleryHeadingHighlight }}</span></h2>
+      <p translate="no" style="font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:16px;line-height:1.6;color:#6B6878;max-width:440px;margin:0">{{ gallerySub }}</p>
     </div>
   </div>
   <div id="bentoWrap" style="position:relative;margin-top:36px;overflow-x:auto;overflow-y:hidden;cursor:grab;-webkit-overflow-scrolling:touch">
@@ -1293,11 +1293,18 @@ class Component extends DCLogic {
     const pressHeadingPrefix = isMl ? '' : 'In the ';
     const pressHeadingHighlight = isMl ? 'വാർത്തകളിൽ' : 'news.';
     const pressCta = isMl ? 'തത്സമയ വാർത്താമുറിയിലേക്ക്' : 'Open the live Newsroom';
+    const galleryLabel = isMl ? 'ദൃശ്യശേഖരം' : 'Visual Chronicle';
+    const galleryHeadingPrefix = isMl ? '' : 'Photo ';
+    const galleryHeadingHighlight = isMl ? 'ചിത്രശേഖരം' : 'Gallery';
+    const gallerySub = isMl
+      ? 'മൂന്ന് പതിറ്റാണ്ടുകളുടെ പ്രവർത്തനജീവിതത്തിലെ ഓർമ്മച്ചിത്രങ്ങൾ. ചിത്രങ്ങളിലൂടെ സഞ്ചരിക്കാം, വലുതായി കാണാൻ ഏതെങ്കിലും ചിത്രത്തിൽ ക്ലിക്ക് ചെയ്യുക.'
+      : 'A collection of moments from three decades on the ground. Drag to explore, click any photo to expand.';
     return {
       journeySteps,
       navAbout, navJourney, navInitiatives, navNewsroom, navGallery, navConnect, heroBadge, heroCta, heroConcern, featuredIn,
       storyLabel, storyQuote, storyName, storyRolePrefix, storyRoleKerala, journeyLabel, journeyHeading, journeySub, tnieQuote, tnieAttribution, statsLabel, statsHeading,
       pressLabel, pressHeadingPrefix, pressHeadingHighlight, pressCta,
+      galleryLabel, galleryHeadingPrefix, galleryHeadingHighlight, gallerySub,
       growthBars: this.growthBars(),
       navSocialOpen: this.state.socialMenu === 'nav',
       mobileNavOpen: this.state.mobileNavOpen,
