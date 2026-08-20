@@ -342,10 +342,10 @@
 
 <section id="journey" style="background:#fff;padding:88px 28px 96px;overflow:hidden">
   <div style="max-width:1200px;margin:0 auto 44px">
-    <div style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9962E;margin-bottom:14px">The Journey</div>
+    <div translate="no" style="font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C9962E;margin-bottom:14px">{{ journeyLabel }}</div>
     <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
-      <h2 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(24px,3.4vw,40px);line-height:1.2;letter-spacing:-.01em;margin:0;color:#2D2467;max-width:640px">Three decades of organisational work, one role at a time.</h2>
-      <p style="font-family:'Mulish',sans-serif;font-size:15px;line-height:1.6;color:#6B6878;max-width:340px;margin:0">From a full-time ABVP worker to the BJP National Executive, every milestone, in one view.</p>
+      <h2 translate="no" style="font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-weight:800;font-size:clamp(24px,3.4vw,40px);line-height:1.2;letter-spacing:-.01em;margin:0;color:#2D2467;max-width:640px">{{ journeyHeading }}</h2>
+      <p translate="no" style="font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:15px;line-height:1.6;color:#6B6878;max-width:340px;margin:0">{{ journeySub }}</p>
     </div>
   </div>
 
@@ -1278,10 +1278,15 @@ class Component extends DCLogic {
     const storyName = isMl ? 'ശോഭാ സുരേന്ദ്രൻ' : 'Sobha Surendran';
     const storyRolePrefix = isMl ? 'ബിജെപി സംസ്ഥാന ജനറൽ സെക്രട്ടറി, ' : 'BJP State General Secretary, ';
     const storyRoleKerala = isMl ? 'കേരളം' : 'Kerala';
+    const journeyLabel = isMl ? 'യാത്ര' : 'The Journey';
+    const journeyHeading = isMl ? 'മൂന്ന് പതിറ്റാണ്ടുകളുടെ സംഘടനാ പ്രവർത്തനം, ഓരോ ചുമതലയിലും.' : 'Three decades of organisational work, one role at a time.';
+    const journeySub = isMl
+      ? 'ഒരു മുഴുവൻ സമയ എബിവിപി പ്രവർത്തകയിൽ നിന്ന് ബിജെപി ദേശീയ നിർവാഹക സമിതി അംഗത്വത്തിലേക്കുള്ള യാത്രയിലെ ഓരോ നാഴികക്കല്ലുകളും ഒറ്റനോട്ടത്തിൽ.'
+      : 'From a full-time ABVP worker to the BJP National Executive, every milestone, in one view.';
     return {
       journeySteps,
       navAbout, navJourney, navInitiatives, navNewsroom, navGallery, navConnect, heroBadge, heroCta, heroConcern, featuredIn,
-      storyLabel, storyQuote, storyName, storyRolePrefix, storyRoleKerala,
+      storyLabel, storyQuote, storyName, storyRolePrefix, storyRoleKerala, journeyLabel, journeyHeading, journeySub,
       growthBars: this.growthBars(),
       navSocialOpen: this.state.socialMenu === 'nav',
       mobileNavOpen: this.state.mobileNavOpen,
