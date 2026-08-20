@@ -323,12 +323,12 @@
       <div id="storyText" style="position:relative;padding:50px 48px;display:flex;flex-direction:column;justify-content:center;background:#2D2467;border:1px solid rgba(232,184,75,.16);border-radius:18px;overflow:hidden;box-shadow:0 28px 60px rgba(26,21,48,.28);background-image:repeating-linear-gradient(118deg,rgba(232,184,75,.045) 0,rgba(232,184,75,.045) 1px,transparent 1px,transparent 22px)">
         <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:20px">
           <span style="font-family:'Montserrat',serif;font-size:58px;line-height:.7;color:#E8B84B">”</span>
-          <span style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#F2D488;margin-top:8px">Her Story</span>
+          <span translate="no" style="font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#F2D488;margin-top:8px">{{ storyLabel }}</span>
         </div>
-        <p style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(16px,1.55vw,20px);line-height:1.4;letter-spacing:-.005em;text-transform:uppercase;color:#fff;margin:0 0 22px">From a schoolgirl shaped by early loss to Kerala's first woman to hold the position on national level. three decades organising village by village. As Mahila Morcha president she built the women's wing across all 140 constituencies, carrying the fight for dignity from tribal hamlets to the coast.</p>
+        <p translate="no" style="font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-weight:700;font-size:clamp(16px,1.55vw,20px);line-height:1.4;letter-spacing:-.005em;text-transform:uppercase;color:#fff;margin:0 0 22px">{{ storyQuote }}</p>
         <div style="height:1px;background:rgba(255,255,255,.16);margin:0 0 18px"></div>
-        <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:19px;color:#fff">Sobha Surendran</div>
-        <div style="font-family:'Mulish',sans-serif;font-size:13px;letter-spacing:.04em;color:rgba(255,255,255,.66);margin-top:5px">BJP State General Secretary, <strong style="color:#E8B84B;font-weight:700">Kerala</strong></div>
+        <div translate="no" style="font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-weight:700;font-size:19px;color:#fff">{{ storyName }}</div>
+        <div translate="no" style="font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:13px;letter-spacing:.04em;color:rgba(255,255,255,.66);margin-top:5px">{{ storyRolePrefix }}<strong style="color:#E8B84B;font-weight:700">{{ storyRoleKerala }}</strong></div>
       </div>
       <div id="storyImg" class="r-story-imgcell" style="position:relative;min-height:440px;border-radius:18px;overflow:hidden;box-shadow:0 28px 60px rgba(26,21,48,.28)">
         <img src="images/portrait.png" alt="Sobha Surendran" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 8%;display:block">
@@ -1271,9 +1271,17 @@ class Component extends DCLogic {
     const heroCta = isMl ? 'അവരുടെ പൊതുജീവിതം അടുത്തറിയൂ' : 'Explore Her Journey';
     const heroConcern = isMl ? 'നിങ്ങളുടെ ആശങ്ക പങ്കുവെക്കൂ' : 'Voice Your Concern';
     const featuredIn = isMl ? 'പ്രമുഖ മാധ്യമങ്ങളിൽ' : 'As featured in';
+    const storyLabel = isMl ? 'ജീവിതയാത്ര' : 'Her Story';
+    const storyQuote = isMl
+      ? 'ആദ്യകാല ജീവിതത്തിലെ പ്രതിസന്ധികളെ അതിജീവിച്ച്, ഒരു സാധാരണ സ്കൂൾ വിദ്യാർത്ഥിനിയിൽ നിന്ന് ദേശീയ രാഷ്ട്രീയത്തിന്റെ ശ്രദ്ധേയമായ പദവിയിലെത്തിയ കേരളത്തിന്റെ ആദ്യ വനിതയായി. മൂന്ന് പതിറ്റാണ്ടുകളായി ഗ്രാമംതോറും ജനങ്ങളോടൊപ്പം ചേർന്ന് പ്രവർത്തിച്ചുകൊണ്ട്, അവരുടെ ശബ്ദത്തിനും അവകാശങ്ങൾക്കും വേണ്ടി നിലകൊണ്ടു. മഹിളാ മോർച്ചയുടെ അധ്യക്ഷയായി കേരളത്തിലെ 140 നിയമസഭാ മണ്ഡലങ്ങളിലേക്കും വനിതാ വിഭാഗത്തിന്റെ പ്രവർത്തനം വ്യാപിപ്പിച്ചു. ആദിവാസി ഗ്രാമങ്ങളിൽ നിന്ന് തീരദേശ മേഖലകളിലേക്ക്, സ്ത്രീകളുടെ അന്തസ്സിനും അവകാശങ്ങൾക്കും വേണ്ടി നിരന്തരമായ പോരാട്ടം മുന്നോട്ട് കൊണ്ടുപോയി.'
+      : "From a schoolgirl shaped by early loss to Kerala's first woman to hold the position on national level. three decades organising village by village. As Mahila Morcha president she built the women's wing across all 140 constituencies, carrying the fight for dignity from tribal hamlets to the coast.";
+    const storyName = isMl ? 'ശോഭാ സുരേന്ദ്രൻ' : 'Sobha Surendran';
+    const storyRolePrefix = isMl ? 'ബിജെപി സംസ്ഥാന ജനറൽ സെക്രട്ടറി, ' : 'BJP State General Secretary, ';
+    const storyRoleKerala = isMl ? 'കേരളം' : 'Kerala';
     return {
       journeySteps,
       navAbout, navJourney, navInitiatives, navNewsroom, navGallery, navConnect, heroBadge, heroCta, heroConcern, featuredIn,
+      storyLabel, storyQuote, storyName, storyRolePrefix, storyRoleKerala,
       growthBars: this.growthBars(),
       navSocialOpen: this.state.socialMenu === 'nav',
       mobileNavOpen: this.state.mobileNavOpen,
