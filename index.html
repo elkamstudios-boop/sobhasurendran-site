@@ -250,7 +250,7 @@
               <svg style="flex:none" width="30" height="30" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="22" fill="#2D2467"></rect><path d="M17 27.5L26.5 18M26.5 18V26M26.5 18H18.5" stroke="#E8B84B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
               <span>{{ heroCta }}</span>
             </a>
-            <button type="button" onClick="{{ onOpenConcernForm }}" style="cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;border-radius:999px;background:rgba(255,255,255,.1);padding:clamp(8px,1.4vw,12px) clamp(12px,2vw,20px);font-family:'Montserrat',sans-serif;font-size:clamp(11.5px,1.6vw,14px);font-weight:700;color:#fff;border:1px solid rgba(255,255,255,.16);max-width:100%">Voice Your Concern</button>
+            <button type="button" onClick="{{ onOpenConcernForm }}" translate="no" style="cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;border-radius:999px;background:rgba(255,255,255,.1);padding:clamp(8px,1.4vw,12px) clamp(12px,2vw,20px);font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-size:clamp(11.5px,1.6vw,14px);font-weight:700;color:#fff;border:1px solid rgba(255,255,255,.16);max-width:100%">{{ heroConcern }}</button>
           </div>
         </div>
         <div class="halo-feat" style="display:flex;align-items:flex-start;gap:24px;align-self:stretch">
@@ -1269,9 +1269,10 @@ class Component extends DCLogic {
     const navConnect = isMl ? 'ബന്ധപ്പെടാം' : 'Connect';
     const heroBadge = isMl ? '1991 മുതൽ കേരളത്തിന്റെ സേവനരംഗത്ത്' : 'Serving Kerala · Since 1991';
     const heroCta = isMl ? 'അവരുടെ പൊതുജീവിതം അടുത്തറിയൂ' : 'Explore Her Journey';
+    const heroConcern = isMl ? 'നിങ്ങളുടെ ആശങ്ക പങ്കുവെക്കൂ' : 'Voice Your Concern';
     return {
       journeySteps,
-      navAbout, navJourney, navInitiatives, navNewsroom, navGallery, navConnect, heroBadge, heroCta,
+      navAbout, navJourney, navInitiatives, navNewsroom, navGallery, navConnect, heroBadge, heroCta, heroConcern,
       growthBars: this.growthBars(),
       navSocialOpen: this.state.socialMenu === 'nav',
       mobileNavOpen: this.state.mobileNavOpen,
