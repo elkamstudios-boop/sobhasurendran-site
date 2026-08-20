@@ -176,7 +176,12 @@
       <!-- Search -->
       <div style="margin-top:30px;display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:6px 6px 6px 18px;max-width:720px;box-shadow:0 18px 40px rgba(26,21,48,.28)">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B6878" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        <input value="{{ query }}" onInput="{{ onQuery }}" placeholder="{{ searchPlaceholder }}" translate="no" style="flex:1;border:none;outline:none;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:15px;color:#1A1530;background:transparent;padding:10px 0" />
+        <sc-if value="{{ isEnSearch }}" hint-placeholder-val="{{ true }}">
+          <input value="{{ query }}" onInput="{{ onQuery }}" placeholder="Search coverage — try &quot;Mahila Morcha&quot; or &quot;BJP&quot;" style="flex:1;border:none;outline:none;font-family:'Mulish',sans-serif;font-size:15px;color:#1A1530;background:transparent;padding:10px 0" />
+        </sc-if>
+        <sc-if value="{{ isMlSearch }}" hint-placeholder-val="{{ false }}">
+          <input value="{{ query }}" onInput="{{ onQuery }}" placeholder="വാർത്തകൾ തിരയുക — &quot;മഹിളാ മോർച്ച&quot; അല്ലെങ്കിൽ &quot;ബിജെപി&quot; എന്ന് നൽകുക" translate="no" style="flex:1;border:none;outline:none;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:15px;color:#1A1530;background:transparent;padding:10px 0" />
+        </sc-if>
         <button type="button" style="background:#2D2467;color:#fff;border:none;font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;padding:12px 22px;border-radius:10px;cursor:pointer">Search</button>
       </div>
     </div>
@@ -464,6 +469,8 @@ class Component extends DCLogic {
       statSourcesLabel: isMl ? 'വാർത്താ ഉറവിടങ്ങൾ' : 'Sources',
       statTodayLabel: isMl ? 'പുതിയ വാർത്ത' : 'New today',
       searchPlaceholder: isMl ? 'വാർത്തകൾ തിരയുക — "മഹിളാ മോർച്ച" അല്ലെങ്കിൽ "ബിജെപി" എന്ന് നൽകുക' : 'Search coverage — try "Mahila Morcha" or "BJP"',
+      isMlSearch: isMl,
+      isEnSearch: !isMl,
       showTranslateBanner: this.state.showTranslateBanner,
       onTranslate: () => this._translateToMalayalam(),
       onDismissTranslateBanner: () => this.setState({ showTranslateBanner: false }),
