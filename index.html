@@ -400,8 +400,8 @@
 <section id="stats" style="background:#FFFFFF;padding:104px 28px">
   <div class="r-stats-wrap" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:.92fr 1.08fr;gap:56px;align-items:center">
     <div>
-      <div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9962E;margin-bottom:16px">Three Decades of Results</div>
-      <h2 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(30px,3.6vw,46px);line-height:1.2;letter-spacing:-.01em;text-transform:uppercase;margin:0 0 52px;color:#2D2467;max-width:460px">The journey, by the numbers.</h2>
+      <div translate="no" style="font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9962E;margin-bottom:16px">{{ statsLabel }}</div>
+      <h2 translate="no" style="font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-weight:800;font-size:clamp(30px,3.6vw,46px);line-height:1.2;letter-spacing:-.01em;text-transform:uppercase;margin:0 0 52px;color:#2D2467;max-width:460px">{{ statsHeading }}</h2>
       <div class="r-stats-nums" style="display:flex;gap:0;flex-wrap:nowrap">
         <div class="r-stat" style="padding-right:clamp(18px,2.2vw,38px)">
           <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(34px,4.2vw,58px);line-height:1;color:#2D2467;letter-spacing:-.02em"><span class="statnum notranslate" data-to="30">30</span><span class="notranslate" style="color:#C9962E">+</span><span style="font-size:.4em;font-weight:700;color:#6B6878;letter-spacing:0"> yrs</span></div>
@@ -1287,10 +1287,12 @@ class Component extends DCLogic {
       ? 'അക്കൗണ്ട് തുറക്കാൻ സഹായിക്കണമെന്നു മാത്രമല്ല ഞങ്ങൾ ജനങ്ങളോട് ആവശ്യപ്പെടുന്നത്. മറിച്ച്, യാതൊരു തടസ്സവുമില്ലാതെ വികസനം കേരളത്തിന്റെ ഓരോ കോണിലേക്കും എത്തുന്ന ഒരു ഭാവിക്കായി പിന്തുണ നൽകണമെന്നാണ് ഞങ്ങളുടെ അഭ്യർത്ഥന.'
       : 'We are not asking people merely to help us open the account. We are asking them to support a future where development reaches every corner of Kerala  without hindrance.';
     const tnieAttribution = isMl ? '— ശോഭാ സുരേന്ദ്രൻ · TNIE അഭിമുഖം, ജനുവരി 2026' : '— Sobha Surendran · TNIE Interview, Jan 2026';
+    const statsLabel = isMl ? 'മൂന്ന് പതിറ്റാണ്ടുകളുടെ നേട്ടങ്ങൾ' : 'Three Decades of Results';
+    const statsHeading = isMl ? 'കണക്കുകളിൽ തെളിയുന്ന യാത്ര.' : 'The journey, by the numbers.';
     return {
       journeySteps,
       navAbout, navJourney, navInitiatives, navNewsroom, navGallery, navConnect, heroBadge, heroCta, heroConcern, featuredIn,
-      storyLabel, storyQuote, storyName, storyRolePrefix, storyRoleKerala, journeyLabel, journeyHeading, journeySub, tnieQuote, tnieAttribution,
+      storyLabel, storyQuote, storyName, storyRolePrefix, storyRoleKerala, journeyLabel, journeyHeading, journeySub, tnieQuote, tnieAttribution, statsLabel, statsHeading,
       growthBars: this.growthBars(),
       navSocialOpen: this.state.socialMenu === 'nav',
       mobileNavOpen: this.state.mobileNavOpen,
