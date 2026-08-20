@@ -307,7 +307,7 @@
 
   <section style="max-width:1360px;margin:0 auto;padding:30px 28px 44px">
     <div class="halo-presslogos" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:38px">
-      <span style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#6B6878">As featured in</span>
+      <span translate="no" style="font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#6B6878">{{ featuredIn }}</span>
       <span style="font-family:'Montserrat',sans-serif;font-size:17px;font-weight:700;color:#9a97a6">The New Indian Express</span>
       <span style="font-family:'Montserrat',sans-serif;font-size:17px;font-weight:700;color:#9a97a6">The Hindu</span>
       <span style="font-family:'Montserrat',sans-serif;font-size:17px;font-weight:700;color:#9a97a6">Manorama</span>
@@ -1270,9 +1270,10 @@ class Component extends DCLogic {
     const heroBadge = isMl ? '1991 മുതൽ കേരളത്തിന്റെ സേവനരംഗത്ത്' : 'Serving Kerala · Since 1991';
     const heroCta = isMl ? 'അവരുടെ പൊതുജീവിതം അടുത്തറിയൂ' : 'Explore Her Journey';
     const heroConcern = isMl ? 'നിങ്ങളുടെ ആശങ്ക പങ്കുവെക്കൂ' : 'Voice Your Concern';
+    const featuredIn = isMl ? 'പ്രമുഖ മാധ്യമങ്ങളിൽ' : 'As featured in';
     return {
       journeySteps,
-      navAbout, navJourney, navInitiatives, navNewsroom, navGallery, navConnect, heroBadge, heroCta, heroConcern,
+      navAbout, navJourney, navInitiatives, navNewsroom, navGallery, navConnect, heroBadge, heroCta, heroConcern, featuredIn,
       growthBars: this.growthBars(),
       navSocialOpen: this.state.socialMenu === 'nav',
       mobileNavOpen: this.state.mobileNavOpen,
