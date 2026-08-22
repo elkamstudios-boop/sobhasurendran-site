@@ -244,7 +244,7 @@
         <div>
           <span translate="no" style="display:inline-flex;align-items:center;gap:10px;border-radius:999px;background:rgba(232,184,75,.1);border:1px solid rgba(232,184,75,.38);padding:5px 14px;font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-size:clamp(9px,1.6vw,11px);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F2D488;margin-bottom:clamp(14px,3vw,26px);max-width:100%;overflow-wrap:break-word">{{ heroBadge }}</span>
           <h1 style="margin:0;font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(22px,4.6vw,46px);line-height:1.18;letter-spacing:-.02em;color:#fff;max-width:100%;overflow-wrap:break-word">Three decades of grassroots service.</h1>
-          <p style="margin:clamp(12px,2.5vw,24px) 0 0;font-family:'Mulish',sans-serif;font-size:clamp(12.5px,1.7vw,16px);line-height:1.55;color:rgba(255,255,255,.8);max-width:100%;overflow-wrap:break-word">From tribal hamlets to coastal villages, a record built village by village — fighting for the dignity of those the system overlooked, and a developed Kerala for all.</p>
+          <p translate="no" style="margin:clamp(12px,2.5vw,24px) 0 0;font-family:'Noto Sans Malayalam','Mulish',sans-serif;font-size:clamp(12.5px,1.7vw,16px);line-height:1.55;color:rgba(255,255,255,.8);max-width:100%;overflow-wrap:break-word">{{ heroPara }}</p>
           <div style="margin-top:clamp(16px,3vw,36px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(8px,2vw,16px)">
             <a href="#journey" translate="no" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;border-radius:999px;background:#E8B84B;padding:3px 16px 3px 3px;font-family:'Noto Sans Malayalam','Montserrat',sans-serif;font-size:clamp(11.5px,1.6vw,14px);font-weight:700;color:#1A1530;max-width:100%">
               <svg style="flex:none" width="30" height="30" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="22" fill="#2D2467"></rect><path d="M17 27.5L26.5 18M26.5 18V26M26.5 18H18.5" stroke="#E8B84B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -1268,6 +1268,9 @@ class Component extends DCLogic {
     const navGallery = isMl ? 'ചിത്രശേഖരം' : 'Gallery';
     const navConnect = isMl ? 'ബന്ധപ്പെടാം' : 'Connect';
     const heroBadge = isMl ? '1991 മുതൽ കേരളത്തിന്റെ സേവനരംഗത്ത്' : 'Serving Kerala · Since 1991';
+    const heroPara = isMl
+      ? 'ആദിവാസി ഊരുകളിൽ നിന്ന് തീരദേശ ഗ്രാമങ്ങളിലേക്ക് — ഓരോ ഗ്രാമത്തിലൂടെയും പടുത്തുയർത്തിയ ഒരു ചരിത്രം. ഭരണസംവിധാനം അവഗണിച്ചവരുടെ അന്തസ്സിനും അവകാശങ്ങൾക്കും വേണ്ടി പോരാടി, എല്ലാവർക്കും വികസനത്തിന്റെ തുല്യാവകാശമുള്ള ഒരു കേരളത്തിനായി.'
+      : 'From tribal hamlets to coastal villages, a record built village by village — fighting for the dignity of those the system overlooked, and a developed Kerala for all.';
     const heroCta = isMl ? 'അവരുടെ പൊതുജീവിതം അടുത്തറിയൂ' : 'Explore Her Journey';
     const heroConcern = isMl ? 'നിങ്ങളുടെ ആശങ്ക പങ്കുവെക്കൂ' : 'Voice Your Concern';
     const featuredIn = isMl ? 'പ്രമുഖ മാധ്യമങ്ങളിൽ' : 'As featured in';
@@ -1315,7 +1318,7 @@ class Component extends DCLogic {
     const quickLinkGargi = isMl ? 'ഗാർഗി ട്രസ്റ്റ് ഇനിഷ്യേറ്റീവ്' : 'Gargi Trust Initiative';
     return {
       journeySteps,
-      navAbout, navJourney, navInitiatives, navNewsroom, navGallery, navConnect, heroBadge, heroCta, heroConcern, featuredIn,
+      navAbout, navJourney, navInitiatives, navNewsroom, navGallery, navConnect, heroBadge, heroPara, heroCta, heroConcern, featuredIn,
       storyLabel, storyQuote, storyName, storyRolePrefix, storyRoleKerala, journeyLabel, journeyHeading, journeySub, tnieQuote, tnieAttribution, statsLabel, statsHeading,
       pressLabel, pressHeadingPrefix, pressHeadingHighlight, pressCta,
       galleryLabel, galleryHeadingPrefix, galleryHeadingHighlight, gallerySub,
